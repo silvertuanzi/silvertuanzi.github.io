@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Windows允许普通用户创建符号链接</title>
+    <link href="/2025/01/14/user-mklink/"/>
+    <url>/2025/01/14/user-mklink/</url>
+    
+    <content type="html"><![CDATA[<p>默认情况下，Windows允许普通用户创建硬链接(<code>mklink /h</code>)和引用链接(指使用<code>mklink /j</code>创建的链接，和符号链接相似但是似乎bug更多一些)，而符号链接需要管理员权限。<br><br>虽然Win11 24H2已经提供了sudo命令可以很方便地提权(其实旧版本系统也可以通过安装 <a href="https://github.com/gerardog/gsudo">gsudo</a> 来实现临时提权)，但是每次提权都需要鼠标点击UAC弹窗比较麻烦，并且有时我们会希望一个不以管理员权限启动的程序也能有创建符号链接的权限(例如huggingface使用符号链接管理缓存)。<br><br>所以考虑允许普通用户创建符号链接。由于此方法依赖组策略编辑器，因此不适用于Windows家庭版&#x2F;教育版。</p><div class="note note-warning">            <p><strong>warning</strong></p><p>你可以在网络上搜索到很多给Windows家庭版启用组策略编辑器的方法，但是据部分反馈，该方法只是获得了一个表面上可以使用的“组策略编辑器”，在其中进行的更改没有实际效果。因此本文不介绍这种方式，使用相关的方法之前建议先做好系统备份工作，防止损坏系统。<br><br>建议使用专业版以上的系统来进行操作，家庭版还是考虑<code>sudo</code>提权的方案吧。</p>          </div><ol><li><code>Win+R</code>打开“运行”，然后输入<code>gpedit.msc</code>：<br> <img src="/img/mklink/gpedit.png"></li><li>如图所示，按以下层级找到策略：<br> <code>本地计算机策略</code>&gt;<code>计算机配置</code>&gt;<code>Windows 设置</code>&gt;<code>安全设置</code>&gt;<code>本地策略</code>&gt;<code>用户权限分配</code>&gt;<code>创建符号链接</code><br> <img src="/img/mklink/gp.png"></li><li>双击策略进入编辑窗口，点击<code>添加用户或组(U)...</code><br> <img src="/img/mklink/adduser.png"></li><li>输入你的用户名，这里咱的用户名是<code>pc</code>：<br> <img src="/img/mklink/username.png"><br> 然后你可以点击一下<code>检查名称</code>，如果没有弹出额外的弹窗，而是直接被补全成了类似图中这样(前面追加的设备名应该与上面的“查找位置”相同)，说明输入正确；否则请关闭弹出的弹窗重新输入：<br> <img src="/img/mklink/check.png"></li><li>一路确定，保存之后重启计算机；</li><li>现在打开一个cmd窗口，尝试一下建立符号链接： <div class="note note-info">            <p>Powershell建立符号链接的方法与cmd并不相同，而是通过<code>New-Item</code>函数创建；<code>mklink</code>命令在Powershell中无法被正确识别，所以请确保你打开的是cmd(命令提示符)</p>          </div> 测试目录符号链接： <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">mklink /d test Desktop<br></code></pre></td></tr></table></figure> 测试文件符号链接： <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd"><span class="hljs-built_in">echo</span> &quot;test&quot; &gt; test1.txt<br>mklink test2.txt test1.txt<br></code></pre></td></tr></table></figure> 从输出可以看到符号链接正常建立了：<br> <img src="/img/mklink/test-cmd.png"><br> 我们进入用户文件夹查看一下属性：<br> <img src="/img/mklink/test-dir.png"><br> <img src="/img/mklink/test-file.png"><br> 可以看到这两个符号链接均指向了正确的文件。<br> 最后自行删除刚刚创建的两份符号链接以及<code>test1.txt</code>这份测试文件。</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
