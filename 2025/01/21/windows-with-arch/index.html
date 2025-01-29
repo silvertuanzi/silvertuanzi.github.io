@@ -1,0 +1,968 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silver-lasombra">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="记录个人安装win+arch双系统的方案，含大量个人偏好，大量碎碎念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows+Arch Linux双系统基本安装">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/01/21/windows-with-arch/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="记录个人安装win+arch双系统的方案，含大量个人偏好，大量碎碎念">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/uefi.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/bitlocker.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/search-bitlocker.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/disable-bitlocker.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/cmd-unlocked.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/psh-unlocked.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/pgp.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/control.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/poweroption.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/disablefastboot.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/before-part.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/ventoy-gparted.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/ventoy-normal.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/gparted-uefi.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/gparted-bios.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/keymap.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/locale.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/launch.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/debian-boot.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/apt-before.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/apt-after.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/debian-gparted.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/xubuntu-gparted.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/before.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/parting.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/part/after.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/install/ventoy.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/ventoy-normal.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/install/boot-uefi.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/install/boot-bios.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/install/stop-reflector.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/windows-with-arch/install/reflector.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/">
+<meta property="article:published_time" content="2025-01-21T01:04:25.000Z">
+<meta property="article:modified_time" content="2025-01-29T01:51:07.322Z">
+<meta property="article:author" content="silver-lasombra">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/windows-with-arch/uefi.png">
+  
+  
+  
+  <title>Windows+Arch Linux双系统基本安装 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows+Arch Linux双系统基本安装"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-21 09:04" pubdate>
+          2025年1月21日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Windows+Arch Linux双系统基本安装</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <div class="note note-success">
+            <p>2025年1月21日在VMware Workstation 17上测试，暂未将配置搬上物理机，但是步骤是相同的。</p>
+          </div>
+
+<div class="note note-warning">
+            <p>只介绍UEFI&#x2F;GPT启动方式，不建议在BIOS&#x2F;MBR平台上安装双系统，引导项极易打架；<br>（不过虚拟机单Linux安装的话BIOS&#x2F;MBR分区简单很多）</p>
+          </div>
+
+<div class="note note-info">
+            <p>本文引用ArchWiki链接时同时提供中文和英文链接，建议优先阅读英文版，中文翻译可能存在滞后性；</p>
+          </div>
+
+<h1 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h1><h2 id="1-检查是否为UEFI启动："><a href="#1-检查是否为UEFI启动：" class="headerlink" title="(1)检查是否为UEFI启动："></a>(1)检查是否为UEFI启动：</h2><div class="note note-info">
+            <p>Win11仅支持UEFI启动，无需检查；<br>开箱状态下为预装Win10，或者空盘安装Win10的通常也是UEFI启动；<br>只有从Win7升级上Win10的，传统BIOS启动的概率才比较大。</p>
+          </div>
+<p>按下<code>Win+R</code>组合键，输入<code>msinfo32</code>确定，在打开的窗口中找到<code>BIOS模式</code>一条，若为UEFI则是UEFI启动，若为Legacy则是传统BIOS启动。<br><img src="/img/windows-with-arch/uefi.png" srcset="/img/loading.gif" lazyload><br>如果是传统BIOS启动的话，理论上进入PE环境下，把硬盘分区表从MBR转为GPT，划分一个EFI分区出来，再修复一下引导，就能无损转换；如果没有重要的数据，还是重装更方便吧</p>
+<h2 id="2-介质准备："><a href="#2-介质准备：" class="headerlink" title="(2)介质准备："></a>(2)介质准备：</h2><p>物理机安装需要一枚容量至少2GB的U盘，建议4G以上；支持USB3.0以上速率的最好，没有问题也不大。</p>
+<div class="note note-danger">
+            <p>务必备份好U盘的资料，U盘在稍后将被格式化；</p>
+          </div>
+
+<h2 id="3-检查bitlocker状态："><a href="#3-检查bitlocker状态：" class="headerlink" title="(3)检查bitlocker状态："></a>(3)检查bitlocker状态：</h2><p>双系统平台上个人强烈不建议使用bitlocker。<br>检查bitlocker状态的最简单的方法是打开“此电脑”，观察硬盘图标。<br>如下图所示，有加密的磁盘会在图标右侧显示出锁的标志，就像图中D盘这样；未加密的则会像图中C盘这样；<br><img src="/img/windows-with-arch/bitlocker.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果一定需要bitlocker加密硬盘，为了减少麻烦，建议留一个未被加密的分区，用于在双系统间共享数据；并且请提前 <a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/windows/%E6%9F%A5%E6%89%BE-bitlocker-%E6%81%A2%E5%A4%8D%E5%AF%86%E9%92%A5-6b71ad27-0b89-ea08-f143-056f5ab347d6">根据Windows官方文档备份bitlocker恢复密钥</a> <br><br>关闭bitlocker的方式：</p>
+<ol>
+<li>在开始菜单中搜索bitlocker：<br> <img src="/img/windows-with-arch/search-bitlocker.png" srcset="/img/loading.gif" lazyload></li>
+<li>点击关闭即可：<br> <img src="/img/windows-with-arch/disable-bitlocker.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<div class="note note-warning">
+            <p>bitlocker解密可能会花费极长时间（数个小时）；在此期间不影响电脑正常使用，所以可以继续执行其它准备工作，但是在彻底解密完成之前最好不要关机。<br>解密的过程中应该是有进度条的，但也可以通过命令行检查解锁的进度:<br><br>使用管理员权限打开命令提示符或者Powershell。<br><br>cmd输入：</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">manage-bde -status<br></code></pre></td></tr></table></figure><p>输出类似这样（关键词：<code>转换状态:完全解密</code> <code>已加密百分比:0.0%</code>）说明完全解密了：<br><img src="/img/windows-with-arch/cmd-unlocked.png" srcset="/img/loading.gif" lazyload><br><br>Powershell输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-built_in">Get-BitLockerVolume</span><br></code></pre></td></tr></table></figure><p>输出类似这样（关键词：<code>FullyDecrypted</code> <code>Encryption Percentage 0</code>）说明完全解密了：<br><img src="/img/windows-with-arch/psh-unlocked.png" srcset="/img/loading.gif" lazyload></p>
+          </div>
+
+<h2 id="4-下载："><a href="#4-下载：" class="headerlink" title="(4) 下载："></a>(4) 下载：</h2><ol>
+<li>从 <a target="_blank" rel="noopener" href="https://archlinux.org/download/">archlinux官网</a> 下载系统镜像。<br> 站点提供bt种子下载和镜像站下载，若通过镜像站下载，则推荐校验sha256与pgp签名； 
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-b18702a1" role="button" aria-expanded="false" aria-controls="collapse-b18702a1">
+        <div class="fold-arrow">▶</div>校验sha256的方式
+      </div>
+      <div class="fold-collapse collapse" id="collapse-b18702a1">
+        <div class="fold-content">
+          <p>如果有一个能运行bash的环境，例如Git Bash，进入bash，执行如下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sha256sum</span> /path/to/***.iso<br></code></pre></td></tr></table></figure><p>如果没有，进入cmd，执行如下命令：</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">certutil -hashfile /<span class="hljs-built_in">path</span>/to/***.iso sha256<br></code></pre></td></tr></table></figure><p>将输出与arch官网对比，一致说明文件完好无损；</p>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-1e636da6" role="button" aria-expanded="false" aria-controls="collapse-1e636da6">
+        <div class="fold-arrow">▶</div>校验签名的方式
+      </div>
+      <div class="fold-collapse collapse" id="collapse-1e636da6">
+        <div class="fold-content">
+          <p>如果有一个能运行bash的环境，例如Git Bash，进入bash，直接复制官网的命令(以2025.01.01版为例)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">gpg --auto-key-locate clear,wkd -v --locate-external-key pierre@archlinux.org<br>gpg --keyserver-options auto-key-retrieve --verify archlinux-2025.01.01-x86_64.iso.sig archlinux-2025.01.01-x86_64.iso<br></code></pre></td></tr></table></figure><p>输出类似这样（注意高亮的地方）说明签名一致，镜像未被篡改：<br><img src="/img/windows-with-arch/pgp.png" srcset="/img/loading.gif" lazyload><br>如果没有bash环境，可以尝试<a target="_blank" rel="noopener" href="https://gpg4win.org/index.html">Gpg4win</a></p>
+        </div>
+      </div>
+    </div></li>
+<li>下载刻录U盘的工具，强烈推荐<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/download.html">Ventoy</a> ，想在安装的时候使用图形化分区工具偷懒的话这是唯一的选择；</li>
+<li>图形化分区工具<a target="_blank" rel="noopener" href="https://gparted.org/download.php">gparted</a> 
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-f7a5c51b" role="button" aria-expanded="false" aria-controls="collapse-f7a5c51b">
+        <div class="fold-arrow">▶</div>因为网络问题gparted下载困难?
+      </div>
+      <div class="fold-collapse collapse" id="collapse-f7a5c51b">
+        <div class="fold-content">
+          <p>gparted的镜像托管在sourceforge网站上面，国内的网络环境可能会遇到下载不畅的情况；这里给出3条替代的方案：</p><ol><li>（U盘容量要求从2GB提升到4GB）从 <a target="_blank" rel="noopener" href="https://mirrors.cernet.edu.cn/debian-cd/current-live/amd64/iso-hybrid/">Debian国内镜像</a> 下载一个最简镜像(无桌面的<code>	debian-live-12.9.0-amd64-standard.iso</code>大小1.4GiB)，然后启动进去后使用<code>apt</code>工具安装<code>gparted</code>和一个最简单的桌面；</li><li>（U盘容量要求从2GB提升到4GB）下载一个 <a target="_blank" rel="noopener" href="https://xubuntu.org/download/">XUbuntu</a> 的minimal版镜像(24.04版 <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cdimage/xubuntu/releases/24.04/release/">清华源</a> &#x2F; <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/ubuntu-cdimage/xubuntu/releases/24.04/release/">USTC源</a> )，该版本大小2.47GiB，为”有国内下载源”的，”带桌面环境和gparted”的Linux镜像中最小的；</li><li>放弃使用<code>gparted</code>图形化分区工具偷懒，走正统的ArchLinux分区方式(<code>fdisk</code>&#x2F;<code>cfdisk</code>)，新手谨防在命令行中误操作导致数据损失</li></ol>
+        </div>
+      </div>
+    </div></li>
+</ol>
+<h2 id="5-关闭Windows快速启动"><a href="#5-关闭Windows快速启动" class="headerlink" title="(5) 关闭Windows快速启动"></a>(5) 关闭Windows快速启动</h2><div class="note note-info">
+            <p>详细信息参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Dual_boot_with_Windows#Fast_Startup_and_hibernation">ArchWiki</a> &#x2F; <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Arch_%2B_Windows_%E5%8F%8C%E7%B3%BB%E7%BB%9F#%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E4%BC%91%E7%9C%A0">中文Wiki</a><br>快速启动会导致Windows关机的时候实质变成进入休眠状态，这样在Linux开机的时候就不能挂载已经在Windows中被挂载的硬盘，否则会导致文件系统错误；<br>同样，如果手动休眠了双系统中的任意系统，然后启动了另一个系统，那么在休眠的系统中已经被挂载的硬盘，不应该被挂载在另一个系统上；如果担心自己误操作，同样可以禁用Windows的休眠功能。<br>虽然ArchWiki指出：</p><blockquote><p>如果 Windows 和 Linux 使用同一个 EFI 系统分区，如果休眠（或在启用快速启动时关机）Windows 并启动 Linux，或者休眠 Linux 并启动 Windows， EFI 系统分区可能遭到破坏。</p></blockquote><p>但是咱这么干过，EFI分区没出问题；只是在Linux上面挂载的Windows硬盘出现了文件系统错误，需要在Windows上使用<code>chkdsk</code>修复</p>
+          </div>
+
+<ol>
+<li>进入控制面板；如果找不到入口，使用开始菜单中的搜索功能；然后选择电源选项：<br> <img src="/img/windows-with-arch/control.png" srcset="/img/loading.gif" lazyload></li>
+<li>左侧的选择功能任选一个进入：<br> <img src="/img/windows-with-arch/poweroption.png" srcset="/img/loading.gif" lazyload></li>
+<li>更改当前不可用的设置，然后取消勾选“启用快速启动”；休眠是否关闭随意，不过感觉笔记本用户应该不需要休眠？最后记得保存修改。<br> <img src="/img/windows-with-arch/disablefastboot.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<h2 id="6-将Windows的硬件时间标准改为UTC"><a href="#6-将Windows的硬件时间标准改为UTC" class="headerlink" title="(6) 将Windows的硬件时间标准改为UTC"></a>(6) 将Windows的硬件时间标准改为UTC</h2><p>在任意位置新建任意文本文档，输入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reg">Windows Registry Editor Version 5.00<br><br>[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]<br>&quot;RealTimeIsUniversal&quot;=dword:00000001<br></code></pre></td></tr></table></figure>
+<p>将后缀从<code>.txt</code>改为<code>.reg</code>双击执行导入注册表。</p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-f1abcb4c" role="button" aria-expanded="false" aria-controls="collapse-f1abcb4c">
+        <div class="fold-arrow">▶</div>碎碎念：这样做的理由
+      </div>
+      <div class="fold-collapse collapse" id="collapse-f1abcb4c">
+        <div class="fold-content">
+          <p>硬件时间标准目前有两套方案: </p><ol><li>Local-RTC: 直接把硬件时间设为本地时间，然后系统显示的时间与硬件时间同步；</li><li>UTC: 把硬件时间固定设为UTC时间，然后系统根据时区设置，将硬件时间转换为本地时间。</li></ol><p>Windows默认使用1，而Linux默认使用2，两者必须统一否则硬件时间会乱套；<br>对于Ubuntu等常见的发行版，其会在检测到硬盘存在Windows时，自动将Linux的时间标准也改成1，从而避免修改Windows注册表；<br>而 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Dual_boot_with_Windows#Time_standard">ArchWiki</a> &#x2F; <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Arch_%2B_Windows_%E5%8F%8C%E7%B3%BB%E7%BB%9F#%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86">中文Wiki</a> 更建议将Windows设为2，这样的目的主要是为了在使用夏令时&#x2F;冬令时的时区，切换时同步次数混乱，导致时间快&#x2F;慢1小时；<br>对北京时区来说无影响，但是如果将Linux的时间标准设为1，Linux的时间管理进程会给出警告，并采取较为消极的联网时间同步策略。<br>所以咱觉得还是统一为UTC更好。</p>
+        </div>
+      </div>
+    </div>
+
+<h2 id="7-了解至少一种命令行文本编辑器的使用方法"><a href="#7-了解至少一种命令行文本编辑器的使用方法" class="headerlink" title="(7) 了解至少一种命令行文本编辑器的使用方法"></a>(7) 了解至少一种命令行文本编辑器的使用方法</h2><p>ArchLinux的安装镜像里面提供了3种文本编辑器，分别是 <a target="_blank" rel="noopener" href="https://man.archlinux.org/man/mcedit.1">mcedit</a> , <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Nano#Usage">nano</a> 和 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Vim#Usage">vim</a> 。至少了解其中一种的使用方式，推荐vim，下文的安装教程中，需要编辑文件时，咱会给出咱偏好的vim操作。</p>
+<h2 id="8-为Linux系统腾出一块空闲的硬盘分区"><a href="#8-为Linux系统腾出一块空闲的硬盘分区" class="headerlink" title="(8) 为Linux系统腾出一块空闲的硬盘分区"></a>(8) 为Linux系统腾出一块空闲的硬盘分区</h2><p>按下<code>Win+X</code>组合键，选择磁盘管理。<br>采用Windows和Linux装在同一块硬盘上不同分区，然后共享EFI分区的方案。<br>这里以虚拟机中新安装的Windows10 22H2版为例，如果分了C和D两个分区，分区结构应该是这样：<br><img src="/img/windows-with-arch/before-part.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>实际分区的情况可能存在差异；例如：</p><ol><li>Win10 LTSC 2019 的恢复分区会在硬盘的开始而非末尾；</li><li>Win10 LTSC 2021 没有恢复分区；</li><li>对于部分使用过一段时间的设备，以及一些出厂预装Windows的设备，如果已经提前分过了区，可能C盘和其它数据分区中间会间隔另一个恢复分区。</li></ol>
+          </div>
+<div class="note note-info">
+            <p>建议至少留出一个非系统分区作为双系统间共享数据的分区，防止在Linux直接挂载Windows系统盘时因为误操作或者Linux的灵车NTFS驱动导致损坏Windows系统；<br>如果有多块硬盘，直接拿其它硬盘共享也行，否则最好分一下CD两个分区，D盘作为共享数据盘。</p>
+          </div>
+<p>在D盘上右键压缩卷，腾出一定数量的空闲空间给Linux使用，不要新建分区，不要格式化。(懒得配图了)</p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-af3d30ad" role="button" aria-expanded="false" aria-controls="collapse-af3d30ad">
+        <div class="fold-arrow">▶</div>碎碎念：对分区位置的考量
+      </div>
+      <div class="fold-collapse collapse" id="collapse-af3d30ad">
+        <div class="fold-content">
+          <p>无论实际的分区情况是什么，如果硬盘最后有恢复分区，就把Linux占据的分区放在恢复分区的前面；否则把Linux放在硬盘的末尾。这样做的考量有：</p><ol><li><p>减少对Windows磁盘的操作：从数据盘右侧压缩一块分区出来，使用自带的磁盘管理就能完成，速度快还能减少数据损失的风险；</p></li><li><p>调整容量方便：考虑3种需要调整分区大小的情况：</p><ol><li>Windows的C盘&#x2F;数据盘空间不足：直接用Diskgenius等分区工具从数据盘&#x2F;C盘拿空间，不操作Linux分区；</li><li>Windows空间不足：向右缩小Linux分区；</li><li>Linux空间不足：向左缩小Windows分区；</li></ol><p> 这三种情况都能最大限度的减小操作成本。</p></li></ol>
+        </div>
+      </div>
+    </div>
+
+<h2 id="9-刻录启动U盘"><a href="#9-刻录启动U盘" class="headerlink" title="(9) 刻录启动U盘"></a>(9) 刻录启动U盘</h2><p>解压ventoy，启动<code>ventoy2disk.exe</code>；<br>插入准备好的U盘，选择该U盘，分区表选择GPT(对UEFI的兼容性更好)，格式随意，点击安装；</p>
+<div class="note note-danger">
+            <p>将会清空U盘上的所有数据！</p>
+          </div>
+<p>然后将archlinux和gparted的两个iso文件都直接放进U盘即可。</p>
+<h2 id="10-准备BIOS"><a href="#10-准备BIOS" class="headerlink" title="(10) 准备BIOS"></a>(10) 准备BIOS</h2><p>重启计算机，进入bios，关闭安全启动(Secure Boot): archlinux并不支持安全启动，如果确实需要这个功能，请在安装完archlinux之后，参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Implementing_Secure_Boot">ArchWiki</a> &#x2F; <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/UEFI/%E5%AE%89%E5%85%A8%E5%90%AF%E5%8A%A8#%E5%AE%9E%E6%96%BD%E5%AE%89%E5%85%A8%E5%90%AF%E5%8A%A8">中文Wiki</a> 自己准备签名文件自行配置（属高阶操作，不介绍，因为咱也不会）</p>
+<div class="note note-warning">
+            <p>如果Windows系统盘开启了bitlocker，在关闭安全启动后，重启进入Windows时可能会要求输入bitlocker密钥。</p>
+          </div>
+
+<h1 id="2-分区"><a href="#2-分区" class="headerlink" title="2. 分区"></a>2. 分区</h1><p>这里使用前述准备好的GParted工具进行分区，图形化操作的好处是不易误操作；<br>在ArchLinux命令行中分区的直接<a href="#3-%E8%BF%9B%E5%85%A5Arch%E5%AE%89%E8%A3%85%E4%BB%8B%E8%B4%A8%E5%AE%89%E8%A3%85">进入下一步</a>。</p>
+<h2 id="1-启动进入GParted界面"><a href="#1-启动进入GParted界面" class="headerlink" title="(1) 启动进入GParted界面"></a>(1) 启动进入GParted界面</h2><ol>
+<li>关闭电脑，然后重新开机并从U盘启动（根据电脑品牌，进入启动菜单boot menu的按键可能是F12,Delete,Esc或者其它）。 <div class="note note-info">
+            <p>部分设备开机状态直接重启可能无法在启动菜单中正确识别到U盘，所以建议是使用关机再手动开机的方式。</p>
+          </div></li>
+<li>在Ventoy操作菜单中，选择gparted的镜像，然后<code>Boot in normal mode</code>即可：<br> <img src="/img/windows-with-arch/part/ventoy-gparted.png" srcset="/img/loading.gif" lazyload><br> <img src="/img/windows-with-arch/ventoy-normal.png" srcset="/img/loading.gif" lazyload></li>
+<li>选择gparted的启动选项:<br> <img src="/img/windows-with-arch/part/gparted-uefi.png" srcset="/img/loading.gif" lazyload> <div class="note note-info">
+            <p>如果启动界面是这样的，说明进BIOS模式了，没进UEFI：<br><img src="/img/windows-with-arch/part/gparted-bios.png" srcset="/img/loading.gif" lazyload></p>
+          </div>
+ 通常来说，默认选择第一项就行；<br> 如果对U盘的稳定性没有信心，选择第2项，将GParted加载进内存再运行，启动时间会稍慢一些，但是运行更稳定。</li>
+<li>接下来依次处理几个选单: <ol>
+<li>键盘布局，直接默认，回车:<br> <img src="/img/windows-with-arch/part/keymap.png" srcset="/img/loading.gif" lazyload></li>
+<li>语言，输入26以选择简体中文，回车:<br> <img src="/img/windows-with-arch/part/locale.png" srcset="/img/loading.gif" lazyload></li>
+<li>图形选项，直接默认启动图形界面，回车:<br> <img src="/img/windows-with-arch/part/launch.png" srcset="/img/loading.gif" lazyload><br> 稍微等待片刻之后就进入了gparted的图形界面。</li>
+</ol>
+</li>
+</ol>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-3167e276" role="button" aria-expanded="false" aria-controls="collapse-3167e276">
+        <div class="fold-arrow">▶</div>使用Debian镜像进入GParted
+      </div>
+      <div class="fold-collapse collapse" id="collapse-3167e276">
+        <div class="fold-content">
+          <ol><li>启动镜像后选择<code>live system(amd64)</code>;<br> <img src="/img/windows-with-arch/part/debian-boot.png" srcset="/img/loading.gif" lazyload></li><li>给apt换源： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> vi /etc/apt/sources.list<br></code></pre></td></tr></table></figure> 修改前:<br> <img src="/img/windows-with-arch/part/apt-before.png" srcset="/img/loading.gif" lazyload><br> 修改后:<br> <img src="/img/windows-with-arch/part/apt-after.png" srcset="/img/loading.gif" lazyload><br> 然后更新apt缓存: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update<br></code></pre></td></tr></table></figure></li><li>安装<code>xinit</code>和一个轻量的窗口管理器(这里以<code>openbox</code>为例)，以及<code>gparted</code>本身： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install xinit openbox gparted<br></code></pre></td></tr></table></figure> (小声bb：Arch你学学人家，Debian的live环境就能自己装个图形界面进去，Arch的live环境装个<code>xorg-server</code>就空间不足，要不然哪需要这么折腾)</li><li>启动图形界面： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">startx /usr/bin/openbox<br></code></pre></td></tr></table></figure> 黑屏是正常的，有鼠标显示出来就行</li><li>在任意位置右键，就能找到gparted的入口，点开就行：<br> <img src="/img/windows-with-arch/part/debian-gparted.png" srcset="/img/loading.gif" lazyload></li><li>完成分区后右键<code>Exit</code>退出桌面环境，然后关机： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> poweroff<br></code></pre></td></tr></table></figure></li></ol>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-69148c82" role="button" aria-expanded="false" aria-controls="collapse-69148c82">
+        <div class="fold-arrow">▶</div>使用Xubuntu镜像进入GParted
+      </div>
+      <div class="fold-collapse collapse" id="collapse-69148c82">
+        <div class="fold-content">
+          <ol><li>启动镜像后选择<code>Try or Install Xubuntu</code></li><li>点击左上角找到gparted:<br> <img src="/img/windows-with-arch/part/xubuntu-gparted.png" srcset="/img/loading.gif" lazyload></li></ol>
+        </div>
+      </div>
+    </div>
+
+<h2 id="2-在GParted中完成分区"><a href="#2-在GParted中完成分区" class="headerlink" title="(2) 在GParted中完成分区"></a>(2) 在GParted中完成分区</h2><p><img src="/img/windows-with-arch/part/before.png" srcset="/img/loading.gif" lazyload><br>在空闲部分从左到右建立3个分区：<br><img src="/img/windows-with-arch/part/parting.png" srcset="/img/loading.gif" lazyload></p>
+<table>
+<thead>
+<tr>
+<th>大小</th>
+<th>格式化为</th>
+<th>挂载点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>除下面两个分区外的所有空间</td>
+<td>btrfs</td>
+<td>&#x2F;</td>
+</tr>
+<tr>
+<td>适量，这里示例2G</td>
+<td>linux swap</td>
+<td>[SWAP]</td>
+</tr>
+<tr>
+<td>1G</td>
+<td>ext4&#x2F;fat32</td>
+<td>&#x2F;boot</td>
+</tr>
+</tbody></table>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-feff5bfd" role="button" aria-expanded="false" aria-controls="collapse-feff5bfd">
+        <div class="fold-arrow">▶</div>为什么这样分区?
+      </div>
+      <div class="fold-collapse collapse" id="collapse-feff5bfd">
+        <div class="fold-content">
+          <ol><li>主目录使用btrfs: btrfs具有很多优良的性质：透明压缩(节省空间),子卷(把根目录和home直接用子卷管理，既能隔离，又防止出现系统分区和home分区一个容量不够的时候从另一个分区挪的尴尬),快照(图形化快照工具timeshift除了基于全盘复制的RSYNC之外，只支持创建btrfs文件系统的快照)<br> btrfs的介绍可以参考<a target="_blank" rel="noopener" href="https://arch.icekylin.online/guide/advanced/btrfs.html">这篇文章</a> ,原文使用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 许可，因此不作引用；</li><li>使用swap分区而非swap文件：swap分区配置起来相对更加简便，如果需要配置休眠，swap分区的配置难度更低；</li><li>/boot目录单独分区：咱希望安装完双系统之后，每次开机时grub引导可以记住咱上一次选择的选项，而grub无法写入btrfs格式的分区；<br> 如果&#x2F;boot目录不单独分区，也有一条好处：快照可以把&#x2F;boot目录包含进去，回滚时可以一起回滚，防止出现&#x2F;boot分区内的iniramfs的内核版本与系统内核版本不匹配，导致回滚快照后&#x2F;boot分区无法挂载，进入emergency mode的问题。</li><li>关于&#x2F;boot分区的格式：fat32理论上具有更好的兼容性，而ext4更多的其实是防止隔壁的Windows乱来</li><li>咱习惯安装3份内核，在安装了<code>linux-firmware</code>固件包后，默认状态下，在虚拟机中每份内核会在&#x2F;boot分区产生约100~150MB的initramfs镜像，物理机由于<code>autodetect</code>机制会探测到比虚拟机更多的硬件，这个数值会略大一点；但是1GB也完全够用了。如果根据<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Mkinitcpio#COMPRESSION">ArchWiki</a> &#x2F;<a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Mkinitcpio#%E5%8E%8B%E7%BC%A9%E6%96%B9%E5%BC%8F(COMPRESSION)">中文Wiki</a> 的方法把压缩开到最极端，占用的总空间会从约450MB下降到约320MB，似乎意义并不大。</li></ol>
+        </div>
+      </div>
+    </div>
+<p>然后确认，等待分区完成。最终的情况应该是这样的：</p>
+<table>
+<thead>
+<tr>
+<th>设备名</th>
+<th>分区描述</th>
+<th>文件系统</th>
+<th>挂载点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;dev&#x2F;nvme0n1p1</td>
+<td>EFI分区</td>
+<td>fat32</td>
+<td>&#x2F;efi</td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p2</td>
+<td>MSR分区</td>
+<td>msr</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p3</td>
+<td>Windows C:</td>
+<td>ntfs</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p4</td>
+<td>Windows D:</td>
+<td>ntfs</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p6</td>
+<td>Linux系统盘</td>
+<td>btrfs</td>
+<td>&#x2F;</td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p7</td>
+<td>Linux swap</td>
+<td>swap</td>
+<td>[SWAP]</td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p8</td>
+<td>Linux boot</td>
+<td>ext4</td>
+<td>&#x2F;boot</td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;nvme0n1p5</td>
+<td>Windows恢复分区</td>
+<td>ntfs</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/img/windows-with-arch/part/after.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>有大量的发行版都会选择把EFI分区挂载在<code>/boot/efi</code>，但是根据<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/EFI_system_partition#Typical_mount_points">ArchWiki</a> &#x2F;<a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/EFI_%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA#%E5%85%B8%E5%9E%8B%E6%8C%82%E8%BD%BD%E7%82%B9">中文Wiki</a> , 现在更建议直接挂载在<code>/efi</code>，<code>/boot/efi</code>不再推荐。</p>
+          </div>
+<p>完成分区后退出GParted，重启进入Arch安装介质，准备开始安装系统。</p>
+<h1 id="3-进入Arch安装介质安装"><a href="#3-进入Arch安装介质安装" class="headerlink" title="3. 进入Arch安装介质安装"></a>3. 进入Arch安装介质安装</h1><div class="note note-info">
+            <p>Tips: 善用tab自动补全命令不仅能节省输入时间，还能防止误输。</p>
+          </div>
+
+<h2 id="1-启动Arch-Linux安装介质"><a href="#1-启动Arch-Linux安装介质" class="headerlink" title="(1) 启动Arch Linux安装介质"></a>(1) 启动Arch Linux安装介质</h2><p>从U盘启动到Arch Linux:<br><img src="/img/windows-with-arch/install/ventoy.png" srcset="/img/loading.gif" lazyload><br><img src="/img/windows-with-arch/ventoy-normal.png" srcset="/img/loading.gif" lazyload><br>看到这个界面后回车：<br><img src="/img/windows-with-arch/install/boot-uefi.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>如果看到的启动界面是这样的，并且启动项的结尾是BIOS，说明是用传统BIOS启动的，没有启动到UEFI模式；立即关机（或者启动到安装介质后输入<code>poweroff</code>关机），然后去BIOS中更改启动类型为<code>UEFI only</code><br><img src="/img/windows-with-arch/install/boot-bios.png" srcset="/img/loading.gif" lazyload></p>
+          </div>
+
+<h2 id="2-停用reflector服务"><a href="#2-停用reflector服务" class="headerlink" title="(2) 停用reflector服务"></a>(2) 停用reflector服务</h2><p>reflector是Arch引入的功能，其会在最新的20个镜像源中测速，并根据速度排序镜像；由于大陆的特殊网络环境，只考虑最新的20个镜像源往往得不到理想的结果，所以先将其禁用：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs zsh">systemctl stop reflector.service <span class="hljs-comment">#停用</span><br>systemctl status reflector.service <span class="hljs-comment">#复查</span><br></code></pre></td></tr></table></figure>
+<p><img src="/img/windows-with-arch/install/stop-reflector.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-success">
+            <p>这里是直接用reflector得到的镜像源列表，20个源一个国内的都没有：<br><img src="/img/windows-with-arch/install/reflector.png" srcset="/img/loading.gif" lazyload><br>硬要用reflector排序镜像源也是可以的，只需要给它加上亿点点限制并手动运行：</p><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs zsh">reflector --latest 5 --country China --protocol https --<span class="hljs-built_in">sort</span> rate --save /etc/pacman.d/mirrorlist<br></code></pre></td></tr></table></figure><p>这个命令依次指定了 最新的5个 地区位于中国 使用https协议 的镜像，按下载速度排序，并把结果覆盖保存在<code>/etc/pacman.d/mirrorlist</code>中。<br>不使用最后的–save参数，可以在控制台先预览输出的结果。<br>更多的用法参见 <a target="_blank" rel="noopener" href="https://man.archlinux.org/man/reflector.1#EXAMPLES">reflector man page</a> 以及 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Reflector">ArchWiki</a> &#x2F; <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Reflector">中文Wiki</a><br>新安装的系统中并不会默认包含<code>reflector</code>软件包，需要可以自行安装配置。</p>
+          </div>
+
+<h2 id="3-分区与格式化"><a href="#3-分区与格式化" class="headerlink" title="(3) 分区与格式化"></a>(3) 分区与格式化</h2><p>已经使用GParted工具完成分区和格式化的直接跳到<a href="">下一步</a></p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-40877bee" role="button" aria-expanded="false" aria-controls="collapse-40877bee">
+        <div class="fold-arrow">▶</div>分区选项一：使用fdisk工具分区
+      </div>
+      <div class="fold-collapse collapse" id="collapse-40877bee">
+        <div class="fold-content">
+          <p>优点：可调参数多，熟练后操作可以更快。<br>使用<code>lsblk</code>命令，先确认即将分区的硬盘。<br><img src="/" srcset="/img/loading.gif" lazyload><br>这里即将分区的盘是<code>/dev/nvme0n1</code>,这时没显示出空闲空间是正常的，这里只显示已经分配的空间。</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-d41d8cd9" role="button" aria-expanded="false" aria-controls="collapse-d41d8cd9">
+        <div class="fold-arrow">▶</div>分区选项二：使用cfdisk工具分区
+      </div>
+      <div class="fold-collapse collapse" id="collapse-d41d8cd9">
+        <div class="fold-content">
+          
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-d41d8cd9" role="button" aria-expanded="false" aria-controls="collapse-d41d8cd9">
+        <div class="fold-arrow">▶</div>格式化
+      </div>
+      <div class="fold-collapse collapse" id="collapse-d41d8cd9">
+        <div class="fold-content">
+          
+        </div>
+      </div>
+    </div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows+Arch Linux双系统基本安装</div>
+      <div>http://silvertuanzi.github.io/2025/01/21/windows-with-arch/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silver-lasombra</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年1月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
