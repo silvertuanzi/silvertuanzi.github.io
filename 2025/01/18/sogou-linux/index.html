@@ -1,0 +1,742 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silver-lasombra">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="记录一下Linux安装搜狗输入法的过程，包含apt系和pacman系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装搜狗输入法的二三事">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/01/18/sogou-linux/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="记录一下Linux安装搜狗输入法的过程，包含apt系和pacman系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx-menu.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx-input.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx5-menu.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx5-input.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx-menu.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx-input.png">
+<meta property="article:published_time" content="2025-01-18T02:40:23.000Z">
+<meta property="article:modified_time" content="2025-02-14T08:50:52.538Z">
+<meta property="article:author" content="silver-lasombra">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/sogou-linux/fcitx-menu.png">
+  
+  
+  
+  <title>Linux安装搜狗输入法的二三事 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux安装搜狗输入法的二三事"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-18 10:40" pubdate>
+          2025年1月18日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux安装搜狗输入法的二三事</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>不想折腾 <a target="_blank" rel="noopener" href="https://rime.im/">Rime</a> 输入法，fcitx自带的输入法感觉也不好使，试了一圈还是搜狗用的习惯。</p>
+<h1 id="apt-deb系安装"><a href="#apt-deb系安装" class="headerlink" title="apt&#x2F;deb系安装"></a>apt&#x2F;deb系安装</h1><h2 id="官方版"><a href="#官方版" class="headerlink" title="官方版"></a>官方版</h2><div class="note note-info">
+            <p>测试平台：Linux Mint 20.3&#x2F;21.3&#x2F;22, LMDE 6<br>由于Mint系二进制兼容上游，因此应该同样适用于Ubuntu 20.04&#x2F;22.04&#x2F;24.04, Debian 12</p>
+          </div>
+
+<div class="note note-warning">
+            <p>兼容情况：Mint 20.3完美运行，其它版本均无法打开输入法设置界面，但是通过修改相关的配置文件(<code>~/.config/sogoupinyin/conf/env.ini</code>)也能实现修改设置的效果。<br>另：不原生支持Wayland，但是在Wayland桌面下似乎也可用，应该是自动调用了XWayland?</p>
+          </div>
+
+<h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install fcitx<br></code></pre></td></tr></table></figure>
+<p>搜狗输入法基于fcitx4框架，该框架与fcitx5冲突，因此会提示你卸载fcitx5；如果你的系统还自带了ibus可以考虑删除，保留也无所谓；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2<br><span class="hljs-built_in">sudo</span> apt install libgsettings-qt1<br></code></pre></td></tr></table></figure>
+<p>这些是必需的依赖；</p>
+<h3 id="2-安装输入法本体"><a href="#2-安装输入法本体" class="headerlink" title="2. 安装输入法本体"></a>2. 安装输入法本体</h3><p>前往 <a target="_blank" rel="noopener" href="https://shurufa.sogou.com/linux">搜狗输入法Linux官网</a> 点击“立即下载”，对于大部分常规计算机，选择“x86_64”即可；<br>下载完毕后，进入下载文件夹，通常双击deb包即可安装，或者通过命令行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dpkg -i /path/to/***.deb <span class="hljs-comment">#将路径替换为下载deb包的路径</span><br></code></pre></td></tr></table></figure>
+<p>完成后可以运行一下依赖检查，看看是否还有依赖缺失：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install --fix<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-修复输入法的依赖库"><a href="#3-修复输入法的依赖库" class="headerlink" title="3. 修复输入法的依赖库"></a>3. 修复输入法的依赖库</h3><p>搜狗输入法自带的Qt5库是有问题的，无法正常运行；我们使用脚本删除输入法自带的库，然后链接到系统正常的库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># !/bin/sh</span><br><br><span class="hljs-built_in">cd</span> /opt/sogoupinyin/files/lib/qt5/lib/<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Core.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 libQt5Core.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Gui.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5 libQt5Gui.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Widgets.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5 libQt5Widgets.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5DBus.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5DBus.so.5 libQt5DBus.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Qml.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Qml.so.5 libQt5Qml.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Network.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Network.so.5 libQt5Network.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Quick.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Quick.so.5 libQt5Quick.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5QuickWidgets.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5QuickWidgets.so.5 libQt5QuickWidgets.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5Svg.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5Svg.so.5 libQt5Svg.so.5<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> libQt5XcbQpa.so.5 <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /usr/lib/x86_64-linux-gnu/libQt5XcbQpa.so.5 libQt5XcbQpa.so.5<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-完成安装"><a href="#4-完成安装" class="headerlink" title="4. 完成安装"></a>4. 完成安装</h3><p>到这里就已经完成了，注销用户或者重启系统之后，切换到fcitx框架，就能找到搜狗输入法了；<br>效果图：<br>托盘菜单：<br><img src="/img/sogou-linux/fcitx-menu.png" srcset="/img/loading.gif" lazyload><br>输入效果：<br><img src="/img/sogou-linux/fcitx-input.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="pacman系安装"><a href="#pacman系安装" class="headerlink" title="pacman系安装"></a>pacman系安装</h1><div class="note note-info">
+            <p>均在Arch Linux上测试，未在Manjaro等其它发行版测试过兼容性；<br><br>pacman系发行版由于AUR的加持，安装起来会简单很多；<br>AUR提供了两个版本：一个是移植自开放麒麟系统的 <a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/fcitx5-sogou">fcitx5-sogou</a>, 另一个是从官方deb包移植的 <a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/fcitx-sogoupinyin">fcitx-sogoupinyin</a><br>前者基于 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5">Fcitx5</a> 框架，后者则基于 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx">Fcitx</a> 框架。<br>Fcitx5被定为Fcitx的继任者，因此Fcitx现已不再有新功能更新；Fcitx5正在积极开发中。<br>Fcitx5目前能感知到的优势有两个，一是原生支持Wayland，二是对在终端输入的支持更好（Fcitx4似乎也支持但是咱没配置出来）；<br>但是Fcitx5版本的搜狗，外观相对比较丑，并且移植不完美，存在设置页无法打开的问题；而基于Fcitx版本的官方搜狗能完美运行。</p>
+          </div>
+
+<div class="note note-warning">
+            <p>Arch系在安装前强烈建议将系统滚到最新：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -Syu<br></code></pre></td></tr></table></figure>
+          </div>
+
+<h2 id="Fcitx5版"><a href="#Fcitx5版" class="headerlink" title="Fcitx5版"></a>Fcitx5版</h2><div class="note note-info">
+            <p>以下假设使用的AUR助手是paru，如果使用的是yay或者其它请自行替换。</p>
+          </div>
+
+<h3 id="1-配置Fcitx5"><a href="#1-配置Fcitx5" class="headerlink" title="1. 配置Fcitx5"></a>1. 配置Fcitx5</h3><div class="note note-info">
+            <p>请确认你已经按照 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Fcitx5">中文wiki</a> 配置好了Fcitx5框架，已经配置好的可以直接进入下一步。<br>Fcitx5相关的中文Wiki是Arch Linux中文社区单独维护的内容，并非英文原文的翻译，因此这里贴出中文帖。</p>
+          </div>
+
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-c4a0b7bd" role="button" aria-expanded="false" aria-controls="collapse-c4a0b7bd">
+        <div class="fold-arrow">▶</div>配置Fcitx5
+      </div>
+      <div class="fold-collapse collapse" id="collapse-c4a0b7bd">
+        <div class="fold-content">
+          <p>安装 <a target="_blank" rel="noopener" href="https://archlinux.org/groups/x86_64/fcitx5-im/">fcitx5-im</a> 包组；你可以保险起见全部安装，也可以先不安装其中的<code>fcitx5-gtk</code>和<code>fcitx5-qt</code>，搜狗并不依赖它们；<code>fcitx5-configtool</code>是配置工具建议保留。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S fcitx5-im<br></code></pre></td></tr></table></figure><p>然后根据你使用的是X11还是Wayland，需要有不同的配置方法：<br>X11配置（参考 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Fcitx5#X11">中文wiki</a> 和 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5#IM_modules">wiki</a> ）<br>编辑<code>/etc/environment</code>，添加以下内容：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">GTK_IM_MODULE</span>=fcitx<br><span class="hljs-attr">QT_IM_MODULE</span>=fcitx<br><span class="hljs-attr">XMODIFIERS</span>=@im=fcitx<br><span class="hljs-attr">SDL_IM_MODULE</span>=fcitx<br><span class="hljs-attr">GLFW_IM_MODULE</span>=ibus<br></code></pre></td></tr></table></figure><p>Wayland在不同桌面下的配置方式不同，因此自行查阅 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Fcitx5#Wayland">中文wiki</a> 和 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5#Wayland">wiki</a></p>
+        </div>
+      </div>
+    </div>
+
+<h3 id="2-安装输入法本体-1"><a href="#2-安装输入法本体-1" class="headerlink" title="2. 安装输入法本体"></a>2. 安装输入法本体</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">paru -S fcitx5-sogou<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>如果下载出现问题，编辑<code>~/.cache/paru/clone/fcitx5-sogou/PKGBUILD</code>，将阿里源注释掉，改用开放麒麟官方源：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mirrors=<span class="hljs-string">&quot;http://archive.build.openkylin.top&quot;</span><br><span class="hljs-comment"># mirrors=&quot;https://mirrors.aliyun.com&quot;</span><br></code></pre></td></tr></table></figure><p>然后重新运行一次安装。</p>
+          </div>
+
+<h3 id="3-完成"><a href="#3-完成" class="headerlink" title="3. 完成"></a>3. 完成</h3><p>注销或者重启即可使用。效果图如下：<br>托盘菜单：<br><img src="/img/sogou-linux/fcitx5-menu.png" srcset="/img/loading.gif" lazyload><br>输入效果：<br><img src="/img/sogou-linux/fcitx5-input.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Fcitx版-官方版"><a href="#Fcitx版-官方版" class="headerlink" title="Fcitx版(官方版)"></a>Fcitx版(官方版)</h2><div class="note note-info">
+            <p>建议不使用AUR助手。</p>
+          </div>
+
+<h3 id="1-配置Fcitx"><a href="#1-配置Fcitx" class="headerlink" title="1. 配置Fcitx"></a>1. 配置Fcitx</h3><div class="note note-info">
+            <p>请确认你已经按照 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx">wiki</a> 或者 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Fcitx">中译wiki</a> 配置好了Fcitx框架，已经配置好的可以直接进入下一步。</p>
+          </div>
+
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-8b986591" role="button" aria-expanded="false" aria-controls="collapse-8b986591">
+        <div class="fold-arrow">▶</div>配置Fcitx
+      </div>
+      <div class="fold-collapse collapse" id="collapse-8b986591">
+        <div class="fold-content">
+          <p>安装<code>fcitx</code>包以及图形化配置工具<code>fcitx-configtool</code>。KDE用户也可以用另一个配置工具<code>kcm-fcitx</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S fcitx fcitx-configtool<br></code></pre></td></tr></table></figure><div class="note note-info">            <p>这里不直接安装 <a target="_blank" rel="noopener" href="https://archlinux.org/groups/x86_64/fcitx-im/">fcitx-im</a> 包组，因为这个包组并不含配置工具，且我们需要的<code>fcitx-qt5</code>被搜狗显式依赖了，<code>fcitx-qt6</code>又不需要。</p>          </div>然后编辑`/etc/environment`，添加以下内容：<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">GTK_IM_MODULE</span>=fcitx<br><span class="hljs-attr">QT_IM_MODULE</span>=fcitx<br><span class="hljs-attr">XMODIFIERS</span>=@im=fcitx<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+<h3 id="2-拉取AUR仓库"><a href="#2-拉取AUR仓库" class="headerlink" title="2. 拉取AUR仓库"></a>2. 拉取AUR仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://aur.archlinux.org/fcitx-sogoupinyin.git --depth 1<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-下载官方输入法安装包"><a href="#3-下载官方输入法安装包" class="headerlink" title="3. 下载官方输入法安装包"></a>3. 下载官方输入法安装包</h3><p>前往 <a target="_blank" rel="noopener" href="https://shurufa.sogou.com/linux">搜狗输入法Linux官网</a> 点击“立即下载”，选择“x86_64”；</p>
+<div class="note note-warning">
+            <p>AUR的打包者并没有维护其它架构的包</p>
+          </div>
+
+<p>然后把下载好的.deb包移动到AUR仓库的目录中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> /path/to/***.deb /path/to/fcitx-sogoupinyin/ <span class="hljs-comment">#自行修改路径</span><br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>搜狗官网包下载的方式是点击下载按钮时才生成一个动态链接，下载后就会失效；所以AUR的打包脚本无法通过直链来下载需要的安装包，需要我们手动解决；这也正是不推荐使用AUR助手安装的原因。</p>
+          </div>
+
+<h3 id="4-启动打包安装"><a href="#4-启动打包安装" class="headerlink" title="4. 启动打包安装"></a>4. 启动打包安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> fcitx-sogoupinyin<br>makepkg -si<br></code></pre></td></tr></table></figure>
+<p>稍等片刻即可安装完成。</p>
+<h3 id="5-完成安装"><a href="#5-完成安装" class="headerlink" title="5. 完成安装"></a>5. 完成安装</h3><p>注销用户或者重启系统之后，切换到fcitx框架，就能找到搜狗输入法了；<br>效果图与deb系相同，再贴一遍：<br>托盘菜单：<br><img src="/img/sogou-linux/fcitx-menu.png" srcset="/img/loading.gif" lazyload><br>输入效果：<br><img src="/img/sogou-linux/fcitx-input.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux安装搜狗输入法的二三事</div>
+      <div>http://silvertuanzi.github.io/2025/01/18/sogou-linux/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silver-lasombra</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年1月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/01/19/mintboot/" title="更改Linux Mint在Boot Menu里面的启动项名称">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">更改Linux Mint在Boot Menu里面的启动项名称</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/01/15/some-rc-files/" title="一些配置文件存档">
+                        <span class="hidden-mobile">一些配置文件存档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
