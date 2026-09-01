@@ -1,0 +1,1624 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silvertuanzi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="习惯了Linux Mint的外观和操作逻辑，那就把Arch配成Mint的样子吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux配置cinnamon桌面与常用应用">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/02/11/arch-cinnamon/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="习惯了Linux Mint的外观和操作逻辑，那就把Arch配成Mint的样子吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/cnwiki.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/archcinnamon1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/archcinnamon2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/visudo1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/visudo2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/makeflags1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/makeflags2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/zstd.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/nocom.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/xz.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/nodebug1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/makepkg/nodebug2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/cinnamon-start.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/clash-verge-rev.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/greeter1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/greeter2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/login.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/group1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/group2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/group3.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/theme/terminal1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/theme/terminal2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/theme/theme1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/theme/theme2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/theme/wallpaper.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/theme/fonts.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/start1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/start2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/settings-arch1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/settings-mint1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/settings-arch2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/settings-mint2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/mintapp1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/mintapp2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/monitor/gnome.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/monitor/none-adwaita.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/monitor/mint.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/mount-need-passwd.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/mission-center.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/timeout.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/mirror.png">
+<meta property="article:published_time" content="2025-02-11T09:04:12.000Z">
+<meta property="article:modified_time" content="2026-09-01T12:41:55.000Z">
+<meta property="article:author" content="silvertuanzi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/arch-cinnamon/cnwiki.png">
+  
+  
+  
+  <title>Arch Linux配置cinnamon桌面与常用应用 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":"https://silvertuanzi-umami.netlify.app/script.js","website_id":"8696ff80-db66-47ae-8f97-dce9da61066b","domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":"3ay5n/D+qZfExizE1VsC63yZVb1BLb5c2fX8frr4eIbjf45uO6BWxM3sPDbztIyAbm9qSesnugRb7M7yhNuHt8WNleaVmKaSp17eECt31fAnRKYruDD+tRoDuNMSlgQSfhtTfw6tX7ELMt8Q6nazsg5qudrPgmusxyWux9HeeaAip1BRl6nP1Ruf19XNCJVXpTgb/x/hLIpVbHhEu5Rfp4Ry1hs5zddYV6+2hd7zvBnljm6m9ouSpAhn6Ewfx3IVCduBPH6cvQvwlhcjvFrm7TMsZ+ngOeHiJmJSzaJLuUwF8ARfRFU8deilRIUvdKgt5OcrGmHC3Vh2cnEXnpYmS/XXRVjiEcRcpkL3joRJf66O5UqAqKGjGjLbIO8rVE5X3bgs","api_server":"https://silvertuanzi-umami.netlify.app"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        let umami = document.createElement('script');
+        umami.async = true;
+        umami.src = "https://silvertuanzi-umami.netlify.app/script.js";
+        umami.setAttribute("data-website-id", "8696ff80-db66-47ae-8f97-dce9da61066b");
+        umami.setAttribute("data-domains", "");
+        document.head.appendChild(umami);
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tools/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>工具</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Arch Linux配置cinnamon桌面与常用应用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-11 17:04" pubdate>
+          2025年2月11日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          23k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          188 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="umami-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="umami-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Arch Linux配置cinnamon桌面与常用应用</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年9月1日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>注：官方源的软件包用角标<sup>pkg</sup>标注；archlinuxcn社区源的软件包用角标<sup>cn</sup>标注；arch4edu源的用角标<sup>edu</sup>标注；来自AUR的软件包用角标<sup>aur</sup>标注，并且附上AUR地址的链接，便于查看源码。<br>涉及到ArchWiki的只贴英文链接啦，反正英文界面可以很简单地跳转到中文版的<br><img src="/img/arch-cinnamon/cnwiki.png" srcset="/img/loading.gif" lazyload></p>
+<p>配置的最终效果应该类似这样：</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/archcinnamon1.png" srcset="/img/loading.gif" lazyload></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/archcinnamon2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+
+<p>配置的起点是一个只执行了最基本安装的，只有root用户的最基本Arch Linux系统，主要的配置类似<a href="/2025/02/10/windows-with-arch/" title="Windows+Arch Linux双系统基本安装">上一篇文章</a>中的安装过程。<br><br>下面正文开始。</p>
+<h1 id="安装桌面环境之前"><a href="#安装桌面环境之前" class="headerlink" title="安装桌面环境之前"></a>安装桌面环境之前</h1><p>这部分配置应该是无论安装什么桌面环境都需要做的。</p>
+<h2 id="0-确保系统为最新"><a href="#0-确保系统为最新" class="headerlink" title="0.确保系统为最新"></a>0.确保系统为最新</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -Syu<br></code></pre></td></tr></table></figure>
+<p>滚动更新的系统最新的才是最稳定的。</p>
+<h2 id="1-配置普通用户"><a href="#1-配置普通用户" class="headerlink" title="1.配置普通用户"></a>1.配置普通用户</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">useradd -m -G wheel -s /bin/bash myusername <span class="hljs-comment">#添加一个名为myusername的用户，指定登录shell为bash，并添加到wheel用户组</span><br>passwd myusername <span class="hljs-comment">#为新用户设置密码</span><br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>Arch Linux似乎约定俗成的把<code>wheel</code>用户组作为特权组给予<code>sudo</code>权限；如果想像其它发行版一样使用<code>sudo</code>用户组当然也是可以的。</p> 
+          </div>
+<p>然后还需要配置<code>sudo</code>权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">EDITOR=vim visudo<br></code></pre></td></tr></table></figure>
+<div class="note note-warning">
+            <p>使用<code>EDITOR</code>环境变量指定编辑器是不可省略的；<code>visudo</code>命令默认使用<code>vi</code>编辑器，但是咱没安装，因此如果不指定编辑器就会执行失败。编辑器可以换为<code>nano</code>等等，前提是安装了它。</p> 
+          </div>
+<p>定位到图示的行（在文件的最后），然后取消注释。</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/visudo1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/visudo2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+<p>这三行分别表示：</p>
+<ol>
+<li>给<code>wheel</code>用户组赋予<code>sudo</code>权限</li>
+<li>给<code>wheel</code>用户组赋予<code>sudo</code>权限，并且无需输入密码</li>
+<li>给<code>sudo</code>用户组赋予<code>sudo</code>权限</li>
+</ol>
+<p>挑选想要的其中一行取消注释即可。<br>另外，还可以在文件中添加这样一行：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Defaults pwfeedback</span><br></code></pre></td></tr></table></figure>
+<p>添加后<code>sudo</code>输入密码时会以星号(<code>*</code>)回显，而非像通常那样什么都不显示。</p>
+<p>之后可以<code>exit</code>退出root用户，然后重新登录到非特权用户；也可以使用<code>su -l myusername</code>直接切换用户。</p>
+<h2 id="2-安装AUR助手"><a href="#2-安装AUR助手" class="headerlink" title="2.安装AUR助手"></a>2.安装AUR助手</h2><p>通常最常见的选择是<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/yay">yay</a><sup>cn&#x2F;aur</sup>或者<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/paru">paru</a><sup>cn&#x2F;aur</sup>，archlinuxcn社区源已经打好了包，直接安装即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S paru<br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <ol> <li>个人更喜欢<code>paru</code>；但是从交互体验来看<code>yay</code>的反馈可能会更好些；</li> <li>Arch Linux更希望用户能手动从AUR安装一遍，熟悉手动打包的过程： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://aur.archlinux.org/paru.git --depth 1<br><span class="hljs-built_in">cd</span> paru<br>makepkg -si<br></code></pre></td></tr></table></figure></li> <li>出于安全原因，<code>makepkg</code>命令和AUR助手均会拒绝直接在root用户下运行，所以记得切换用户。</li> </ol> 
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-b2662aae" role="button" aria-expanded="false" aria-controls="collapse-b2662aae">
+        <div class="fold-arrow">▶</div>留意不同AUR包后缀的区别
+      </div>
+      <div class="fold-collapse collapse" id="collapse-b2662aae">
+        <div class="fold-content">
+          <p>通常来说，一个开源软件包<code>foo</code>会在AUR上存在至少三种分支：</p> <ul> <li><code>foo</code>:使用发布版本的源码包编译安装（源码包从release里面下载）</li> <li><code>foo-bin</code>:直接打包上游编译好的二进制包</li> <li><code>foo-git</code>:从git拉取最新的源码编译安装</li> </ul> <p>其它后缀的阅读包描述可以看出。通常情况下，<code>-bin</code>因为是现成的二进制文件，只需要解压然后重打包，安装速度最快；源码编译的则会兼容性更好，并且如果动态链接了系统依赖，可能一定程度节省硬盘空间（比如相比于一堆包一人打包一个electron，全部共用系统的electron库明显更节省空间）。<br>另外，<code>yay</code>是go语言编写的，国内网络环境可能会拉取依赖困难。<code>yay-bin</code>就能避免这一问题。</p> 
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-a9b2ede2" role="button" aria-expanded="false" aria-controls="collapse-a9b2ede2">
+        <div class="fold-arrow">▶</div>另一个可能有点邪门和灵车的选择:pamac
+      </div>
+      <div class="fold-collapse collapse" id="collapse-a9b2ede2">
+        <div class="fold-content">
+          <p>pamac是Manjaro团队开发的另一套辅助性的包管理软件，在Manjaro系统中默认预装，ArchLinux也可以从AUR中获取到；<br>pamac提供了另一套不同于pacman的命令，命令的整体特征更类似于<code>apt</code>等常见的包管理器（例如<code>pamac install foo</code>等等），命令的用法参照<a target="_blank" rel="noopener" href="https://wiki.manjaro.org/index.php/Pamac">Manjaro Wiki - pamac</a> （此wiki的汉化约等于没有）<br>此外pamac也提供了图形化操作界面，预览同样可以在前述的wiki界面找到。<br>下面列出在AUR中pamac不同包的区别：<br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/pamac-cli">pamac-cli</a> –只提供命令行；<br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/pamac-aur">pamac-aur</a> –提供图形界面，包含基本的软件包和AUR包支持；<br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/pamac-flatpak">pamac-flatpak</a> –提供图形界面，在上一个的基础上增加了flatpak支持（需要自己配置安装flatpak<sup>pkg</sup>）；<br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/pamac-all">pamac-all</a> –提供图形界面，在上一个的基础上增加了snap支持（需要自己配置安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/snapd">snapd</a><sup>aur</sup>）；</p> 
+        </div>
+      </div>
+    </div>
+
+<h2 id="3-关于显卡驱动"><a href="#3-关于显卡驱动" class="headerlink" title="3.关于显卡驱动"></a>3.关于显卡驱动</h2><p>Linux内核已经集成了至少能亮机的modesetting驱动，所以驱动可以先不装；配置好能正常点亮的桌面，然后把快照等措施准备好了，再来大战驱动也不迟。<br>另外由于咱目前还只是在虚拟机做的测试，就不写驱动的配置啦，三家显卡分别参考各自的wiki就好了（包括核显）：<br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Intel_graphics">Intel</a> 和 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA">NVIDIA</a><br>AMD: 先参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Xorg#AMD">这里</a> 根据显卡架构确定安装的驱动类型，然后参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/AMDGPU">AMDGPU</a> 和 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/ATI">ATI</a> ，<span class="label label-info">由于RX400系已经属于GCN4架构了，现在能见到的常见A卡只要比RX400系新，就装AMDGPU就行</span></p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-c305dbf4" role="button" aria-expanded="false" aria-controls="collapse-c305dbf4">
+        <div class="fold-arrow">▶</div>VMware虚拟机需要做的事
+      </div>
+      <div class="fold-collapse collapse" id="collapse-c305dbf4">
+        <div class="fold-content">
+          <p>安装开源的open-vm-tools以及必要的驱动，然后启动相应的服务：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S open-vm-tools xf86-input-vmmouse xf86-video-vmware mesa<br>systemctl <span class="hljs-built_in">enable</span> --now vmtoolsd.service<br>systemctl <span class="hljs-built_in">enable</span> --now vmware-vmblock-fuse.service<br></code></pre></td></tr></table></figure> <blockquote> <p>如果主机和客户机间复制粘贴功能无法正常工作，尝试安装gtkmm3<sup>pkg</sup>。</p> </blockquote> 
+        </div>
+      </div>
+    </div>
+
+<h2 id="3-5-大战NVIDIA驱动"><a href="#3-5-大战NVIDIA驱动" class="headerlink" title="3.5 大战NVIDIA驱动"></a>3.5 大战NVIDIA驱动</h2><p>在N卡物理机上安装时（配置为RTX2080Ti），由于当前版本的mesa&#x2F;nouveau驱动链有一点问题（无论安装<code>xf86-video-nouveau</code>还是使用默认的<code>modesetting</code>驱动都一样），xorg会启动失败，需要稍微经过一点配置才能亮机；但是反正N卡最后要换到nvidia驱动的，因此这里并不值得单独为了nouveau折腾一通，直接上得了。</p>
+<ol>
+<li><p>先确认自己的显卡架构；咱整理了一份简单的表：</p>
+<table>
+<thead>
+<tr>
+<th>架构名</th>
+<th>代表型号(只收录常见的)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Maxwell</td>
+<td>GTX745, 750, 750 Ti; 8系9系全系; GTX Titan X</td>
+</tr>
+<tr>
+<td>Pascal</td>
+<td>10系; Titan X和Titan Xp</td>
+</tr>
+<tr>
+<td>Volta</td>
+<td>Titan V和V100</td>
+</tr>
+<tr>
+<td>Turing</td>
+<td>16系和20系; T4</td>
+</tr>
+<tr>
+<td>Ampere</td>
+<td>30系; A100</td>
+</tr>
+<tr>
+<td>Ada Lovelace</td>
+<td>40系; L40</td>
+</tr>
+<tr>
+<td>Hopper</td>
+<td>H100</td>
+</tr>
+<tr>
+<td>Grace Hopper</td>
+<td>GH200</td>
+</tr>
+<tr>
+<td>Blackwell</td>
+<td>50系; B200</td>
+</tr>
+</tbody></table>
+<p> 比Maxwell更老的架构已经不受NVIDIA支持；建议根据ArchWiki自行选择，是安装不受nv支持但是可能图形性能更好的旧驱动，还是使用xorg社区支持的nouveau。</p>
+<blockquote>
+<p>Nvidia不再积极为这些显卡提供驱动。这意味着这些驱动不正式支持现在的Xorg版本。因此使用 Nouveau 驱动可能会更方便，因为它依然为这些老显卡提供对当前Xorg的支持。但是，Nvidia 提供的 legacy 驱动依旧可用，并且或许拥有更好的 3D 性能（稳定性）。</p>
+</blockquote>
+</li>
+<li><p>根据显卡架构和系统内核，选择合适的驱动分支：</p>
+<ul>
+<li>从Maxwell到Volta之间的GPU受nvidia旧版闭源驱动分支支持：从AUR安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/nvidia-580xx-dkms/">nvidia-580xx-dkms</a></li>
+<li>从Turing到最新的所有GPU受nvidia-open开源驱动分支支持；在nvidia闭源驱动分支放弃支持Volta以下旧显卡之后，arch社区就不再官方维护nvidia闭源分支，完全迁移到nvidia-open<br>  linux<sup>pkg</sup>内核：使用nvidia-open<sup>pkg</sup><br>  linux-lts<sup>pkg</sup>内核：使用nvidia-open-lts<sup>pkg</sup><br>  其它内核：使用nvidia-open-dkms<sup>pkg</sup></li>
+</ul>
+ <div class="note note-info">
+            <p>dkms驱动会在每次更新内核或者驱动的时候，动态地把驱动编译成相应的内核模块；务必确保安装了内核相应的<code>headers</code>头文件。<br>在咱的e3 1230v2物理机上，对每个内核的dkms编译，需要cpu满载大约4~5分钟；如果不用dkms可以省出一些时间<del>和电费</del>。cpu性能好的话，cpu火力全开应该会很快，所以根据实际需求了。</p> 
+          </div></li>
+<li><p>根据选择的驱动分支安装驱动包以及必须的其它支持：nvidia-utils<sup>pkg</sup>提供了大部分图形功能的必要组件，包括OpenGL和Vulkan的支持；lib32-nvidia-utils<sup>pkg</sup>用于支持32位应用（例如steam<sup>pkg</sup>）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S nvidia-open-dkms nvidia-utils lib32-nvidia-utils<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>nvidia-utils软件包包含一个文件，其将会在重启后屏蔽 nouveau 内核模块。</p>
+</blockquote>
+ 
+    <div class="fold">
+      <div class="fold-title fold-warning collapsed" data-toggle="collapse" href="#collapse-71d6cbeb" role="button" aria-expanded="false" aria-controls="collapse-71d6cbeb">
+        <div class="fold-arrow">▶</div>使用预编译的非dkms驱动的注意事项
+      </div>
+      <div class="fold-collapse collapse" id="collapse-71d6cbeb">
+        <div class="fold-content">
+          <p>为了避免冲突，不要与dkms驱动同时安装；<br>滚动更新系统之前留意下更新的软件列表，如果内核更了驱动没更，就先别y，等驱动推新版本了再一块更。<br>预编译驱动安装完成后不会自动执行<code>mkinitcpio</code>，因此记得手动执行一下，<del>或者，参照<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA#pacman_hook">wiki</a>添加pacman钩子，以在升级驱动的时候自动运行mkinitcpio：</del>更新：虽然驱动本身并不会执行钩子，但是驱动本体更新的时候，通常伴随着nvidia-utils包的更新，而这个包是带有<code>mkinitcpio -P</code>钩子的，因此或许这两个pacman钩子完全没有必要？<br><code>/etc/pacman.d/hooks/nvidia-lts.hook</code></p> <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[Trigger]<br><span class="hljs-attribute">Operation</span>=Install<br><span class="hljs-attribute">Operation</span>=Upgrade<br><span class="hljs-attribute">Operation</span>=Remove<br><span class="hljs-attribute">Type</span>=Package<br><span class="hljs-attribute">Target</span>=nvidia-open-lts<br><span class="hljs-attribute">Target</span>=linux-lts<br><br>[Action]<br><span class="hljs-attribute">Description</span>=Updating Nvidia-lts module <span class="hljs-keyword">in</span> initcpio<br><span class="hljs-attribute">Depends</span>=mkinitcpio<br><span class="hljs-attribute">When</span>=PostTransaction<br>NeedsTargets<br><span class="hljs-attribute">Exec</span>=/bin/sh -c <span class="hljs-string">&#x27;while read -r trg; do case $trg in linux-lts) echo &quot;Already updated.&quot;; exit 0; esac; done; /usr/bin/mkinitcpio -p linux-lts&#x27;</span><br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div></li>
+<li><p>安装完毕后，重启，然后使用<code>nvidia-smi</code>命令确定驱动是否正常运行。</p>
+</li>
+<li><p>此时xorg应该已经可以正常运行了。对于x11(cinnamon桌面目前仍然默认使用x11，wayland模式仍在测试中)，为了便于配置，进行下面步骤：</p>
+<ul>
+<li>执行：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvidia-xconfig<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>该命令会自动检测并根据现有硬件的情况创建（或修改）&#x2F;etc&#x2F;X11&#x2F;xorg.conf</p>
+</blockquote>
+</li>
+<li>nvidia-settings<sup>pkg</sup>提供了一个图形界面。  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S nvidia-settings<br></code></pre></td></tr></table></figure>
+  <div class="note note-info">
+            <p>似乎wayland下还不支持使用这个工具。</p> 
+          </div>
+ 更多x11配置以及wayland配置参见<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA">ArchWiki</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="4-优化AUR编译参数"><a href="#4-优化AUR编译参数" class="headerlink" title="4.优化AUR编译参数"></a>4.优化AUR编译参数</h2><p>编辑<code>/etc/makepkg.conf</code>，主要做三个方面的修改：</p>
+<ol>
+<li><p>启用多核编译：<br> 定位到<code>MAKEFLAGS</code>处，取消注释，并把-j2改成需要的线程数（这里咱给虚拟机分配了6核）。有一种说法是，如果希望CPU能彻底吃满，应当设定成比CPU线程数多1的超负荷。所以咱最终给了<code>-j7</code></p>
+ <div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/makepkg/makeflags1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/makepkg/makeflags2.png" srcset="/img/loading.gif" lazyload></div></div></div></li>
+<li><p>更改软件包的压缩格式：<br> 默认情况下打好的软件包使用兼顾速度和压缩率的zstd压缩格式(Arch官方的pacman源也使用这种格式)，这里只列举两种极端需求。两种需求均是定位到<code>PKGEXT</code>处。<br> <img src="/img/arch-cinnamon/makepkg/zstd.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>对速度有极端需求，不介意占用空间的：直接不压缩<br>  <img src="/img/arch-cinnamon/makepkg/nocom.png" srcset="/img/loading.gif" lazyload></li>
+<li>对硬盘空间有极端需求，不介意压缩和解压速度的：改用xz压缩格式<br>  <img src="/img/arch-cinnamon/makepkg/xz.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+</li>
+<li><p>阻止生成debug包：<br> 正常情况下，makepkg会生成一个正常包和一个debug软件包；对于普通用户而言，debug包没有任何意义，因此取消掉以节省时间：<br> 定位到<code>GLOBAL PACKAGE OPTION</code>处，然后把最下面的括号中的<code>debug</code>前面加上<code>!</code>。</p>
+ <div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/makepkg/nodebug1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/makepkg/nodebug2.png" srcset="/img/loading.gif" lazyload></div></div></div></li>
+</ol>
+<h1 id="cinnamon桌面环境"><a href="#cinnamon桌面环境" class="headerlink" title="cinnamon桌面环境"></a>cinnamon桌面环境</h1><h2 id="1-安装桌面环境和中文字体等必要组件"><a href="#1-安装桌面环境和中文字体等必要组件" class="headerlink" title="1.安装桌面环境和中文字体等必要组件"></a>1.安装桌面环境和中文字体等必要组件</h2><p>安装cinnamon<sup>pkg</sup>桌面本体以及一些属于cinnamon的软件：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文字编辑器</td>
+<td>xed<sup>pkg</sup></td>
+</tr>
+<tr>
+<td>图片查看器</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/xviewer/">xviewer</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>文档阅读器</td>
+<td>xreader<sup>pkg</sup></td>
+</tr>
+<tr>
+<td>媒体播放器</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/xplayer/">xplayer</a><sup>aur</sup>(<a target="_blank" rel="noopener" href="https://github.com/linuxmint/xplayer">上游</a>已停止维护，现版本安装失败，视频播放器直接移步vlc吧)</td>
+</tr>
+<tr>
+<td>图像管理器</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/pix/">pix</a><sup>aur</sup></td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S cinnamon xed xreader gnome-terminal<br></code></pre></td></tr></table></figure>
+<div class="note note-secondary">
+            <p>这里AUR包先不装，由于AUR包的发布特点无法做镜像站，因此总会遇到点网络问题，所以先去基本的桌面解决了网络问题再回来整这些。</p> 
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-fbdc9892" role="button" aria-expanded="false" aria-controls="collapse-fbdc9892">
+        <div class="fold-arrow">▶</div>cinnamon后备模式
+      </div>
+      <div class="fold-collapse collapse" id="collapse-fbdc9892">
+        <div class="fold-content">
+          <blockquote> <p>当Cinnamon发生崩溃事件时, 会激活其后备模式。要控制此模式下打开的窗口，需要安装metacity软件包以及gnome-shell以显示任务栏。</p> </blockquote> <p>但是存在两个问题：</p> <ol> <li>信息矛盾：参见<a target="_blank" rel="noopener" href="https://archlinux.org/packages/extra/x86_64/cinnamon/">cinnamon包页面</a>, 被标记为可选依赖，并提供”fallback mode”的包是metacity和gnome-panel，而不是gnome-shell；</li> <li>引入大量无关依赖：无论是gnome-panel还是gnome-shell，均会引入大量gnome桌面相关的依赖（甚至包含gnome-desktop<sup>pkg</sup>，然后再间接引入nautilus<sup>pkg</sup>等等一大堆gnome应用）。</li> </ol> <p>综合考虑这些信息，并去Linux Mint预装的软件包中一顿搜索后，咱决定只安装metacity<sup>pkg</sup>，等触发了后备模式再看看能不能正常运作。</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S metacity<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+<p>然后安装一些常见的开源字体：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei<br>pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra<br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>中文字体的设置只能通过配置文件；如果不想在这上面花时间，就只安装一套字体（下文的微软字体也不配置）。例如，如果想开箱就有类似mint的字体，就只安装第二行的noto一系。</p> 
+          </div>
+<p>当然还有cinnamon的语言包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S cinnamon-translations<br></code></pre></td></tr></table></figure>
+<p>在这里直接把ntfs-3g<sup>pkg</sup>安了，提供ntfs文件系统的完整支持：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S ntfs-3g<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-5-微软字体"><a href="#1-5-微软字体" class="headerlink" title="1.5.微软字体"></a>1.5.微软字体</h2><p>参考<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Microsoft_fonts">ArchWiki</a><br>只建议把Windows的字体文件复制到Linux系统下，不建议使用软链接；因为按照咱的使用习惯，咱并不喜欢开机自动挂载Windows分区（甚至希望尽量完全避免挂载Windows系统盘分区）。<br>首先挂载Windows的系统盘（这里考虑直接挂载到<code>/mnt</code>目录，并假设Windows的系统盘分区是<code>/dev/nvme0n1p3</code>）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#以下两行二选一</span><br>mount -t ntfs3 /dev/nvme0n1p3 /mnt <span class="hljs-comment">#使用内核自带的ntfs3驱动挂载必须显式指定</span><br>mount /dev/nvme0n1p3 /mnt <span class="hljs-comment">#在安装ntfs-3g后会默认使用ntfs-3g驱动</span><br></code></pre></td></tr></table></figure>
+<p>然后复制相应的字体文件到对应目录，并设定好权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /usr/local/share/fonts<br><span class="hljs-built_in">mkdir</span> /usr/local/share/fonts/WindowsFonts<br><span class="hljs-built_in">cp</span> /mnt/Windows/Fonts/* /usr/local/share/fonts/WindowsFonts/<br><span class="hljs-built_in">chmod</span> 644 /usr/local/share/fonts/WindowsFonts/*<br></code></pre></td></tr></table></figure>
+<p>最后重新生成字体缓存：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fc-cache --force<br></code></pre></td></tr></table></figure>
+<p>以及卸下挂载的Windows分区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">umount /mnt<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-startx启动桌面环境"><a href="#2-startx启动桌面环境" class="headerlink" title="2.startx启动桌面环境"></a>2.startx启动桌面环境</h2><p>安装启动图形环境的脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S xorg-xinit<br></code></pre></td></tr></table></figure>
+<p>然后使用脚本启动桌面环境（此处应切换到非root用户）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">startx /usr/bin/cinnamon-session <span class="hljs-comment">#启动常规的cinnamon桌面</span><br>startx /usr/bin/cinnamon-session-cinnamon2d <span class="hljs-comment">#或者，启动遇到问题时，启动禁用图形加速的cinnamon桌面</span><br></code></pre></td></tr></table></figure>
+<p>初始状态下的cinnamon真的很丑：<br><img src="/img/arch-cinnamon/cinnamon-start.png" srcset="/img/loading.gif" lazyload></p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-482f8445" role="button" aria-expanded="false" aria-controls="collapse-482f8445">
+        <div class="fold-arrow">▶</div>关于xinit
+      </div>
+      <div class="fold-collapse collapse" id="collapse-482f8445">
+        <div class="fold-content">
+          <p>xinit的更多用法参考<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Xinit">ArchWiki</a><br>使用这个脚本启动桌面可以绕开桌面管理器（以下简称dm），在桌面崩溃的时候，可以使用这个脚本排除问题（xorg&#x2F;dm&#x2F;桌面三者均可能出问题，用这个可以排除dm的问题，<del>不过大部分时候都是xorg在抽风</del>）<br>这里不装dm还有一个比较难绷的理由，曾经有一段很长的时间，<code>lightdm-slick-greeter</code><sup>pkg</sup>这个包是坏的<del>或者只是单纯是咱那会wiki没看全没配置对</del>，启动lightdm会无法显示登录界面；而这个greeter是mint主题的默认登录界面，而且有些mint相关的应用程序直接硬依赖这个greeter，因此只能去AUR里面取两个包曲线救国: <a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/lightdm-slick-greeter-mint-theme">lightdm-slick-greeter-mint-theme</a><sup>aur</sup>和<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/lightdm-guest">lightdm-guest</a><sup>aur</sup>。不过现在这个包已经好了，所以跳过<code>xinit</code>环节也行，但是咱还是更喜欢留着xinit脚本在排查故障的时候用。</p> 
+        </div>
+      </div>
+    </div>
+
+<h2 id="2-5-一点必要的小手段"><a href="#2-5-一点必要的小手段" class="headerlink" title="2.5.一点必要的小手段"></a>2.5.一点必要的小手段</h2><p>AUR是源码发布机制，从源码可以发现很多开源包的source是直接从github上面拉的，所以难免遇到网络问题，需要一些必要的小手段。<br>pacman上面有一些已经打包好的客户端可以直接用（善用<code>pacman -Ss</code>多做搜索）。<br>总之就是现在有了一只可爱的小猫来解决网络问题：<br><img src="/img/arch-cinnamon/clash-verge-rev.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-安装桌面管理器"><a href="#3-安装桌面管理器" class="headerlink" title="3.安装桌面管理器"></a>3.安装桌面管理器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S lightdm lightdm-slick-greeter<br></code></pre></td></tr></table></figure>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-3292b6c2" role="button" aria-expanded="false" aria-controls="collapse-3292b6c2">
+        <div class="fold-arrow">▶</div>其它可选项
+      </div>
+      <div class="fold-collapse collapse" id="collapse-3292b6c2">
+        <div class="fold-content">
+          <p><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/lightdm-guest">lightdm-guest</a><sup>aur</sup>: 除了提供lightdm本体外，额外支持访客用户登录。<br><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/lightdm-slick-greeter-mint-theme">lightdm-slick-greeter-mint-theme</a><sup>aur</sup>: 额外提前设置好了一些选项，具体参考AUR页面的置顶评论。这个包强制依赖<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/lightdm-guest">lightdm-guest</a><sup>aur</sup>。由于这个包还会使用<code>wget</code>命令下载当日的微软壁纸并设置为锁屏壁纸，因此确保系统安装了<code>wget</code>否则会打包失败。<br>如果使用了这两个包，下面的配置greeter可以不做，这两个包会自动配置好。</p> 
+        </div>
+      </div>
+    </div>
+<p>然后还要配置greeter:编辑<code>/etc/lightdm/lightdm.conf</code>，找到<code>[Seat:*]</code>模块，然后修改<code>greeter-session</code>变量，就像这样：</p>
+<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">[Seat:*]<br><span class="hljs-meta prompt_">...</span><br>greeter-session=lightdm-slick-greeter<br></code></pre></td></tr></table></figure>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/greeter1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/greeter2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+<div class="note note-warning">
+            <p>这个配置过程不是可选的，不设置的话会导致greeter无法启动，如果配置了自动登录会无法切换用户，如果没配置自动登录就会直接导致lightdm启动失败。<br>但是作为lightdm默认的<code>lightdm-gtk-greeter</code>例外。</p> 
+          </div>
+<p>最后把lightdm设置为开机自启，由于现在还开着桌面就不立即启动lightdm了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> lightdm.service<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-设置中文"><a href="#4-设置中文" class="headerlink" title="4.设置中文"></a>4.设置中文</h2><p>编辑<code>/etc/locale.conf</code>，把<code>LANG=en_US.UTF-8</code>改为<code>LANG=zh_CN.UTF-8</code>。<br>但是这样修改之后，tty终端就会试图显示中文（但是只会显示菱形方块），当桌面崩溃需要tty救急时这会导致tty输出完全不可读。<br>所以在<code>/etc/profile.d/</code>路径下新建一个空文件，取一个喜欢的名字（例如<code>tty-en.sh</code>），然后填入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Set tty English</span><br><br><span class="hljs-keyword">for</span> ttyi <span class="hljs-keyword">in</span> &#123;1..6&#125;; <span class="hljs-keyword">do</span><br>    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-subst">$(tty)</span>&quot;</span> = <span class="hljs-string">&quot;/dev/tty<span class="hljs-variable">$ttyi</span>&quot;</span> ];<br>    <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">export</span> LC_ALL=<span class="hljs-string">&quot;en_US.UTF-8&quot;</span><br>        <span class="hljs-built_in">export</span> LANGUAGE=<span class="hljs-string">&quot;en_US.UTF-8&quot;</span><br>        <span class="hljs-built_in">export</span> LANG=<span class="hljs-string">&quot;en_US.UTF-8&quot;</span><br>    <span class="hljs-keyword">fi</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<p>这会当检测到窗口处于tty时，把语言设为英文。添加在这里和把代码追加在<code>/etc/profile</code>文件中等效，并且对所有用户生效。</p>
+<div class="note note-info">
+            <p><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mintlocale">mintlocale</a><sup>aur</sup>会在cinnamon桌面的设置菜单中添加一个语言设置菜单，允许设置当前用户或者所有用户的语言，其中设置所有用户时会修改<code>/etc/locale.conf</code>。<br>这个包无论在什么语言环境下安装，最终菜单都会以英文显示，无法完美的像原生Mint系统下变为中文菜单。</p> 
+          </div>
+<p>完成设置语言之后重启计算机。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">reboot<br></code></pre></td></tr></table></figure>
+<p>重启后就能看到登录界面了：<br><img src="/img/arch-cinnamon/login.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>为防止系统用户出现在登录界面，安装可选依赖accountsservice<sup>pkg</sup>, 或者把这些用户名添加到<code>/etc/lightdm/users.conf</code>下的<code>hidden-users</code>里。前者优势在于添加&#x2F;删除用户时不用更新列表。</p>
+</blockquote>
+<h2 id="4-5-配置自动登录"><a href="#4-5-配置自动登录" class="headerlink" title="4.5.配置自动登录"></a>4.5.配置自动登录</h2><p>编辑<code>/etc/lightdm/lightdm.conf</code>，同样找到<code>[Seat:*]</code>模块，然后修改<code>autologin-user</code>变量，改为想要自动登录的用户名；<br>然后还需要确保自动登录的用户在<code>autologin</code>用户组中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">groupadd autologin <span class="hljs-comment">#创建autologin组</span><br>gpasswd -a username autologin <span class="hljs-comment">#把用户username添加进去</span><br></code></pre></td></tr></table></figure>
+<p>或者可以使用cinnamon桌面的图形化设置操作用户组：</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/group1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/group2.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/group3.png" srcset="/img/loading.gif" lazyload></div></div></div>
+
+<h2 id="5-cinnamon配置"><a href="#5-cinnamon配置" class="headerlink" title="5.cinnamon配置"></a>5.cinnamon配置</h2><h3 id="terminal"><a href="#terminal" class="headerlink" title="terminal"></a>terminal</h3><p><code>编辑</code>→<code>首选项</code>，把字体改为<code>source code pro</code>且大小为10号，颜色主题改为<code>Tango 暗色</code></p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/theme/terminal1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/theme/terminal2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+
+<h3 id="桌面与主题"><a href="#桌面与主题" class="headerlink" title="桌面与主题"></a>桌面与主题</h3><p>安装以下包：</p>
+<table>
+<thead>
+<tr>
+<th>包名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/bibata-cursor-theme">bibata-cursor-theme</a><sup>aur</sup></td>
+<td>鼠标指针</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mint-y-icons">mint-y-icons</a><sup>aur</sup></td>
+<td>图标主题</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mint-artwork">mint-artwork</a><sup>aur</sup></td>
+<td>壁纸和开始菜单图标，顺便绑定了一堆mint常用的主题、字体等等</td>
+</tr>
+</tbody></table>
+<div class="note note-info">
+            <p>事实上，<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mint-artwork">mint-artwork</a><sup>aur</sup>已经包含了<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/bibata-cursor-theme">bibata-cursor-theme</a><sup>aur</sup>和<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mint-y-icons">mint-y-icons</a><sup>aur</sup>作为依赖，因此直接安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mint-artwork">mint-artwork</a><sup>aur</sup>即可。</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">paru -S mint-artwork<br></code></pre></td></tr></table></figure>
+          </div>
+<p>全部安装完成之后，进入系统设置，主题菜单已经发生了变化：<br><img src="/img/arch-cinnamon/theme/theme1.png" srcset="/img/loading.gif" lazyload><br>点开高级设置展开可以看到以前的界面，然后做一些想要的调整就行。<br><img src="/img/arch-cinnamon/theme/theme2.png" srcset="/img/loading.gif" lazyload><br>此外还有壁纸：<br><img src="/img/arch-cinnamon/theme/wallpaper.png" srcset="/img/loading.gif" lazyload><br>调整一下字体（<code>pacman -S ttf-dejavu</code>）：<br><img src="/img/arch-cinnamon/theme/fonts.png" srcset="/img/loading.gif" lazyload><br>到这一步后，基本的设置大体完成，但是中文字体似乎还没统一。针对中文字体的更详细配置参考<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Font_configuration/Chinese">ArchWiki</a></p>
+<p>此外，还有一份 <a target="_blank" rel="noopener" href="https://github.com/licyk/cinnamon-theme-transparent">半透明主题</a> 可以安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/licyk/cinnamon-theme-transparent<br></code></pre></td></tr></table></figure>
+<p>然后把三个主题文件夹放在<code>~/.themes/</code>（对单用户生效）或者<code>/usr/local/share/themes/</code>（对所有用户生效），之后就可以使用了。</p>
+<div class="note note-info">
+            <p>不通过包管理器而是自行安装的东西都放在<code>/usr/local/</code>目录下。</p> 
+          </div>
+<div class="note note-info">
+            <p>虽然这主题截至2026年1月还能用，但是主线版本已经迭代n次，这个主题已经显得过旧了；并且改法也是老旧的cinnamon主题的改法。<br>还是尽量使用官方支持的主题，然后可以在cinnamon扩展里面安装transparent panels reloaded扩展，实现面板半透明。</p> 
+          </div>
+
+<h3 id="“开始”菜单"><a href="#“开始”菜单" class="headerlink" title="“开始”菜单"></a>“开始”菜单</h3><p>在左下处右键，然后选择配置：<br><img src="/img/arch-cinnamon/start1.png" srcset="/img/loading.gif" lazyload><br>勾选“使用自定义图标和标签”，根据图示选图标，文本删空：<br><img src="/img/arch-cinnamon/start2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="6-补齐系统应用"><a href="#6-补齐系统应用" class="headerlink" title="6.补齐系统应用"></a>6.补齐系统应用</h2><p>到这一步，cinnamon桌面的外观已经基本没有问题了，但是系统设置里面还缺少了很多项。<br>（左ArchLinux, 右LinuxMint22.1)</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/settings-arch1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/settings-mint1.png" srcset="/img/loading.gif" lazyload></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/settings-arch2.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/settings-mint2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+<p>接下来逐一补充。</p>
+<ol>
+<li>输入法：与<code>apt</code>高度耦合，无法补充，自行配置。</li>
+<li>语言：安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/mintlocale">mintlocale</a><sup>aur</sup></li>
+<li>在线账户：安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/gnome-online-accounts-gtk">gnome-online-accounts-gtk</a><sup>aur</sup></li>
+<li>磁盘：安装gnome-disk-utility<sup>pkg</sup></li>
+<li>打印机：安装system-config-printer<sup>pkg</sup></li>
+<li>蓝牙：安装blueman<sup>pkg</sup></li>
+<li>驱动管理和软件源：与<code>apt</code>高度耦合，无法补充，自行配置。</li>
+<li>防火墙：安装gufw<sup>pkg</sup></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">paru -S mintlocale gnome-online-accounts-gtk gnome-disk-utility system-config-printer blueman gufw<br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>其中大部分应用安装即可使用，但也有一些只是前端窗口，使用需要额外配置后台服务（如打印机可能需要配置<code>cups</code><sup>pkg</sup>）</p> 
+          </div>
+
+<p>此外还有一些其它的系统软件：<br>重要的：<br>nemo-fileroller<sup>pkg</sup>: 压缩与解压文件，同时提供Nemo文件管理器的右键压缩与解压支持<br>其它的Linux Mint预装软件：</p>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>在Arch Linux的包名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>归档管理器</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/file-roller-linuxmint">file-roller-linuxmint</a><sup>aur</sup>取代默认的gnome主题的fileroller；留意fileroller的可选依赖，其中包含对其它各种压缩格式的额外支持，自选安装</td>
+</tr>
+<tr>
+<td>便笺</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/sticky">sticky</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>磁盘使用情况分析器</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/baobab-gtk3">baobab-gtk3</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>电源统计</td>
+<td>gnome-power-manager<sup>pkg</sup></td>
+</tr>
+<tr>
+<td>计算器</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/gnome-calculator-gtk3">gnome-calculator-gtk3</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>截图</td>
+<td>gnome-screenshot<sup>pkg</sup></td>
+</tr>
+<tr>
+<td>密码和密钥</td>
+<td>后端gnome-keyring<sup>pkg</sup>,前端seahorse<sup>pkg</sup></td>
+</tr>
+<tr>
+<td>日历</td>
+<td>gnome-calendar<sup>pkg</sup><span class="label label-info">只有gnome版，没有与cinnamon契合的旧版</span>咱自己移植了一下，目前能用，仓库地址 <a target="_blank" rel="noopener" href="https://gitee.com/silvertuanzi/gnome-calendar-linuxmint">gitee</a> &#x2F; <a target="_blank" rel="noopener" href="https://github.com/silvertuanzi/gnome-calendar-linuxmint">github</a></td>
+</tr>
+<tr>
+<td>书库</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/thingy">thingy</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>网络电视 Hypnotix</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/hypnotix">hypnotix</a><sup>aur</sup>或者<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/hypnotix-wayland">hypnotix-wayland</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>文档扫描仪</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/simple-scan-linuxmint">simple-scan-linuxmint</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>文件重命名工具</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/bulky">bulky</a><sup>aur</sup></td>
+</tr>
+<tr>
+<td>系统监视器</td>
+<td>cinnamon版本<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/gnome-system-monitor-linuxmint">gnome-system-monitor-linuxmint</a><sup>aur</sup>显示效果更好，但是gnome版本gnome-system-monitor<sup>pkg</sup>在系统参数页面多显示一项磁盘读写速度</td>
+</tr>
+<tr>
+<td>字符映射表</td>
+<td>gucharmap<sup>pkg</sup></td>
+</tr>
+<tr>
+<td>Web应用</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/webapp-manager">webapp-manager</a><sup>aur</sup></td>
+</tr>
+</tbody></table>
+<p>未列在此表中的内容：<br>libreoffice全家桶，以及下图:</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/arch-cinnamon/mintapp1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/arch-cinnamon/mintapp2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+<p>电源模式（平衡，节能，以及只在部分设备开放的高性能）由power-profiles-daemon<sup>pkg</sup>提供。</p>
+<div class="note note-info">
+            <p>搜索时优先寻找<code>gtk3</code>后缀的AUR老版本，通常会跟cinnamon桌面的契合度更高。</p> 
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-a23856b1" role="button" aria-expanded="false" aria-controls="collapse-a23856b1">
+        <div class="fold-arrow">▶</div>2025.02.21编译gnome-system-monitor-linuxmint报错
+      </div>
+      <div class="fold-collapse collapse" id="collapse-a23856b1">
+        <div class="fold-content">
+          <p>错误日志：</p> <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gams">Dependency glib<span class="hljs-number">-2.0</span> found: <span class="hljs-keyword">YES</span> <span class="hljs-number">2.82</span><span class="hljs-number">.4</span> (cached)<br>Program /usr/bin/glib-mkenums found: <span class="hljs-keyword">NO</span><br><br>gnome-<span class="hljs-keyword">system</span>-monitor/src/meson.build:<span class="hljs-number">79</span>:<span class="hljs-number">22</span>: ERROR: Dependency <span class="hljs-string">&#x27;glib-2.0&#x27;</span> tool <span class="hljs-keyword">variable</span> <span class="hljs-string">&#x27;glib_mkenums&#x27;</span> contains <span class="hljs-comment">erroneous value:</span> <span class="hljs-comment">&#x27;/usr/bin/glib-mkenums&#x27;</span><br><br>This <span class="hljs-comment">is a distributor issue -- please report it to your glib-2.0 provider.</span><br><br>A <span class="hljs-comment">full log can be found at</span> /home/<span class="hljs-comment">lasombra</span>/.cache/<span class="hljs-comment">paru</span>/clone/<span class="hljs-comment">gnome-system-monitor-linuxmint</span>/src/<span class="hljs-comment">build</span>/meson-logs/<span class="hljs-comment">meson-log.txt</span><br></code></pre></td></tr></table></figure> <p>解决方案：安装<code>glib2-devel</code><sup>pkg</sup></p> 
+        </div>
+      </div>
+    </div>
+<div class="note note-info">
+            <p>关于应用主题的另一种方案：AUR搜索<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages?O=0&K=libadwaita-without-adwaita">libadwaita-without-adwaita</a>, 当前的包名为<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/libadwaita-without-adwaita-git">libadwaita-without-adwaita-git</a><sup>aur</sup>, 但是根据规范该包不应该带有<code>-git</code>后缀。因此后续可能改名。<br>用这个包替换掉原生的<code>libadwaita</code>后，直接安装gnome应用也能融入桌面，不再会出现“一股gnome味”的情况。<br>对比：</p> <table> <thead> <tr> <th>gnome-system-monitor</th> <th>without-adwaita</th> <th>gnome-system-monitor-linuxmint</th> </tr> </thead> <tbody><tr> <td><img src="/img/arch-cinnamon/monitor/gnome.png" srcset="/img/loading.gif" lazyload></td> <td><img src="/img/arch-cinnamon/monitor/none-adwaita.png" srcset="/img/loading.gif" lazyload></td> <td><img src="/img/arch-cinnamon/monitor/mint.png" srcset="/img/loading.gif" lazyload></td> </tr> </tbody></table> 
+          </div>
+
+<h2 id="7-挂载硬盘设置"><a href="#7-挂载硬盘设置" class="headerlink" title="7.挂载硬盘设置"></a>7.挂载硬盘设置</h2><p>还有一个问题：Nemo挂载硬盘时，会要求输入密码，而不是像mint一样直接挂载：<br><img src="/img/arch-cinnamon/mount-need-passwd.png" srcset="/img/loading.gif" lazyload><br>Nemo挂载硬盘使用的是<code>udisks2</code>服务，因此在Nemo中挂载硬盘等价于：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">udisksctl mount -b /dev/nvme0n1p1<br></code></pre></td></tr></table></figure>
+<p>需要配置一项放行规则：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/* 把这个文件复制到 /etc/polkit-1/rules.d/allow-mount-internal.rules */</span><br><br>polkit.<span class="hljs-title function_">addRule</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">action, subject</span>) &#123;<br>    <span class="hljs-keyword">if</span> ((action.<span class="hljs-property">id</span> == <span class="hljs-string">&quot;org.freedesktop.udisks2.filesystem-mount-system&quot;</span> ||<br>         action.<span class="hljs-property">id</span> == <span class="hljs-string">&quot;org.freedesktop.udisks.filesystem-mount-system-internal&quot;</span>) &amp;&amp;<br>        subject.<span class="hljs-property">local</span> &amp;&amp; subject.<span class="hljs-property">active</span> &amp;&amp; subject.<span class="hljs-title function_">isInGroup</span>(<span class="hljs-string">&quot;storage&quot;</span>))<br>    &#123;<br>            <span class="hljs-keyword">return</span> polkit.<span class="hljs-property">Result</span>.<span class="hljs-property">YES</span>;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>这个规则会给用户组<code>storage</code>中的用户放行挂载；然后还需要把用户添加到<code>storage</code>组中。把规则中的用户组直接给<code>wheel</code>组也行。<br>或者，按需取用<a target="_blank" rel="noopener" href="https://gist.github.com/Scrumplex/8f528c1f63b5f4bfabe14b0804adaba7">这份更详细的规则</a></p>
+<p>此外，默认会把硬盘挂载到<code>/run/media/&lt;username&gt;</code>目录下，路径太长很不优雅，添加这份配置可以把挂载目录改为<code>/media</code>：<br>文件路径：<code>/etc/udev/rules.d/99-udisks2.rules</code></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment"># UDISKS_FILESYSTEM_SHARED</span><br><span class="hljs-comment"># ==1: mount filesystem to a shared directory (/media/VolumeName)</span><br><span class="hljs-comment"># ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)</span><br><span class="hljs-comment"># See udisks(8)</span><br><span class="hljs-keyword">ENV</span>&#123;ID_FS_USAGE&#125;==<span class="hljs-string">&quot;filesystem|other|crypto&quot;</span>, <span class="hljs-keyword">ENV</span>&#123;UDISKS_FILESYSTEM_SHARED&#125;=<span class="hljs-string">&quot;1&quot;</span><br></code></pre></td></tr></table></figure>
+<p>更多设置项参见<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Udisks">ArchWiki-udisks</a></p>
+<h2 id="8-家目录"><a href="#8-家目录" class="headerlink" title="8.家目录"></a>8.家目录</h2><p>现在的家目录下只有“桌面”一个文件夹。<br>xdg-user-dirs<sup>pkg</sup>可以帮助创建一套默认的家目录文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S xdg-user-dirs<br>LC_ALL=C.UTF-8 xdg-user-dirs-update --force <span class="hljs-comment">#强制让目录为英文命名；不然当心在特殊情况下输不了中文路径</span><br></code></pre></td></tr></table></figure>
+<p>此外还有一些少量的自定义配置参见<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/XDG_user_directories">ArchWiki</a><br>Nemo的侧边栏可以一个一个手动添加，并且可以把侧边栏单独重命名成中文而不影响实际路径。</p>
+<h1 id="安装桌面之后"><a href="#安装桌面之后" class="headerlink" title="安装桌面之后"></a>安装桌面之后</h1><h2 id="1-常用软件"><a href="#1-常用软件" class="headerlink" title="1.常用软件"></a>1.常用软件</h2><h3 id="写在前面：Tauri与NVIDIA的犯冲"><a href="#写在前面：Tauri与NVIDIA的犯冲" class="headerlink" title="写在前面：Tauri与NVIDIA的犯冲"></a>写在前面：Tauri与NVIDIA的犯冲</h3><p>Nvidia显卡在启动几乎全部Tauri应用时都可能会遇到只显示边框，内容无法显示的问题，经测试属于Tauri UI的通病（参见<a target="_blank" rel="noopener" href="https://github.com/tauri-apps/tauri/issues/13493">issue</a>）<br>解决方案：为应用启动器添加环境变量<code>WEBKIT_DISABLE_DMABUF_RENDERER=1</code>或者<code>WEBKIT_DISABLE_COMPOSITING_MODR=1</code>。</p>
+<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><p>开源的：firefox<sup>pkg</sup>，chromium<sup>pkg</sup><br>闭源但是常用的：microsoft-edge-stable-bin<sup>edu</sup>，google-chrome<sup>edu</sup>，或者在AUR上获取更新更快的版本以及beta测试版等等（arch4edu源通常同步会慢些）</p>
+<h3 id="下载器"><a href="#下载器" class="headerlink" title="下载器"></a>下载器</h3><p>主力：<a target="_blank" rel="noopener" href="https://abdownloadmanager.com/?lang=zh-CN">AB download manager</a><br>目前咱双系统都作为主力用的下载器，开源的，UI也很舒服（比IDM好看一点）。<br>浏览器插件：<a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/ab-download-manager-brows/bbobopahenonfdgjgaleledndnnfhooj">edge&#x2F;chrome</a> (需要科学上网)，<a target="_blank" rel="noopener" href="https://addons.mozilla.org/en-US/firefox/addon/ab-download-manager/">firefox</a><br>安装完之后，去浏览器插件的设置里面，有一个选项是控制接管下载的文件类型，把经常下载的文件类型补进去。</p>
+<div class="note note-info">
+            <p>fdm免费但不开源，找到好用的开源替代品它就该下班了。</p> 
+          </div>
+<p><del>主力</del>已弃用: <a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/freedownloadmanager">freedownloadmanager</a><sup>aur</sup><br>FDM浏览器插件: <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/free-download-manager-chr/ahmpjcflkgiildlgicmcieglgoilbfdp">edge&#x2F;chrome</a> (需要科学上网)，<a target="_blank" rel="noopener" href="https://addons.mozilla.org/en-US/firefox/addon/free-download-manager-addon/">firefox</a></p>
+<div class="note note-info">
+            <p>2025年6月8日更新：fdm无法启动，在命令行中输入<code>fdm</code>执行，报错日志为：</p> <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">qt.qpa.plugin: From <span class="hljs-number">6.5</span><span class="hljs-number">.0</span>, xcb-cursor0 <span class="hljs-keyword">or</span> libxcb-cursor0 is needed <span class="hljs-built_in">to</span> <span class="hljs-built_in">load</span> <span class="hljs-keyword">the</span> Qt xcb <span class="hljs-built_in">platform</span> plugin.<br>qt.qpa.plugin: Could <span class="hljs-keyword">not</span> <span class="hljs-built_in">load</span> <span class="hljs-keyword">the</span> Qt <span class="hljs-built_in">platform</span> plugin <span class="hljs-string">&quot;xcb&quot;</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;&quot;</span> even though <span class="hljs-keyword">it</span> was found.<br>This application failed <span class="hljs-built_in">to</span> <span class="hljs-built_in">start</span> because no Qt <span class="hljs-built_in">platform</span> plugin could be initialized. Reinstalling <span class="hljs-keyword">the</span> application may fix this problem.<br><br>Available <span class="hljs-built_in">platform</span> plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, wayland-egl, wayland, xcb.<br></code></pre></td></tr></table></figure> <p>解决方法：安装xcb-util-cursor<sup>pkg</sup></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S xcb-util-cursor<br></code></pre></td></tr></table></figure>
+          </div>
+
+<p>备用：挑选原则是找一个aria2套壳的GUI下载器，目前挑定的是<a target="_blank" rel="noopener" href="https://github.com/AnInsomniacy/motrix-next">motrix-next</a><br>它基于Tauri UI，内核使用优化过的<a target="_blank" rel="noopener" href="https://github.com/AnInsomniacy/aria2-next">aria2-next</a>下载引擎，使用体验尚可。<br><br>与此同时老版motrix咱其实还没卸载但是已经几乎不用了（electron做这种东西是真的卡啊）<br><br><del>备用</del>已弃用：<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/motrix">motrix</a><sup>aur</sup>和<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/imfile">imfile</a><sup>aur</sup><br>下面的删除线内容记录了这俩兄弟的长期咕咕咕历史，不过今年(2026)它们都突然开始活跃更新，且发版频率大幅上升，大抵是AI的功劳，再观望观望。<br><del>Motrix上次更新时间已经是2023年5月，有一个现在持续维护的fork版<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/imfile">imfile</a><sup>aur</sup>(imfile最近一个版本也是2024年8月了，官网域名都丢了，并且软件稳定性还不如motrix原版)</del></p>
+<h3 id="微信-QQ"><a href="#微信-QQ" class="headerlink" title="微信&#x2F;QQ"></a>微信&#x2F;QQ</h3><p>为了避免扫盘，可以使用flatpak精细地控制权限。 <a target="_blank" rel="noopener" href="https://flatpak.org/setup/Arch">flatpak配置指南</a> 以及<a target="_blank" rel="noopener" href="https://mirror.sjtu.edu.cn/docs/flathub">SJTU镜像源</a><br>个人喜欢直接使用简单版本。</p>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>纯净版（简单破事少）</th>
+<th>沙盒版（使用bubblewarp做简单的沙盒隔离，但是系统文件访问可能不便，例如收发其它目录的文件）</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QQ</td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/linuxqq">linuxqq</a><sup>aur</sup></td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/linuxqq-nt-bwrap">linuxqq-nt-bwrap</a><sup>aur</sup></td>
+<td>直接去官网下载appimage版也可运行；还有 <a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/linuxqq-portable">基于portable的另一种沙盒版</a> 可选</td>
+</tr>
+<tr>
+<td>微信</td>
+<td><a target="_blank" rel="noopener" href="https://gitee.com/evine/wechat-bin">gitee</a> &#x2F; <a target="_blank" rel="noopener" href="https://github.com/devome/wechat-bin">github</a></td>
+<td><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/wechat-universal-bwrap">wechat-universal-bwrap</a><sup>aur</sup>以及<a target="_blank" rel="noopener" href="https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap/">备用的github仓库</a></td>
+<td>直接去官网下载appimage版也可运行; 2024年12月，AUR上的微信包所有权争夺撕了很久，最终留下了一地鸡毛；现在的Kimiblock维护者维护的版本引入了一大堆无用依赖，不建议使用</td>
+</tr>
+</tbody></table>
+<h3 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h3><p>cinnamon桌面配套的<code>xed</code>已经可以满足基本的需求；<br><br>官方仓库里的code<sup>pkg</sup>是对 <a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode.git">开源vscode仓库</a> 编译而来，可能不包含一些微软增加的功能；由微软发布的版本可以通过<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/visual-studio-code-bin">visual-studio-code-bin</a><sup>aur</sup>安装。<br><br><del>轻量的文本编辑器，notepadqq<sup>pkg</sup>本来是个好选择，但是该项目最后一次有实质的更新已经是2021年的事了，而现在的版本在ArchLinux中会频繁闪退；降级之后似乎可以稳定运行，或者根据 <a target="_blank" rel="noopener" href="https://github.com/notepadqq/notepadqq/issues/1108#issuecomment-2143405678">github issue</a> ，禁用自动保存可以解决闪退问题，但这需要在启动后15s之内完成设置；<br><br>notepad--( <a target="_blank" rel="noopener" href="https://gitee.com/cxasm/notepad--">gitee</a> &#x2F; <a target="_blank" rel="noopener" href="https://github.com/cxasm/notepad--">github</a> )曾经是个开源的文本编辑器，但是现版本已经转向闭源；<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/notepad---git">notepad---git</a><sup>aur</sup>从git拉取开源的版本然后编译安装，目前还算好用，但是UI内鼠标指针会变，跟系统鼠标指针不一致；<br></del><br>轻量文本编辑器推荐使用<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/notepadqq">notepadqq</a><sup>aur</sup>。目前该项目经历了大型现代化重构，已经可以直接正常使用。<br><br><a target="_blank" rel="noopener" href="https://github.com/dail8859/NotepadNext">notepadnext</a> 是个很有潜力的好项目，可惜现在还不支持转换文件编码。<br></p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-a7d599f5" role="button" aria-expanded="false" aria-controls="collapse-a7d599f5">
+        <div class="fold-arrow">▶</div>降级notepadqq(现在不再需要)
+      </div>
+      <div class="fold-collapse collapse" id="collapse-a7d599f5">
+        <div class="fold-content">
+          <ul> <li>降级到2.0.0beta-1：可以直接使用下文<a href="#6-%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%99%8D%E7%BA%A7">软件包降级</a>的downgrade脚本。以root权限运行：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">downgrade notepadqq<br></code></pre></td></tr></table></figure>   然后在跳出的页面选择2.0.0beta-1版本即可。下载可能有困难，准备好网络加速或者多尝试几次；<br>  最后downgrade脚本会提示是否把降级后的包加入<code>IgnorePkg</code>，选择<code>y</code>加入，阻止滚动更新的时候被升级回去。这个修改会保存在<code>/etc/pacman.conf</code>里面。</li> <li>降级到1.4.8-6或者更早的版本（2.0.0beta-1如果上述方法失效也可以采用这种方式）：旧版的包由于年代过于久远，签名已经失效，因此获取官方的PKGBUILD仓库自己重新编译打包：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://gitlab.archlinux.org/archlinux/packaging/packages/notepadqq.git <span class="hljs-comment">#获取仓库</span><br><span class="hljs-built_in">cd</span> notepadqq<br>git checkout 1.4.8-6 <span class="hljs-comment">#切换到需要的版本</span><br>makepkg -si <span class="hljs-comment">#获取依赖，打包，安装</span><br></code></pre></td></tr></table></figure>   为了避免失效，咱在 <a target="_blank" rel="noopener" href="https://gitee.com/silvertuanzi/notepadqq-archpkgbuild">gitee</a> 上镜像了一份这个仓库，作为备份地址。以及原始仓库的备份：<a target="_blank" rel="noopener" href="https://gitee.com/silvertuanzi/notepadqq">notepadqq</a> <a target="_blank" rel="noopener" href="https://gitee.com/silvertuanzi/CodeMirror/">CodeMirror</a></li> </ul> 
+        </div>
+      </div>
+    </div>
+
+<h3 id="任务管理器"><a href="#任务管理器" class="headerlink" title="任务管理器"></a>任务管理器</h3><p>安装mission-center<sup>pkg</sup>，它具有类似Windows任务管理器的界面：[<a target="_blank" rel="noopener" href="https://missioncenter.io/">官网</a>]<br><img src="/img/arch-cinnamon/mission-center.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>截图使用了<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/libadwaita-without-adwaita">libadwaita-without-adwaita</a><sup>aur</sup></p> 
+          </div>
+<p>此外，安装nethogs<sup>pkg</sup>之后，应用页可以显示每进程的网络占用情况。</p>
+<hr>
+<p>其它软件多在AUR上面搜索基本都能搜到。</p>
+<h2 id="2-脚本update-grub"><a href="#2-脚本update-grub" class="headerlink" title="2.脚本update-grub"></a>2.脚本update-grub</h2><p>在Debian&#x2F;Ubuntu系统上，修改了grub配置后只需要简单地以<code>sudo</code>权限运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">update-grub<br></code></pre></td></tr></table></figure>
+<p>就可以完成配置更新，但是Arch上面却需要：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grub-mkconfig -o /boot/grub/grub.cfg<br></code></pre></td></tr></table></figure>
+<p>实际上<code>update-grub</code>就是一个简单的脚本，因此可以很简单地移植过来：<br>可以直接安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/update-grub">update-grub</a><sup>aur</sup>包来实现，或者手动创建这个脚本：<br>在<code>/usr/local/bin</code>目录下，以root权限创建文本文件，命名为<code>update-grub</code>，然后把权限设为755（所有者可读、写、执行，其他用户可读和执行）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 755 /usr/local/bin/update-grub<br></code></pre></td></tr></table></figure>
+<p>然后填入以下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-built_in">set</span> -e<br><span class="hljs-built_in">exec</span> grub-mkconfig -o /boot/grub/grub.cfg <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span><br></code></pre></td></tr></table></figure>
+<p>保存即可。</p>
+<h2 id="3-timeshift快照"><a href="#3-timeshift快照" class="headerlink" title="3.timeshift快照"></a>3.timeshift快照</h2><p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S timeshift<br></code></pre></td></tr></table></figure>
+<p>timeshift快照分为两种类型，在页面上都有介绍，这里提取其中的几个关键要素：</p>
+<table>
+<thead>
+<tr>
+<th>快照类型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RSYNC</td>
+<td>适用于任何文件系统，不依赖文件系统特性；基于全盘复制，因此占用空间较大，但是可以把快照储存在非系统盘上；第一次快照的时候是完全复制整个系统，此后的快照中与前面的快照相同的文件使用硬链接保存，不同的文件直接复制。快照占用的空间一经创建就确定下来；可以精细地选择需要快照和不需要快照的文件夹</td>
+</tr>
+<tr>
+<td>BTRFS</td>
+<td>仅适用于btrfs文件系统，且仅支持<code>@</code>和<code>@home</code>的子卷布局；由于基于文件系统，因此只能把快照储存在同一个盘上；快照在刚刚创建的时候不占据任何空间，随着系统本身的文件和快照的差距越来越大，占用的空间也越来越大，但是占用的空间一定不会大于RSYNC类型。</td>
+</tr>
+</tbody></table>
+<p>按照页面向导操作即可，其中定期快照需要启用<code>cron</code>服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> --now cronie.service<br></code></pre></td></tr></table></figure>
+<p>或者，根据 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Timeshift">ArchWiki</a> ，安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/timeshift-systemd-timer">timeshift-systemd-timer</a><sup>aur</sup>可以替代<code>cron</code>服务。</p>
+<p>此外，<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/timeshift-autosnap">timeshift-autosnap</a><sup>aur</sup>提供了一个钩子，可以在检测到<code>pacman</code>执行了更新操作时，在更新前创建一份快照。<br>但是注意，使用AUR助手更新时，来自AUR的软件包是逐一打包安装的，因此每有一个AUR包被更新就会创建一个快照；不过不必担心空间不足，两份快照由于绝大部分内容是一致的，因此几乎不会占用额外的空间。</p>
+<div class="note note-info">
+            <p><a target="_blank" rel="noopener" href="https://codeberg.org/racehd/timeshift-autosnap">timeshift-autosnap</a>在0.10.0版本增加了一个功能，现在每当触发自动快照时，如果和上一次自动快照间隔的时间很短，就不会进行本次自动快照。<br>这个间隔时间默认为18小时，可以通过修改配置文件调整，修改方法参见<a target="_blank" rel="noopener" href="https://codeberg.org/racehd/timeshift-autosnap">上游文档</a>。</p> 
+          </div>
+
+<h3 id="btrfs快照"><a href="#btrfs快照" class="headerlink" title="btrfs快照"></a>btrfs快照</h3><ul>
+<li>配置btrfs快照之后，检查<code>/etc/fstab</code>文件，如果存在<code>subvolid</code>项则去除：回滚快照后<code>subvolid</code>会发生变化，这一项的存在会导致系统盘无法正确挂载；只靠<code>subvol</code>名称已经足以让系统分辨子卷；  <div class="note note-info">
+            <p>在2025.02.01镜像中，<code>genfstab</code>脚本生成的fstab文件已经不再会包含<code>subvolid</code>项。</p> 
+          </div></li>
+<li>由于<code>/boot</code>分区并不属于btrfs文件系统的一部分，因此回滚快照的时候不会跟着回滚；有时候这会导致<code>/boot</code>分区的initramfs内核版本与系统linux内核版本不一致，从而导致进不去系统。  <div class="note note-info">
+            <p>内核日志会输出<code>Failed to mount /boot</code>一类的日志，如果使用<code>journalctl -xb</code>查看具体日志，会看到<code>unknown filesystem type &#39;vfat&#39; error</code>报错。通常情况下，这会导致无法进入图形界面，而是只能启动到emergency mode。</p> 
+          </div>
+  解决办法是，在回滚快照后，重启计算机之前，立即执行以下两项中的一项：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkinitcpio -P <span class="hljs-comment">#保守的选择：重新生成全部initramfs，这样就与系统内一致了；也可以使用mkinitcpio -p &lt;内核名,例如linux&gt;只生成其中一个内核的，然后启动的时候选择这个内核</span><br>pacman -Sy &lt;内核,例如linux&gt; &lt;相应的头文件,例如linux-headers&gt; <span class="hljs-comment">#激进的选择：先把其中一个内核更新了，这会在更新的同时为这个内核生成initramfs；然后启动的时候选择这个内核</span><br></code></pre></td></tr></table></figure>
+  如果重启的手速太快，忘记执行这些，导致进不去系统的话，就只能用liveCD启动，挂载硬盘，然后<code>arch-chroot</code>进去执行。不过这时由于<code>/etc/fstab</code>是完好无损的，可以只挂载根分区，chroot后执行<code>mount -a</code>一次性挂载上所有分区。</li>
+<li>grub-btrfs<sup>pkg</sup>提供了一项独特的功能：开机的时候直接引导进入快照。<br>  如果安装了<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/timeshift-autosnap">timeshift-autosnap</a><sup>aur</sup>，则这个包会在自动创建快照的同时，更新grub配置文件。<br>  手动增删快照后也要刷新一次grub配置以让启动列表中的快照列表与实际的快照一致。<br>  启动到快照的时候，同样要注意<code>/boot</code>分区挂载的问题；不同的是，<code>/boot</code>分区只有一份，不可能让其中的initramfs放弃跟随系统盘，去跟快照中一致。因此，要直接启动到快照，必须确保目标快照中的内核版本与当前系统的内核版本一致。<br>  一个保险的方法是在执行<code>pacman -Syu</code>之前，先单独更新一个内核（例如<code>pacman -Sy linux-lts linux-lts-headers</code>）；然后重启到这个内核；<br>  或者在滚的时候忽略其中一个内核的更新（例如<code>pacman -Syu --ignore linux-lts,linux-lts-headers</code>）；重启后确认无问题再启动到这个内核。  <div class="note note-success">
+            <p>通常其实没必要这么谨慎。Arch Linux现在的稳定性已经很强，滚挂进不去系统已经是非常少见的了；而且即使挂了，在手头有USB启动盘的情况下，启动到liveCD然后使用<code>arch-chroot</code>进入系统执行修复永远是最直接最有效的方法。</p> 
+          </div></li>
+<li>如果最初分区的时候，不为<code>/boot</code>单独分区，则以上两个问题均不存在；但是：<blockquote>
+<p><code>GRUB_DEFAULT=saved</code>和<code>GRUB_SAVEDEFAULT=true</code>仅当 &#x2F;boot 不是 btrfs 文件系统的时候才能用，因为 GRUB 没法对 btrfs 进行写入操作。但它会生成一个容易误导人的错误信息：”sparse file not allowed. Press any key to continue.”</p>
+</blockquote>
+</li>
+</ul>
+<div class="note note-danger">
+            <p>如果一个子卷内存在活动的swap文件，btrfs会拒绝对这个子卷快照；所以务必确保为swap文件单独准备了一个子卷（例如<code>@swap</code>）</p> 
+          </div>
+
+<div class="note note-info">
+            <p>关于<a target="_blank" rel="noopener" href="https://codeberg.org/racehd/timeshift-autosnap">timeshift-autosnap</a>和<a target="_blank" rel="noopener" href="https://github.com/Antynea/grub-btrfs">grub-btrfs</a>的一些杂七杂八的tips:</p> <ol> <li>grub-btrfs提供了一个<code>grub-btrfsd.service</code>服务，可以在创建和删除btrfs快照时，后台静默重新安装grub并更新grub菜单。使用<code>systemctl enable grub-btrfsd</code>即可启用。</li> <li>当grub-btrfs与timeshift配合使用时，由于timeshift每次启动使用的目录都不一样，grub-btrfsd需要使用专门的模式来监控timeshift快照。将<code>--timeshift-auto</code>按照<a target="_blank" rel="noopener" href="https://github.com/Antynea/grub-btrfs?tab=readme-ov-file#-using-timeshift-with-systemd">上游文档</a>提供的方法传递给<code>grub-btrfsd.service</code>。</li> <li>timeshift-autosnap的所有配置均由<code>/etc/timeshift-autosnap.conf</code>配置文件控制。<ol> <li>自动创建的快照默认状态下最多保留3个。设置<code>deleteSnapshots=false</code>阻止自动删除旧快照，设置<code>maxSnapshots</code>改变默认值；</li> <li>timeshift-autosnap会自动检测<code>grub-btrfsd.service</code>是否在后台运行；如果检测到，就会跳过自身的更新grub配置，以防止二者同时运行出现冲突。但是上游仍然建议手动设置<code>updateGrub=false</code>以保险；</li> <li>前面提到“每当触发自动快照时，如果和上一次自动快照间隔的时间很短，就不会进行本次自动快照”，这个时间间隔由<code>minHoursBetweenSnapshots</code>控制，如果设置为0则会每次都执行快照，相当于回退到旧版本的行为；</li> <li>其它参数参看<a target="_blank" rel="noopener" href="https://codeberg.org/racehd/timeshift-autosnap">上游文档</a>。</li> </ol> </li> <li>咱的自用配置：不启用<code>grub-btrfsd.service</code>，timeshift-autosnap全默认。这是最简单的方法，只有在手动增删快照的时候需要专门更新grub配置，其它时候都能自动完成。</li> </ol> 
+          </div>
+
+<h2 id="4-缩短关机等待时间"><a href="#4-缩短关机等待时间" class="headerlink" title="4.缩短关机等待时间"></a>4.缩短关机等待时间</h2><p>有时候关机时可能会出现类似<code>A stop job is running for...(1m30s)</code>这样的提示，这是因为有的进程在关机的时候没有主动停止，需要等待90秒超时强制关闭。<br>90秒的时间太长了，可以缩短到30s；这个时间足以多数应用正常关闭了。</p>
+<div class="note note-info">
+            <p>Linux Mint 22.1版本把这个时间缩短到了10s”，非常激进。这里附上相应的配置文件，Arch Linux也可以考虑用这种在<code>/etc/systemd/system.conf.d/</code>目录下新建文件的方式，避免直接修改系统文件。</p> 
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-cde6ffc9" role="button" aria-expanded="false" aria-controls="collapse-cde6ffc9">
+        <div class="fold-arrow">▶</div>/etc/systemd/system.conf.d/50_linuxmint.conf
+      </div>
+      <div class="fold-collapse collapse" id="collapse-cde6ffc9">
+        <div class="fold-content">
+          <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># To override these values, create your own file in /etc/systemd/systemd.conf.d/60_custom.conf.</span><br><span class="hljs-comment"># Reload configuration with &quot;sudo systemctl daemon-reload&quot;</span><br><span class="hljs-comment"># Test with &quot;systemctl show&quot;</span><br><br><span class="hljs-section">[Manager]</span><br><br><span class="hljs-comment"># Reduce shutdown timeout from 90s to 10s.</span><br><span class="hljs-comment"># If you rely on important tasks to successfully finish during the shutdown sequence, set the timeout to something greater than 90s.</span><br><span class="hljs-attr">DefaultTimeoutStopSec</span>=<span class="hljs-number">10</span>s<br><br><span class="hljs-comment"># Rationale:</span><br><span class="hljs-comment"># This is done for the following reasons:</span><br><span class="hljs-comment"># - 90s is too long for users to wait (they think it&#x27;s hanging indefinitely, and they eventually just use their power button)</span><br><span class="hljs-comment"># - Cups, minidlna have made this a buggy mess for years now and there&#x27;s no sign of improvement for the near future</span><br><span class="hljs-comment"># - This is a workaround many people have used in Mint, Ubuntu, Arch, Fedora and many other distributions, although reducing the start</span><br><span class="hljs-comment"># timeout is known to possibly affect the journal, no adverse effects were reported after reducing the stop timeout.</span><br><span class="hljs-comment"># - For our audience (desktop users), this makes a lot of sense. It would be different for a server, or a machine which relies on shutdown</span><br><span class="hljs-comment"># scripts to perform important tasks, but for most people this fixes a very important issue and is unlikely to create new ones.</span><br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+<p>修改方法：编辑<code>/etc/systemd/system.conf</code>，找到<code>DefaultTimeoutStopSec</code>项，取消注释并改为想要的时间（30s）。<br><img src="/img/arch-cinnamon/timeout.png" srcset="/img/loading.gif" lazyload><br>然后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl daemon-reload<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-command-not-found提示"><a href="#5-command-not-found提示" class="headerlink" title="5.command-not-found提示"></a>5.command-not-found提示</h2><p>pkgfile<sup>pkg</sup>可以查询某个命令属于哪个软件包；使用root权限运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S pkgfile <span class="hljs-comment">#安装</span><br>pkgfile -u <span class="hljs-comment">#更新数据库</span><br></code></pre></td></tr></table></figure>
+<p><code>pkgfile</code>可以手动使用，用法参见<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Pkgfile">ArchWiki</a><br>也可以在输入未安装的命令时，提示需要安装的包：</p>
+<ol>
+<li>bash<br> 在<code>~/.bashrc</code>中加入一行： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /usr/share/doc/pkgfile/command-not-found.bash<br></code></pre></td></tr></table></figure></li>
+<li>zsh<br> 在<code>~/.zshrc</code>中加入一行： <figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs zsh"><span class="hljs-built_in">source</span> /usr/share/doc/pkgfile/command-not-found.zsh<br></code></pre></td></tr></table></figure></li>
+<li>fish<br> 无需额外配置，安装后会被自动调用。</li>
+</ol>
+<h2 id="6-软件包降级"><a href="#6-软件包降级" class="headerlink" title="6.软件包降级"></a>6.软件包降级</h2><p>pacman并不支持包降级，并且arch社区也不对降级包的行为作支持。部分升级是不受支持的。<br>但是，如果有软件包确实出现了问题不得不降级，也有工具提供了这一功能。<br>安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/downgrade">downgrade</a><sup>cn&#x2F;aur</sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S downgrade<br></code></pre></td></tr></table></figure>
+<p>然后使用root权限运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">downgrade &lt;想降级的包&gt;<br></code></pre></td></tr></table></figure>
+<p>选择想要降级的版本即可。注意标注的来源，来自<code>/var/cache/pacman/pkg</code>的是本地缓存的包，优先使用；远程包则来自 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Arch_Linux_Archive">Arch Linux Archive</a> ，没有镜像源，可能需要下载比较长时间。官方提供了 <a target="_blank" rel="noopener" href="https://asia.archive.pkgbuild.com/">亚洲</a> , <a target="_blank" rel="noopener" href="https://europe.archive.pkgbuild.com/">欧洲</a> , <a target="_blank" rel="noopener" href="https://america.archive.pkgbuild.com/">美洲</a> 三个地区的镜像，可以手动下载然后用<code>pacman -U</code>安装，可能会稍微快一点。</p>
+<p>Arch Linux还支持把整个系统完全降级到某个时间点的状态。有关降级的更多内容，参见<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Downgrading_packages">ArchWiki</a></p>
+<div class="note note-info">
+            <p>这些方法只支持降级官方源中的软件包；第三方源（如archlinuxcn源或者arch4edu源）的软件包，远程源似乎并没有旧版本的存档；因此如果缓存里面存有，就可以提取缓存降级（从<code>/var/cache/pacman/pkg</code>目录）；如果没有就是没法降级了。AUR中的包可以尝试使用<code>git reset</code>回退到之前的某个版本然后手动<code>makepkg</code>打个旧版本的包降级。</p> 
+          </div>
+
+<h2 id="7-镜像源列表优化"><a href="#7-镜像源列表优化" class="headerlink" title="7.镜像源列表优化"></a>7.镜像源列表优化</h2><p>目前pacman源仅有唯一的cernet源；pacman支持配置多源，因此可以优化一下：</p>
+<ol>
+<li>官方源<br> sudo执行下面命令来获得一份位于中国大陆，且使用HTTPS协议的镜像站列表，然后覆盖 <code>/etc/pacman.d/mirrorlist</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -L <span class="hljs-string">&#x27;https://archlinux.org/mirrorlist/?country=CN&amp;protocol=https&#x27;</span> -o /etc/pacman.d/mirrorlist<br></code></pre></td></tr></table></figure>
+ 之后编辑<code>/etc/pacman.d/mirrorlist</code>，做两件事：将想要使用的镜像源取消注释，并且排序。<br> 咱的喜好：cernet最先，然后各个企业镜像。（别碰163源，慢过蜗牛）<br> 另外还有少量镜像源未被收录在官方镜像列表： <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">Server = https:<span class="hljs-regexp">//</span>repo.huaweicloud.com<span class="hljs-regexp">/archlinux/</span><span class="hljs-variable">$repo</span><span class="hljs-regexp">/os/</span><span class="hljs-variable">$arch</span>			<span class="hljs-comment">#华为云</span><br>Server = https:<span class="hljs-regexp">//mi</span>rrors.cloud.tencent.com<span class="hljs-regexp">/archlinux/</span><span class="hljs-variable">$repo</span><span class="hljs-regexp">/os/</span><span class="hljs-variable">$arch</span>		<span class="hljs-comment">#腾讯云</span><br></code></pre></td></tr></table></figure></li>
+<li>archlinuxcn源和arch4edu源<br> 安装archlinuxcn-mirrorlist-git<sup>cn</sup>和mirrorlist.arch4edu<sup>edu</sup>，然后编辑<code>/etc/pacman.d/archlinuxcn-mirrorlist</code>和<code>/etc/pacman.d/mirrorlist.arch4edu</code>，将想要使用的镜像源取消注释，并且排序。<br> 最后编辑<code>/etc/pacman.conf</code>，把原先这里的镜像源注释掉，改为： <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[archlinuxcn]</span><br><span class="hljs-attr">Include</span> = /etc/pacman.d/archlinuxcn-mirrorlist<br><br><span class="hljs-section">[arch4edu]</span><br><span class="hljs-attr">Include</span> = /etc/pacman.d/mirrorlist.arch4edu<br></code></pre></td></tr></table></figure>
+ <img src="/img/arch-cinnamon/mirror.png" srcset="/img/loading.gif" lazyload><br> 最后，使用两个y强制刷新镜像源列表：<code>sudo pacman -Syyu</code></li>
+</ol>
+<hr>
+<p>到这里咱已经把目前能想到的，日用的Arch Linux系统必需的配置（除了显卡驱动）之外都配置完成了。由于目前还是在虚拟机上面整，暂时没有条件配置显卡驱动；不知道是虚拟机的问题还是其它什么问题，休眠目前也没配置成功。这两个问题以后在物理机上解决了另开一篇。<br>显卡驱动参考<a href="#3-%E5%85%B3%E4%BA%8E%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8">前述章节</a>根据显卡品牌不同分列的wiki；<br>休眠配置参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation">ArchWiki</a> 。<br>2025年4月6日更新：休眠在Virtualbox虚拟机配置完成，参见<a href="/2025/04/06/arch-hibernate/" title="Arch Linux配置休眠">这里</a><br>2025年6月8日更新：显卡驱动配置完成，参见<a href="#3-5-%E5%A4%A7%E6%88%98NVIDIA%E9%A9%B1%E5%8A%A8-2025%E5%B9%B46%E6%9C%888%E6%97%A5%E6%9B%B4%E6%96%B0">3.5节</a>；休眠在物理机上验证正常工作。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Arch Linux配置cinnamon桌面与常用应用</div>
+      <div>http://silvertuanzi.github.io/2025/02/11/arch-cinnamon/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silvertuanzi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/06/arch-hibernate/" title="Arch Linux配置休眠">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Arch Linux配置休眠</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/10/windows-with-arch/" title="Windows+Arch Linux双系统基本安装">
+                        <span class="hidden-mobile">Windows+Arch Linux双系统基本安装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"silvertuanzi/silvertuanzi.github.io","repo-id":"R_kgDONp8bkA","category":"Announcements","category-id":"DIC_kwDONp8bkM4C-7VA","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","data-strict":1};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="umami-site-pv-container" style="display: none">
+        总访问量 
+        <span id="umami-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="umami-site-uv-container" style="display: none">
+        总访客数 
+        <span id="umami-site-uv"></span>
+         人
+      </span>
+    
+    
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/umami-view.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

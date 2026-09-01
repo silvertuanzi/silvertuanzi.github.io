@@ -1,0 +1,1184 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silvertuanzi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="nvcc杂记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些编译cuda的笔记">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/12/03/nvcc-notes/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="nvcc杂记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/nvcc-notes/msvc.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/nvcc-notes/tool-prompt.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/nvcc-notes/cuda.png">
+<meta property="article:published_time" content="2025-12-03T01:10:56.000Z">
+<meta property="article:modified_time" content="2026-06-22T09:02:41.000Z">
+<meta property="article:author" content="silvertuanzi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/nvcc-notes/msvc.png">
+  
+  
+  
+  <title>一些编译cuda的笔记 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":"https://silvertuanzi-umami.netlify.app/script.js","website_id":"8696ff80-db66-47ae-8f97-dce9da61066b","domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":"3ay5n/D+qZfExizE1VsC63yZVb1BLb5c2fX8frr4eIbjf45uO6BWxM3sPDbztIyAbm9qSesnugRb7M7yhNuHt8WNleaVmKaSp17eECt31fAnRKYruDD+tRoDuNMSlgQSfhtTfw6tX7ELMt8Q6nazsg5qudrPgmusxyWux9HeeaAip1BRl6nP1Ruf19XNCJVXpTgb/x/hLIpVbHhEu5Rfp4Ry1hs5zddYV6+2hd7zvBnljm6m9ouSpAhn6Ewfx3IVCduBPH6cvQvwlhcjvFrm7TMsZ+ngOeHiJmJSzaJLuUwF8ARfRFU8deilRIUvdKgt5OcrGmHC3Vh2cnEXnpYmS/XXRVjiEcRcpkL3joRJf66O5UqAqKGjGjLbIO8rVE5X3bgs","api_server":"https://silvertuanzi-umami.netlify.app"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        let umami = document.createElement('script');
+        umami.async = true;
+        umami.src = "https://silvertuanzi-umami.netlify.app/script.js";
+        umami.setAttribute("data-website-id", "8696ff80-db66-47ae-8f97-dce9da61066b");
+        umami.setAttribute("data-domains", "");
+        document.head.appendChild(umami);
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tools/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>工具</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="一些编译cuda的笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-03 09:10" pubdate>
+          2025年12月3日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          132 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="umami-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="umami-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">一些编译cuda的笔记</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年6月22日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><div class="note note-info">
+            <p>Linux由于各个发行版包管理不同，且几乎99%的发行版一定会自带<code>gcc</code>，因此参见<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">CUDA</a>和<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cudnn-downloads">cuDNN</a>安装即可，以及可能需要参见<a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#mandatory-actions">CUDA文档</a>设置环境变量。<br>本节只介绍Windows.</p> 
+          </div>
+<div class="note note-info">
+            <p>CUDA支持离卡编译，因此CUDA Toolkit和其它各路编译套件完全可以装在没有N卡的机器上，然后完成所有编译工作。但是编译完的程序当然还是需要在有N卡的机器上才能运行</p> 
+          </div>
+<ol>
+<li>Visual Studio: C&#x2F;C++编译器<br> 如果电脑原先没有安装VS，那只安装VS Build Tools就足够了：从微软<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/downloads/">官网</a>获取Visual Studio 2026生成工具（页面下拉，在所有下载里面选择“用于Visual Studio的工具”就能找到。或者，如果需要兼容性，可以选择<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/visualstudio/releases/2022/release-history#release-dates-and-build-numbers">VS2022</a>或者<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/visualstudio/releases/2019/history#release-dates-and-build-numbers">VS2019</a> <div class="note note-info">
+            <p>截至当前的cuda版本(13.0)，NVIDIA官方支持2019和2022</p> 
+          </div>
+ 然后在安装的时候，选择“使用C++的桌面开发”。组件可以适当精简，比如<code>MSVC AddressSanitizer</code>和<code>vcpkg包管理器</code>可以不需要。如下图所示：<br> <img src="/img/nvcc-notes/msvc.png" srcset="/img/loading.gif" lazyload><br> 安装完成后，编译器默认并不会被添加到环境变量，也不建议直接把编译器添加到PATH。<br> 在开始菜单中可以看到专用的工具项，从这里启动就可以进入相应的cmd和powershell：<br> <img src="/img/nvcc-notes/tool-prompt.png" srcset="/img/loading.gif" lazyload><br> 为了简单快捷，可以自己在喜欢的位置创建一个空文件夹，里面编写一个<code>setcl.bat</code>内容如下（假设VS Build Tools安装到默认路径）： <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">@<span class="hljs-built_in">echo</span> off<br>&quot;C:\Program Files (x86)\Microsoft Visual Studio\<span class="hljs-number">18</span>\BuildTools\VC\Auxiliary\Build\vcvars64.bat&quot;<br></code></pre></td></tr></table></figure>
+ 然后把这个文件夹添加进环境变量<code>PATH</code>，之后只要在任意位置运行<code>setcl</code>命令，就能等效于立即启动<code>x64 Native Tools Command Prompt for VS</code> <div class="note note-info">
+            <p>一般都是在64位主机上编译目标为64位的程序，所以干脆直接启动这个，免得混淆。<br>如果希望在命令行快捷启动其它的，可以按照<code>开始菜单的启动项右键→打开文件位置→右键快捷方式→属性</code>查看对应的启动项到底是在执行什么指令，然后用类似的方式搓成脚本。</p> 
+          </div>
+ 如果想要测试，可以编译一个示例，看看是否正常工作。示例代码来自<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/cpp/build/building-on-the-command-line?view=msvc-180">Microsoft官方文档</a> 
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-2bceb5a4" role="button" aria-expanded="false" aria-controls="collapse-2bceb5a4">
+        <div class="fold-arrow">▶</div>C
+      </div>
+      <div class="fold-collapse collapse" id="collapse-2bceb5a4">
+        <div class="fold-content">
+          <p>hello.c</p> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, World! This is a native C program compiled on the command line.\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure> <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">cl hello.c<br>hello.exe<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-c8c43135" role="button" aria-expanded="false" aria-controls="collapse-c8c43135">
+        <div class="fold-arrow">▶</div>C++
+      </div>
+      <div class="fold-collapse collapse" id="collapse-c8c43135">
+        <div class="fold-content">
+          <p>hello.cpp</p> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;Hello, world, from Microsoft C++!&quot;</span> &lt;&lt; endl;<br>&#125;<br></code></pre></td></tr></table></figure> <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">cl /EHsc hello.cpp<br>hello.exe<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div></li>
+<li>Cuda Toolkit: Cuda编译器<br> 前往<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">NVIDIA Cuda Toolkit官网</a>下载，安装的时候自定义组件仅选择<code>Runtime</code>和<code>Development</code>两项即可：<br> <img src="/img/nvcc-notes/cuda.png" srcset="/img/loading.gif" lazyload> <div class="note note-info">
+            <p>截至cuda 13.0 update 2版本，nvcc尚未官方支持vs2026。如果使用vs2026，会提示编译器不受支持，需要在编译时添加参数<code>-allow-unsupported-compiler</code>。可以使用环境变量把编译参数固定下来，<code>NVCC_PREPEND_FLAGS</code>将编译参数插入在其它参数的开头，<code>NVCC_APPEND_FLAGS</code>将编译参数追加在其它参数的末尾。</p> 
+          </div>
+ 安装完成后，同样可以编译一个示例测试一下。注意虽然nvcc直接添加进PATH了，但是仍然需要<code>cl.exe</code>提供C&#x2F;C++编译器，所以仍然需要确保VS环境处于激活状态。 
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-a47c0d1c" role="button" aria-expanded="false" aria-controls="collapse-a47c0d1c">
+        <div class="fold-arrow">▶</div>CUDA
+      </div>
+      <div class="fold-collapse collapse" id="collapse-a47c0d1c">
+        <div class="fold-content">
+          <p>hello.cu</p> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function">__global__ <span class="hljs-type">void</span> <span class="hljs-title">hello_from_gpu</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello from GPU! \n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br> hello_from_gpu&lt;&lt;&lt;<span class="hljs-number">4</span>,<span class="hljs-number">4</span>&gt;&gt;&gt;();<br> <span class="hljs-built_in">cudaDeviceSynchronize</span>();<br><br> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure> <p>编译后会输出16行”Hello from GPU!”</p> <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">nvcc hello.cu<br>hello.exe<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div></li>
+<li>cuDNN库：可能需要<br> 前往<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cudnn-downloads">NVIDIA cuDNN官网</a>，下载安装即可，可以在自定义里面选择是需要cuda13的版本还是cuda12的版本。 <div class="note note-info">
+            <p>虽然写的是12.9，但是对cuda12全兼容，如果cuda用了12.8也可以放心使用。</p> 
+          </div></li>
+<li>其它可选工具<br> 建议全局安装一个cmake和ninja，如果不安装也问题不大，pip里面也有这两个工具。<br> 喜欢scoop的当然可以用scoop来安装。 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">winget <span class="hljs-keyword">install</span> Kitware.CMake Ninja-build.Ninja<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="编译记录"><a href="#编译记录" class="headerlink" title="编译记录"></a>编译记录</h1><div class="note note-info">
+            <p>2026年3月8日：更新自编译推荐度，以满分5星为标准，但是实际上只能评出接近满分和接近0分两种极端……</p> 
+          </div>
+
+<h2 id="xformers"><a href="#xformers" class="headerlink" title="xformers"></a>xformers</h2><div class="note note-warning">
+            <p>推荐自编译指数：<del>1.5星</del> 2.5星<br>更新理由：<br>xformers已自刎归天（参见这个<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/xformers/commit/ca6d2aa0d43241fc8a8dcd872debc2406160160d">commit</a>）<br>xformers现在强推<a target="_blank" rel="noopener" href="https://github.com/meta-pytorch/MSLK">mslk</a>并且删光了<code>xformers/ops/fmha</code>里面的所有东西，全部改成了从<code>mslk</code>包里面引；但是mslk的readme给咱看气笑了：</p> <ul> <li>不支持Windows</li> <li>只支持Ampere以上，问题来了，Ampere以上用flash attn不好还是用sageattention不好去用这个破mslk，50系甚至还有flash attn4吃</li> <li>Blackwell全部用了<code>sm_xxa</code>的声明，并且只写了<code>sm_100a</code>和<code>sm_120a</code>，所以甚至sm_103的尊贵的B300用不了，虽然不影响咱这种穷鬼普通用户，但是这种草台班子就很想笑</li> </ul> <p>总之就是一股巨大的草台班子气息。<br>所以，把这个commit之前的最后一次提交留存下来，并把下面的patch提前打进去，编译一版最终版xformers归档留存看起来挺不错。<br>原理由：</p> <ol> <li>xformers当前版本已经适配了pytorch稳定abi，因此现在xformers不再需要与torch版本一对一绑定，最新的<code>xformers 0.0.35</code>的依赖已经变成了<code>torch&gt;=2.10.0</code>，因此意味着以后torch更新可以直接使用现有xformers，而无需在等待官方适配之前先自己编译一份顶上(直接用torch nightly都大概率没问题)；</li> <li>xformers官方开摆了：fa2和fa3都直接用torch的，xformers现在这个轮子大小剩不了多少了；不过xformers底层的mem eff优化还是更省显存，xformers和sdp现在的关系是，sdp更快但是更费显存，看需求用，但是自编译也没多少模块了；<br> 不过这也意味着，现在编译xformers速度可以相当快；</li> <li>对于新显卡xformers官方更是摆：<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/xformers/issues/1374#issuecomment-3853439874">官方不会正式支持Blackwell了</a><br> 所以xformers现在没有正常内置cutlass-Blackwell的bug估计也很难等到修复了；<br> 如果Blackwell GPU使用xformers遇到类似这种报错： <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">NotImplementedError: <span class="hljs-keyword">No</span> <span class="hljs-keyword">operator</span> <span class="hljs-built_in">found</span> <span class="hljs-keyword">for</span> `memory_efficient_attention_forward` <span class="hljs-keyword">with</span> inputs<br></code></pre></td></tr></table></figure>  有一个临时的修复方案，无需编译。<br> 前往python环境里面的xformers目录，通常可以在环境目录底下的<code>Lib/site-packages</code>里面找到<code>xformers</code>文件夹。修改里面的<code>ops/fmha/cutlass.py</code>，定位到170行左右： <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs diff">    OPERATOR = (<br>        get_operator(&quot;aten&quot;, &quot;_efficient_attention_forward&quot;)<br>        if is_pt_cutlass_compatible()<br>        else None<br>    )<br><span class="hljs-deletion">-   CUDA_MAXIMUM_COMPUTE_CAPABILITY = (9, 0)</span><br><span class="hljs-addition">+   CUDA_MAXIMUM_COMPUTE_CAPABILITY = (12, 1)</span><br>    SUPPORTED_DEVICES: Set[str] = &#123;&quot;cuda&quot;&#125;<br>    SUPPORTED_DTYPES: Set[torch.dtype] = &#123;torch.float, torch.half, torch.bfloat16&#125;<br></code></pre></td></tr></table></figure>  这样就能正确启用<code>cutlass-pt</code>模块，由于这个cutlass是pytorch提供，因此无需担心对新卡的适配不好。</li> <li>对于未来更新的显卡（Rubin及以后），按照xformers现在这种摆烂方式，有可能直接就不可用了，到那个时候想自己尝试尝试编译也行，但是大概率意义不大。</li> </ol> 
+          </div>
+<div class="note note-danger">
+            <p>由于flash-attn2目前最后一个能在Windows上编译的版本是2.7.4，从2.8开始截止当前版本2.8.3在Windows上均会编译失败，因此xformers内置的flash-attn2在升级到2.8之后也无法在Windows上通过编译。<br>xformers最后一个绑定flash-attn2.7.4的版本是0.0.30，已知可以稳定配合pytorch2.7，因此如果官方包遇到兼容性问题（尤其是Blackwell GPU），自己编译一版0.0.30去配合torch2.7.1+cu128应该是个不错的选择。<br>从0.0.31开始，Windows上无法编译出含flash-attn2的xformers轮子。不是很建议尝试在旧xformers上强行为新版torch编译，适配大概率会比较差。<br>或者，编译一版不含flash attention的xformers，只使用mem eff优化也存在可行性，并且这样的话，编译所需时间会极大幅度缩短，内存压力也会极大幅度减小。即使没有fa2，单纯的xformers经测试也会比torch sdp更省显存。</p> 
+          </div>
+
+<ol>
+<li>获取源码：从<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/xformers">github</a>获取最新源码，或者从<a target="_blank" rel="noopener" href="https://pypi.org/project/xformers">pypi</a>获取指定版本的源码压缩包。 <div class="note note-warning">
+            <p>从<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/xformers/commit/6d6e6f0a07e5771b40b0814adac7f07aae946beb">这个commit</a>开始，xformers主动提前适配了torch2.10nightly版本的API，弃用了对torch2.9版本的支持。<br>因此，如果需要为torch2.9编译，那就不能直接连同submodules一起clone，而需要使用<code>git checkout</code>或者<code>git reset --hard</code>先切回旧版本：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/facebookresearch/xformers.git<br><span class="hljs-built_in">cd</span> xformers<br>git reset --hard 513e7a43aba20b22b6b52a32a5d17896ff0e2bd7<br></code></pre></td></tr></table></figure> <p>然后再执行下文的<code>git submodule update --init --recursive</code></p> 
+          </div>
+ 从github获取的时候要clone submodule: <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/facebookresearch/xformers.git --recurse-submodules<br></code></pre></td></tr></table></figure>
+ 或者如果<code>clone</code>的时候忘记，那么进入xformers源码根目录下执行： <figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git submodule update</span> <span class="hljs-literal">--</span><span class="hljs-comment">init</span> <span class="hljs-literal">--</span><span class="hljs-comment">recursive</span><br></code></pre></td></tr></table></figure>
+ 对于pypi获取的压缩包，解压并且删除里面的<code>xformers.egg-info</code>文件夹。 <div class="note note-info">
+            <p>git在默认设置下使用Windows的旧版API，其不支持长路径，需要通过git config开启长路径支持：</p> <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">git config --global core.longpaths <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure> <p>或者，如果有洁癖不想动全局配置，那就<code>clone</code>的时候不要<code>--recursive-submodules</code>，然后为仓库单独开启长路径之后再执行<code>git submodule update</code>。<br>如果没有开启长路径，然后clone期间出现Filename is too long报错，不要抱有任何侥幸心理，把源码文件夹整个删除，开启长路径支持之后再重新整个拉取，这是确保文件夹里的源码和预期一致的最稳妥的方法。</p> 
+          </div></li>
+<li>准备环境：建议使用venv虚拟环境，然后<code>pip</code>安装计划和xformers搭配的<code>torch</code>以及xformers的依赖<code>numpy</code>。如果前面没有安装全局的ninja，这里就一起安装一个，否则没有并行编译会纯纯龟速。<br> 与此同时，如果有用<code>uv</code>的习惯，那后面启动编译直接用uv就好（也可以<code>pip install uv</code>）；或者用更<em>官方</em>一点的方式，<code>pip install build setuptools wheel</code>。</li>
+<li>微调<code>setup.py</code>(可选)：<ul>
+<li>首先咱不喜欢xformers在版本号里面记录编译日期；用git commit hash就足以指示编译的准确版本。因此删除开头的<code>import datetime</code>；然后定位到<code>get_local_version_suffix()</code>函数，修改：  <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs diff">     def get_local_version_suffix() -&gt; str:    <br>         if not (Path(__file__).parent / &quot;.git&quot;).is_dir():<br>             # Most likely installing from a source distribution<br>             return &quot;&quot;<br><span class="hljs-deletion">-        date_suffix = datetime.datetime.now().strftime(&quot;%Y%m%d&quot;)</span><br>         git_hash = subprocess.check_output(<br>             [&quot;git&quot;, &quot;rev-parse&quot;, &quot;--short&quot;, &quot;HEAD&quot;], cwd=Path(__file__).parent<br>         ).decode(&quot;ascii&quot;)[:-1]<br><span class="hljs-deletion">-        return f&quot;+&#123;git_hash&#125;.d&#123;date_suffix&#125;&quot;</span><br><span class="hljs-addition">+        return f&quot;+&#123;git_hash&#125;&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li>然后，由于flash attention v3仅支持A100,H100等计算卡，不支持Geforce游戏卡；计算卡要用也是在Linux上用，而Linux上既有满血的torch flash attn2也有xformers官方的满血fa3，因此Linux上自编译xformers的必要性也小些。所以修改源码直接屏蔽fa3编译：  <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs diff">     def get_flash_attention3_nvcc_archs_flags(cuda_version: int):<br><span class="hljs-addition">+        return []</span><br>         if os.getenv(&quot;XFORMERS_DISABLE_FLASH_ATTN&quot;, &quot;0&quot;) != &quot;0&quot;:<br>             return []<br></code></pre></td></tr></table></figure></li>
+<li>下调nvcc threads:由于nvcc编译flash attn部分极其费内存，把nvcc threads调小降低内存压力:  <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs diff">         if cuda_version &gt;= 1102:<br>             nvcc_flags += [<br>                 &quot;--threads&quot;,<br><span class="hljs-deletion">-                &quot;4&quot;,</span><br><span class="hljs-addition">+                &quot;1&quot;,</span><br>                 &quot;--ptxas-options=-v&quot;,<br>             ]<br>         if sys.platform == &quot;win32&quot;:<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>设置环境变量：<ul>
+<li><code>XFORMERS_DISABLE_FLASH_ATTN</code>根据编译需求设置：<br>  设为0：开启xformers内置的flash-attn，包括fa2和fa3；此时这个选项仅是开启fa的必要条件，开启后上文屏蔽fa3的设置依旧有效；在高版本下编译fa2极大可能失败。<br>  设为1：直接禁用fa2和fa3，只编译最基础的xformers mem eff优化。<br>  对于旧版本xformers0.0.30，这个环境变量默认会取0；当前版本0.0.33已经改为默认取1</li>
+<li><code>XFORMERS_PT_FLASH_ATTN</code>设置为0<br>  Windows下pytorch根本没有编译flash attn组件，此选项让xformers编译自己打包的的flash attn，如果xformers版本高于0.0.30则不要开启，大概率会导致编译失败。<br>  如果上一个环境变量已经设为1禁用了flash attn，那么这个环境变量会被无视。</li>
+<li><code>TORCH_CUDA_ARCH_LIST</code>按以下规则设置：比较重要<br>  首先根据<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-gpus">NVIDIA文档</a>确定GPU与cuda arch版本号的关系。  <div class="note note-info">
+            <p>不在此表上的GPU已经不在cuda13的支持范围；如果需要在cuda12或者旧版本上为老显卡编译，参看<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-legacy-gpus">NVIDIA文档</a></p> 
+          </div>
+  然后确定编译目标：<ul>
+<li>如果只想自用，那就只填自己的（例如RTX50系填<code>12.0</code>）；</li>
+<li>如果想自己选择几代不同的架构，就用分号分隔（例如如果想同时支持RTX40和50系，填<code>8.9;12.0</code>）；</li>
+<li>如果想搞成类似官方的泛用包，<a target="_blank" rel="noopener" href="https://huggingface.co/silvertuanzi/xformers_build_archive/blob/main/environment_variables.txt">这里(在huggingface上)</a>记录了一些xformers官方用过的环境变量可以照抄；</li>
+<li>如果不设置，xformers的默认行为会有所差异：flash attn2模块里面设定了一个默认列表，会根据cuda版本的不同启用不同的默认列表，然后将flash attn2的模块为列表中的所有架构编译；flash attn3模块则是检测本机是否是8.0(A100等)或者9.0(H100等)，如果是，就针对本机架构编译，否就直接不编译。其它模块不确定，但是应该是针对本机架构编译。为了确保精准控制自己的需求，建议设置；</li>
+<li>如果手动设置的列表里面不含8.0和9.0，那么fa3模块会自动不启用，因此上文的手动屏蔽此时不再需要。</li>
+</ul>
+</li>
+<li><code>XFORMERS_PT_CUTLASS_ATTN</code>可选设置，控制是否借用torch的cutlass的开关，设置为0禁用，默认启用。这个影响不大，不设保持默认行为也可，稍微节约一点点编译时间；设为0是模拟旧版本的行为</li>
+<li><code>MAX_JOBS</code>控制ninja的并行数：特别需要注意，因为xformers编译过程中，部分环节特别特别吃内存；而ninja的默认行为是把并行数直接开到CPU线程数+2，对于常规的消费级电脑，如果编译fa2，这个设置几乎一定会爆内存。<br>  作为参考，在fa2能通过编译的时候，咱自己的个人配置<code>MAX_JOBS=2</code>能不爆16GB内存，开到3就会开始触发大量虚拟内存交换，甚至会导致中断退出。根据自己的内存调整即可。咱测试的时候没动过nvcc threads，如果按照上文把nvcc threads降低，那有可能这个数值可以开高点，这样至少纯C++无CUDA的部分可以编译快点。<br>  如果选择不编译flash attention部分，在前面把nvcc threads减到1的前提下16G内存可以直接开8，编译很快就会完成。</li>
+<li><code>NVCC_FLAGS</code>：对于vs2026如果上文没有配置<code>-allow-unsupported-compiler</code>，xformers的编译程序接受这个环境变量作为追加编译参数，设置在这也是可以的。</li>
+</ul>
+</li>
+<li>启动编译： <div class="note note-info">
+            <p>可以使用<code>chcp 65001</code>把输出切换到UTF-8编码，这样msvc编译器输出的中文不会乱码，可以更清晰地查看日志输出。</p> 
+          </div>
+ 导航到xformers源码的根路径，如果使用uv，就执行 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">uv <span class="hljs-keyword">build</span> . --no-<span class="hljs-keyword">build</span>-isolation<br></code></pre></td></tr></table></figure>
+ 如果使用build，在以下两种命令选一种；build的默认日志可能输出没那么多，如果缺少安全感就加个<code>-v</code>多看看日志刷屏 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">python -m build . -<span class="hljs-built_in">n</span><br>pyproject-build . -<span class="hljs-built_in">n</span><br></code></pre></td></tr></table></figure>
+ 注意上述命令的默认行为是，先把源码打包成源码包(sdist)，就像pip的源码压缩包那样；然后对源码包执行编译。<br> 如果想直接只编译whl，那就额外添加<code>--wheel</code>参数。<br> 经过漫长的编译之后，产物会出现在<code>dist</code>文件夹，妥善保存。 <div class="note note-info">
+            <p>   按照python现行规范，直接用<code>python</code>执行<code>setup.py</code>的行为都应当被替代：</p> <table> <thead> <tr> <th>旧命令</th> <th>新命令</th> </tr> </thead> <tbody><tr> <td><code>python setup.py install</code></td> <td><code>pip install .</code></td> </tr> <tr> <td><code>python setup.py develop</code></td> <td><code>pip install -e .</code></td> </tr> <tr> <td><code>python setup.py sdist</code>，<code>python setup.py build</code>以及<code>python setup.py bdist_wheel</code></td> <td><code>python -m build</code></td> </tr> </tbody></table> <p>其中后者会默认在TEMP目录下创建隔离的编译环境，视情况添加类似<code>--no-build-isolation</code>的参数改变这个行为。    </p> 
+          </div></li>
+</ol>
+<h3 id="上游flash-attn可能要注意的"><a href="#上游flash-attn可能要注意的" class="headerlink" title="上游flash-attn可能要注意的"></a>上游flash-attn可能要注意的</h3><div class="note note-warning">
+            <p>推荐自编译指数：2<br>flash-attn的问题是官方自己没搞二进制轮子；但是各种民间轮子已经满天飞，如果有适配的轮子肯定直接用就好，如果没有再来考虑编译。</p> 
+          </div>
+<p>额外提一下编译<a target="_blank" rel="noopener" href="https://pypi.org/project/flash-attn/">flash-attn2</a>可能需要注意的事项，和编译xformers无关，编译xformers不用看本节。</p>
+<p>由于咱的设备不支持flash attention2，环境变量的注意事项完全来自于手撕源码<code>setup.py</code>。</p>
+<ol>
+<li>flash-attn同样支持且建议使用<code>ninja</code>并行编译加速，如果想使用<code>pip install ninja</code>的话注意build isolation问题。</li>
+<li><code>NVCC_THREADS</code><br> <code>nvcc</code>的线程数，默认为4，当编译内存不够时可以先考虑压低这个数值，从而尽量减少对编译纯C&#x2F;C++部分的速度影响（纯C&#x2F;C++编译通常吃不了多少内存）</li>
+<li><code>FLASH_ATTN_CUDA_ARCHS</code><br> flash-attn使用这个环境变量来控制编译的目标GPU架构，默认值是<code>80;90;100;110;120</code>（也就是全编译）。这样非常浪费时间，因此强烈建议设置该环境变量，仅编译自己的GPU架构。另外该值只接受0结尾，因此对于30系(sm86)和40系(sm89)也应该使用80</li>
+<li><code>MAX_JOBS</code>和xformers部分相同。</li>
+</ol>
+<h2 id="llama-cpp-python"><a href="#llama-cpp-python" class="headerlink" title="llama-cpp-python"></a>llama-cpp-python</h2><div class="note note-success">
+            <p>推荐自编译指数：5<br>llama.cpp是非常推荐自行编译的。llama.cpp的源码里面有大量检测本机硬件针对优化的流程，自编译的轮子的性能会明显强于一些预编译的通用轮子。<br>至少在咱这里，用预编译轮子，在cuda版本确认正确的情况下，GPU根本起不来，速度和CPU完全一样；自编译就能正确调用上。<br>对于AMD的zen4以上用户，llama.cpp会检测CPU支持的指令集，并开启AVX512优化；由于llama.cpp的推理是CPU和GPU都有参与工作，因此开启AVX512也能得到收益。<br>再者，llama-cpp-python并不检测pytorch内置的cuda运行库，因此即使使用预编译包，也需要从cuda toolkit至少安装cuda runtime，那cuda toolkit装都装了不如自己编译一下得了。<br>最后，项目不大，只要正确配置好并行加速，编译时间并不会很长。<br>llama-cpp-python的官方文档也是优先推荐自行编译。</p> 
+          </div>
+<p>llama-cpp-python现在有两个源码来源：一个是最开始的上游<a target="_blank" rel="noopener" href="https://github.com/abetlen/llama-cpp-python">abetlen&#x2F;llama-cpp-python</a>，一个是基于它的fork<a target="_blank" rel="noopener" href="https://github.com/JamePeng/llama-cpp-python">JamePeng&#x2F;llama-cpp-python</a><br>目前二者均在积极维护，pypi上的<a target="_blank" rel="noopener" href="https://pypi.org/project/llama-cpp-python">llama-cpp-python</a>由上游的abetlen维护。<br>fork会出现大概只是因为上游原版从2025年8月停更到2026年3月才复活吧。用哪个应该都差不多，反正核心都是<a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a><br>为了方便后续使用，还是走获取源码+构建轮子的方式，便于把构建的wheel存起来复用。直接<code>pip install</code>装源码包一是可控性太低，二是日志太少，不太喜欢。</p>
+<ol>
+<li><p>准备源码</p>
+ <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">--recursive</span> [链接二选一]<br></code></pre></td></tr></table></figure>
+<p> 或者可以从<a target="_blank" rel="noopener" href="https://pypi.org/project/llama-cpp-python">pypi</a>获取abetlen版本的发布包，也可以通过任意pypi镜像站获取，例如<a target="_blank" rel="noopener" href="https://help.mirrors.cernet.edu.cn/pypi/">cernet镜像</a>给出的链接是<code>https://mirrors.cernet.edu.cn/pypi/web/simple</code>，那就访问<a target="_blank" rel="noopener" href="https://mirrors.cernet.edu.cn/pypi/web/simple/llama-cpp-python">https://mirrors.cernet.edu.cn/pypi/web/simple/llama-cpp-python</a></p>
+<p> 然后如果选择的是JamePeng版本的分支，可以打开<code>pyproject.toml</code>稍作修改：</p>
+ <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs diff">  [tool.scikit-build]<br>  wheel.packages = [&quot;llama_cpp&quot;]<br><span class="hljs-addition">+ wheel.py-api = &quot;py3&quot;</span><br>  cmake.verbose = true<br>  cmake.minimum-version = &quot;3.21&quot;<br>  minimum-version = &quot;0.5.1&quot;<br>  sdist.include = [&quot;.git&quot;, &quot;vendor/llama.cpp/*&quot;]<br></code></pre></td></tr></table></figure>
+<p> 由于llama-cpp-python使用的是ctypes，编译一个wheel对py3各版本通用是完全可行的。实际上，<a target="_blank" rel="noopener" href="https://github.com/abetlen/llama-cpp-python/pull/2166">上游abetlen版本已经这么做了</a></p>
+</li>
+<li><p>准备一个python虚拟环境，以及构建工具<a target="_blank" rel="noopener" href="https://pypi.org/project/build/">build</a>或者<a target="_blank" rel="noopener" href="https://pypi.org/project/uv/">uv</a></p>
+</li>
+<li><p>配置环境变量</p>
+<ul>
+<li>开启CUDA  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd"><span class="hljs-built_in">set</span> CMAKE_ARGS=-DGGML_CUDA=on<br></code></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CMAKE_ARGS=<span class="hljs-string">&#x27;-DGGML_CUDA=on&#x27;</span><br></code></pre></td></tr></table></figure></li>
+<li>如果有<strong>全局可用</strong>的<code>ninja</code>（不能是<code>pip install ninja</code>，编译会新建一个隔离环境吃不到。不过<code>conda install ninja</code>或许可以），设置让cmake使用ninja加速编译：  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd"><span class="hljs-built_in">set</span> CMAKE_GENERATOR=Ninja<br></code></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CMAKE_GENERATOR=Ninja<br></code></pre></td></tr></table></figure>
+  <div class="note note-warning">
+            <p>在Windows MSVC下，如果<code>CMAKE_GENERATOR=Ninja</code>则需要手动提前激活vs编译器环境，ninja只会在PATH里面找可用的编译器<code>cl</code>；而如果不设置，默认的msbuild调度就不需要，但是在咱的场景下msbuild会只调单核，超绝龟速编译。</p> 
+          </div>
+  <div class="note note-info">
+            <p>建议使用和ninja类似的方式安装一个类似<strong>全局可用</strong>的<code>ccache</code>，它可以缓存已经编译过的结果，从而加快编译速度。<br>llama.cpp会直接检测有是否可用的ccache，如果有会自动使用，无需配置。<br>在Windows环境下，ccache只有配合ninja的时候才比较可用，因为ninja是直接绕开msbuild直接调<code>ccache cl</code>命令，如果走默认的msbuild路径ccache就很难调出来。</p> 
+          </div>
+ llama-cpp-python内部是完整的llama.cpp，因此接受和上游一样的cmake变量，通过<code>CMAKE_ARGS</code>环境变量传进去，参见<a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md#cuda">llama.cpp文档</a><br> 如果是在cmd，直接传类似<code>set CMAKE_ARGS=-DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=&quot;86;89&quot;</code>即可，cmd环境变量以行为单位解析不需要包外层引号；<br> 如果是在bash，外层传单引号内层传双引号以避免引号解析混乱，类似<code>export CMAKE_ARGS=&#39;-DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=&quot;86;89&quot;&#39;</code>即可。</li>
+</ul>
+</li>
+<li><p>启动编译: 当前工作目录位于源码根目录</p>
+ <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">uv build . <span class="hljs-comment">--wheel</span><br></code></pre></td></tr></table></figure>
+<p> 或者</p>
+ <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">python -m build . <span class="hljs-comment">--wheel</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="相似项目"><a href="#相似项目" class="headerlink" title="相似项目"></a>相似项目</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a><br> 和python无关了，纯粹的C++项目且用cmake构建，直接参见<a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md#cuda">官方文档</a>使用cmake命令即可，同样可以考虑加入<code>-G Ninja</code></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/leejet/stable-diffusion.cpp">stable-diffusion.cpp</a>，Windows下同时强烈建议添加<code>-DCMAKE_CXX_FLAGS=&quot;/EHsc&quot;</code>对齐MSVC标准。<br> 同样是纯粹的C++项目，推理t2i的，直接参见<a target="_blank" rel="noopener" href="https://github.com/leejet/stable-diffusion.cpp/blob/master/docs/build.md#build-with-cuda">官方文档</a>，同样可以考虑加入<code>cmake -G Ninja</code><br> 注意在Windows下必须<code>-DCMAKE_CXX_FLAGS=&quot;/bigobj&quot;</code>否则编译报错，Windows下同时强烈建议添加<code>-DCMAKE_CXX_FLAGS=&quot;/EHsc&quot;</code>对齐MSVC标准。<br> 目前sd.cpp在Windows下推理仍有明显的<a target="_blank" rel="noopener" href="https://github.com/leejet/stable-diffusion.cpp/issues/1473">性能问题</a>，在Linux下非常正常，可以作为一个后备推理方案（量化，gguf这些功能在一些老卡上还有一点就业空间）</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/william-murray1204/stable-diffusion-cpp-python">stable-diffusion-cpp-python</a><br> 上述sd.cpp项目的python封装，同样是使用ctypes，因此和llama-cpp-python流程高度相似，可以使用相同的patch适配py3所有版本，且同样通过环境变量<code>CMAKE_ARGS</code>等传递cmake选项。</li>
+</ol>
+<h2 id="onnxruntime-gpu"><a href="#onnxruntime-gpu" class="headerlink" title="onnxruntime-gpu"></a>onnxruntime-gpu</h2><div class="note note-danger">
+            <p>推荐自编译指数：0<br>项目过大，编译时间过长，非常非常折磨。<br>咱会想到自编译，纯粹是因为torch的cu130到来之后，咱想冲版本，但是onnxruntime-gpu的cu13适配来的实在太慢，所以没忍住自己搞了一版；<br>在cu14到来之前，没有任何理由再开一次编译，这里仅做一下记录。<br>现在pypi提供的onnxruntime-gpu仍为cu12版, 如需cu13，安装方式：</p> <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">pip install onnxruntime-gpu -i https:<span class="hljs-regexp">//</span>aiinfra.pkgs.visualstudio.com<span class="hljs-regexp">/PublicPackages/</span>_packaging<span class="hljs-regexp">/onnxruntime-cuda-13/</span>pypi/simple<br></code></pre></td></tr></table></figure>
+          </div>
+
+<ol>
+<li>获取源码：</li>
+</ol>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/microsoft/onnxruntime.git --depth <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>根据目标python版本准备好一个对应python版本的环境（虚拟环境venv或者conda什么的皆可），确保这个环境处于激活状态。也就是说，执行<code>python</code>命令可以正确启用想要版本的python。</li>
+<li>确保已经安装好cuda和cudnn；其中Windows下的cudnn不能使用安装版，因为安装版的目录结构会是这样： 
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-d5c89cf3" role="button" aria-expanded="false" aria-controls="collapse-d5c89cf3">
+        <div class="fold-arrow">▶</div>tree
+      </div>
+      <div class="fold-collapse collapse" id="collapse-d5c89cf3">
+        <div class="fold-content">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs tree">NVIDIA<br>└── CUDNN<br>	└── v9.20<br>		├── bin<br>		│   └── 13.2<br>		│       └── x64<br>		│           ├── cudnn64_9.dll<br>		│           ├── cudnn_adv64_9.dll<br>		│           ├── cudnn_cnn64_9.dll<br>		│           ├── cudnn_engines_precompiled64_9.dll<br>		│           ├── cudnn_engines_runtime_compiled64_9.dll<br>		│           ├── cudnn_graph64_9.dll<br>		│           ├── cudnn_heuristic64_9.dll<br>		│           └── cudnn_ops64_9.dll<br>		├── include<br>		│   └── 13.2<br>		│       ├── cudnn.h<br>		│       ├── cudnn_adv.h<br>		│       ├── cudnn_backend.h<br>		│       ├── cudnn_cnn.h<br>		│       ├── cudnn_graph.h<br>		│       ├── cudnn_ops.h<br>		│       └── cudnn_version.h<br>		├── lib<br>		│   └── 13.2<br>		│       └── x64<br>		│           ├── cudnn.lib<br>		│           ├── cudnn64_9.lib<br>		│           ├── cudnn_adv.lib<br>		│           ├── cudnn_adv64_9.lib<br>		│           ├── cudnn_cnn.lib<br>		│           ├── cudnn_cnn64_9.lib<br>		│           ├── cudnn_engines_precompiled.lib<br>		│           ├── cudnn_engines_precompiled64_9.lib<br>		│           ├── cudnn_engines_runtime_compiled.lib<br>		│           ├── cudnn_engines_runtime_compiled64_9.lib<br>		│           ├── cudnn_graph.lib<br>		│           ├── cudnn_graph64_9.lib<br>		│           ├── cudnn_heuristic.lib<br>		│           ├── cudnn_heuristic64_9.lib<br>		│           ├── cudnn_ops.lib<br>		│           └── cudnn_ops64_9.lib<br>		└── LICENSE<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+ 安装版的在<code>bin</code>,<code>lib</code>等目录下都至少套了一层CUDA版本的路径，有的在底下还套了一层<code>x64</code>，onnxruntime的编译不能识别这样的路径。<br> 因此需要用软链接的方式，或者用cudnn的tarball包，组织成这样的结构： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tree">cudnn-windows-x86_64-9.20.0.48_cuda13-archive<br>├── bin<br>│   └── x64<br>│       └── ...<br>├── include<br>│   └── ...<br>├── lib<br>│   └── x64<br>│       └── ...<br>└── LICENSE<br></code></pre></td></tr></table></figure>
+ 同样的，对于.deb系的Linux，由于会分布在<code>/usr/lib/x86_64-linux-gnu</code>和<code>/usr/include/x86_64-linux-gnu</code>也会变成非标路径，因此如果遇到识别问题，也应该考虑改用tarball包重新组织路径结构。</li>
+<li>根据平台，Windows使用<code>build.bat</code>启动，Linux使用<code>build.sh</code>启动，且需要的所有前置环境和编译参数如下：<ul>
+<li><code>cmake</code>: 核心，项目是cmake项目当然必须需要cmake启动</li>
+<li><code>ninja</code>: 强烈建议使用，对于这种重型项目，ninja的调度优势无论是对比msbuild还是对比GNU make都强了不知道多少；且windows下用ninja调度cl能更好的配合ccache加速，msbuild测试几乎无法命中ccache;<br>  另外强调一下，如果是默认的msbuild，那么msbuild自己就能找到编译器；但是Ninja并不能自己找到<code>cl.exe</code>，因此ninja需要在vs command prompt下使用。为了保险，建议直接使用x64 native command prompt</li>
+<li><code>ccache</code>: 同样强烈建议使用。onnxruntime项目本身是大型的C++&#x2F;CUDA混合项目，ccache对两种的编译都能起到缓存作用；而且必须提及的一点是，CUDA部分会有一些模块的编译相当吃内存，但是为了这个模块直接限制总并行数也很亏；所以高效的选择肯定是，先火力全开，到了吃内存的部分，<code>Ctrl+C</code>干掉，然后调整并行数继续开。编译进度万一在重开的时候丢失了（Windows上概率很大）就是ccache缓存垫回来的时候了。</li>
+<li>启用以下编译参数，由于项目过于重型，因此编译的目标是：只编译最基础的包含CUDA&#x2F;cudnn的模块，不编译TensorRT和NCCL（反正一般用不上），不编译其它语言，并且跳过所有测试，关闭PGO和LTO（太耗时）：<ul>
+<li><code>--config Release</code></li>
+<li><code>--compile_no_warning_as_error</code></li>
+<li><code>--use_cache</code> 本项启用ccache</li>
+<li><code>--cmake_generator Ninja</code></li>
+<li><code>--skip_tests --skip_onnx_tests --skip_winml_tests --skip_nodejs_tests</code> 保险起见，全加</li>
+<li><code>--build_wheel</code> 核心，编译python wheel</li>
+<li><code>--parallel 0</code> 控制并行编译数，0的时候会取CPU最大线程数，nvcc爆内存了需要适当调一个比较小的正数</li>
+<li><code>--nvcc_threads 1</code> nvcc的线程数，开1就好，这个体感收益似乎并不高？而且nvcc阶段的模块都是内存杀手，压制一下挺好</li>
+<li><code>--use_cuda</code> 启用cuda编译<ul>
+<li><code>--cuda_version CUDA_VERSION --cuda_home CUDA_HOME</code>这两个可以不用指定，cuda版本会自动检测，然后只要<code>nvcc</code>在PATH里面，就不需要手动指定路径；</li>
+<li><code>--cudnn_home CUDNN_HOME</code> 指定cudnn路径，如前文所言，需要确保路径如下：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs tree">CUDNN_HOME<br>├── bin<br>│   └── ...<br>├── include<br>│   └── ...<br>└── lib<br>	└── ...<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><code>--cmake_extra_defines</code>杂项，用来额外指定附加给cmake的选项，包含：<br>  <code>--cmake_extra_defines CMAKE_CUDA_ARCHITECTURES=75;86;89;120</code> 指定编译的目标CUDA架构，这个列表包含了20~50四代GeForce游戏卡，可以自己根据需求调整，节省时间只给自己的GPU编译也是可以的<br>  <code>--cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_extra_defines onnxruntime_BUILD_CSHARP_TESTS=OFF --cmake_extra_defines onnxruntime_BUILD_JAVA_TESTS=OFF</code> 把无关的测试禁用的更彻底一点，求稳妥，反正不会负负得正</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对于Linux桌面系统，通常来说系统都会存在一个系统级别的<code>protobuf</code>，并且99%的概率下与onnxruntime需要的protobuf不同。编译脚本会自己拉取合适的protobuf版本，因此只需要避免全局的protobuf干扰。咱选择了最简单粗暴的方式：直接破坏依赖来卸载掉全局的protobuf，编译完成再装回来。或者，用喜欢的方式起一个干净的编译环境也行，可以是docker，甚至可以是一个全新的wsl环境。下面列举一下破坏依赖强制卸载的方法： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#apt/dpkg</span><br>dpkg --force depends -r libprotobuf32t64 libprotobuf-lite32t64 libprotobuf-dev protobuf-compiler <span class="hljs-comment">#break</span><br>apt install -f <span class="hljs-comment">#restore</span><br><br><span class="hljs-comment">#pacman</span><br>pacman -Rdd protobuf <span class="hljs-comment">#break</span><br>pacman -S --asdeps protobuf <span class="hljs-comment">#restore	</span><br></code></pre></td></tr></table></figure>
+ <div class="note note-info">
+            <ol> <li>apt系包拆的太散，卸载前先<code>apt search protobuf</code>看一眼到底有哪些包，哪些是已安装的；</li> <li>dnf&#x2F;rpm系可以用<code>rpm -e --nodeps</code>卸载，但是不方便直接恢复，至少咱不知道怎样让包恢复成“作为依赖安装”这个标记。或许有一个思路是，找到依赖protobuf的随便一个包，把它卸掉再重装，这样间接把依赖引回来。</li> </ol> 
+          </div></li>
+</ol>
+<p>完成之后，保存.whl文件，上传，然后这辈子不会再想编译第二次。
+	</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>一些编译cuda的笔记</div>
+      <div>http://silvertuanzi.github.io/2025/12/03/nvcc-notes/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silvertuanzi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/24/rime-input/" title="Rime输入法配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rime输入法配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/01/python-envs/" title="搞python环境杂七杂八那些事">
+                        <span class="hidden-mobile">搞python环境杂七杂八那些事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"silvertuanzi/silvertuanzi.github.io","repo-id":"R_kgDONp8bkA","category":"Announcements","category-id":"DIC_kwDONp8bkM4C-7VA","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","data-strict":1};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="umami-site-pv-container" style="display: none">
+        总访问量 
+        <span id="umami-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="umami-site-uv-container" style="display: none">
+        总访客数 
+        <span id="umami-site-uv"></span>
+         人
+      </span>
+    
+    
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/umami-view.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

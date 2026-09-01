@@ -1,0 +1,1266 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silvertuanzi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="大部分都是无用的折腾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搞python环境杂七杂八那些事">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/10/01/python-envs/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="大部分都是无用的折腾">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/py-default1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/py-options1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/py-default2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/py-options2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/py-launcher.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/pyplus.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/tag.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/main.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/vsbuild.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/vsbuildarm.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/dotnet.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/no-o.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/with-o.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/python-envs/download.png">
+<meta property="article:published_time" content="2025-10-01T02:03:00.000Z">
+<meta property="article:modified_time" content="2026-06-10T07:25:24.000Z">
+<meta property="article:author" content="silvertuanzi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/python-envs/py-default1.png">
+  
+  
+  
+  <title>搞python环境杂七杂八那些事 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":"https://silvertuanzi-umami.netlify.app/script.js","website_id":"8696ff80-db66-47ae-8f97-dce9da61066b","domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":"3ay5n/D+qZfExizE1VsC63yZVb1BLb5c2fX8frr4eIbjf45uO6BWxM3sPDbztIyAbm9qSesnugRb7M7yhNuHt8WNleaVmKaSp17eECt31fAnRKYruDD+tRoDuNMSlgQSfhtTfw6tX7ELMt8Q6nazsg5qudrPgmusxyWux9HeeaAip1BRl6nP1Ruf19XNCJVXpTgb/x/hLIpVbHhEu5Rfp4Ry1hs5zddYV6+2hd7zvBnljm6m9ouSpAhn6Ewfx3IVCduBPH6cvQvwlhcjvFrm7TMsZ+ngOeHiJmJSzaJLuUwF8ARfRFU8deilRIUvdKgt5OcrGmHC3Vh2cnEXnpYmS/XXRVjiEcRcpkL3joRJf66O5UqAqKGjGjLbIO8rVE5X3bgs","api_server":"https://silvertuanzi-umami.netlify.app"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        let umami = document.createElement('script');
+        umami.async = true;
+        umami.src = "https://silvertuanzi-umami.netlify.app/script.js";
+        umami.setAttribute("data-website-id", "8696ff80-db66-47ae-8f97-dce9da61066b");
+        umami.setAttribute("data-domains", "");
+        document.head.appendChild(umami);
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tools/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>工具</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="搞python环境杂七杂八那些事"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-01 10:03" pubdate>
+          2025年10月1日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          27k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          225 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="umami-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="umami-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">搞python环境杂七杂八那些事</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年6月10日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="多版本python环境管理"><a href="#多版本python环境管理" class="headerlink" title="多版本python环境管理"></a>多版本python环境管理</h1><div class="note note-secondary">
+            <p>可能是本篇唯一有点用的一章</p> 
+          </div>
+
+<h2 id="纯官方方法"><a href="#纯官方方法" class="headerlink" title="纯官方方法"></a>纯官方方法</h2><div class="note note-info">
+            <p>无法做到python版本号第三位(micro version)的不同版本共存（例如3.10.6和3.10.11共存）。不过这似乎也没有实用价值，一般前两位符合需求就没问题。</p> 
+          </div>
+
+<h3 id="Windows-py-launcher-py-exe"><a href="#Windows-py-launcher-py-exe" class="headerlink" title="Windows: py launcher(py.exe)"></a>Windows: py launcher(py.exe)</h3><p>Windows下，如果同时安装多个版本的python，则添加进PATH的只能有<strong>最多一个</strong>，添加多个的话，<code>python</code>命令只会调用PATH中位置靠前的那个。<br>为了便于在命令行下管理多版本，python官方默认安装了py launcher，并且用管理员权限安装到全局目录；也可以在自定义安装选项中选择：</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/python-envs/py-default1.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/python-envs/py-options1.png" srcset="/img/loading.gif" lazyload></div></div></div>
+<p>已经安装过py launcher之后，再安装第二版本的python选项就不可用了：</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/python-envs/py-default2.png" srcset="/img/loading.gif" lazyload></div><div class="group-image-wrap"><img src="/img/python-envs/py-options2.png" srcset="/img/loading.gif" lazyload></div></div></div>
+<p>使用例：<br><img src="/img/python-envs/py-launcher.png" srcset="/img/loading.gif" lazyload><br><code>py -X.Y</code>等价于直接使用相应的<code>python.exe</code>，所以诸如<code>py -X.Y -m pip install foo</code>或者<code>py -X.Y -m venv venv</code>这样的命令都是合法的操作。</p>
+<h3 id="Linux-直接共存"><a href="#Linux-直接共存" class="headerlink" title="Linux: 直接共存"></a>Linux: 直接共存</h3><p>Linux下是可以非常方便地直接同时安装多版本的python的。</p>
+<ol>
+<li><p>ubuntu<br> 直接添加ppa源即可：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> add-apt-repository ppa:deadsnakes/ppa<br><span class="hljs-built_in">sudo</span> apt update<br></code></pre></td></tr></table></figure>
+<p> 需要注意的是这个ppa源按照debian系拆包的习惯，把每个版本的python都拆分成了多个小包，类似于：</p>
+<blockquote>
+<p><strong>Built packages</strong><br> <strong>idle-python3.11</strong> IDE for Python (v3.11) using Tkinter<br> <strong>libpython3.11</strong> Shared Python runtime library (version 3.11)<br> <strong>libpython3.11-dbg</strong> Debug Build of the Python Interpreter (version 3.11)<br> <strong>libpython3.11-dev</strong> Header files and a static library for Python (v3.11)<br> <strong>libpython3.11-minimal</strong> Minimal subset of the Python language (version 3.11)<br> <strong>libpython3.11-stdlib</strong> Interactive high-level object-oriented language (standard library, version 3.11)<br> <strong>libpython3.11-testsuite</strong> Testsuite for the Python standard library (v3.11)<br> <strong>python3.11</strong> Interactive high-level object-oriented language (version 3.11)<br> <strong>python3.11-dbg</strong> Debug Build of the Python Interpreter (version 3.11)<br> <strong>python3.11-dev</strong> Header files and a static library for Python (v3.11)<br> <strong>python3.11-distutils</strong> distutils package for Python (version 3.11)<br> <strong>python3.11-examples</strong> Examples for the Python language (v3.11)<br> <strong>python3.11-full</strong> Python Interpreter with complete class library (version 3.11)<br> <strong>python3.11-gdbm</strong> GNU dbm database support for Python (version 3.11)<br> <strong>python3.11-gdbm-dbg</strong> GNU dbm database support for Python (version 3.11 debug extension)<br> <strong>python3.11-lib2to3</strong> lib2to3 package for Python (version 3.11)<br> <strong>python3.11-minimal</strong> Minimal subset of the Python language (version 3.11)<br> <strong>python3.11-tk</strong> Tkinter - Writing Tk applications with Python (version 3.11)<br> <strong>python3.11-tk-dbg</strong> Tkinter - Writing Tk applications with Python (version 3.11 debug extension)<br> <strong>python3.11-venv</strong> Interactive high-level object-oriented language (pyvenv binary, version 3.11)</p>
+</blockquote>
+<p> 按需取用，如果图省事就直接安装<code>python3.*-full</code></p>
+ <div class="note note-secondary">
+            <p>Debian不支持ppa，不过把ppa源的deb包倒腾过来用也不是不行…吧？</p> 
+          </div></li>
+<li><p>Arch系<br> AUR都有，用喜欢的AUR助手直接装就行；不过AUR的本质也是拉取python源码然后按照预设选项全自动编译，感觉上还没有手动编译好…</p>
+</li>
+<li><p>Linux通用法<br> 根据<a target="_blank" rel="noopener" href="https://github.com/python/cpython">官方github</a>的方法直接编译就行，调整下<code>--prefix</code>的位置以便管理，然后最后使用<code>make altinstall</code>安装即可。<br> 后面会有大量篇幅碎碎念编译<del>（或者说这篇就是为折腾编译cpython这盘醋包的饺子）</del></p>
+</li>
+</ol>
+<p>共存安装后，直接使用对应的可执行文件调用即可。<br>例如<code>python3</code>调用系统自带python，<code>python3.11</code>调用安装的3.11，<code>pip3.12</code>调用安装的3.12版本的<code>pip</code></p>
+<h2 id="第三方工具uv"><a href="#第三方工具uv" class="headerlink" title="第三方工具uv"></a>第三方工具uv</h2><div class="note note-info">
+            <p>不喜欢conda系(anaconda&#x2F;miniconda&#x2F;micromamba)</p> <ol> <li>虽然conda系支持安装非python软件包（比如可以通过<code>conda install</code>安装<code>cmake</code>甚至是<code>nvcc</code>）但是咱不需要；这些工具用官方方案感觉更稳。</li> <li>虽然conda系支持细分到小版本的python版本管理（比如可以同时管理<code>3.10.11</code>和<code>3.10.6</code>），但是同个<code>3.X</code>内的包是兼容的，对于咱普通使用者来说不需要这么细。</li> <li>conda环境管理，如果使用<code>conda create -n &lt;name&gt;</code>就只能强制塞在c盘，如果用<code>-p</code>指定路径，则<code>conda activate</code>之后，终端开头会把完整的绝对路径前缀上去，又臭又长观感极差。</li> <li>conda不认自行安装的python，常用的大部分工具都来自conda-forge的重打包，心理上用起来不如第一方包舒适。</li> <li>conda环境只能通过conda命令激活，与很多开源项目启动脚本默认的<code>venv</code>方法不兼容。</li> <li>conda环境需要专门通过conda prompt终端进入，麻烦。</li> </ol> 
+          </div>
+<p><code>uv</code>并不能算是conda的替代品，只是它也提供了管理多版本python环境的功能。<br>uv的全部功能参见<a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/getting-started/features/">uv文档</a>，官方支持的所有安装方式参见<a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/getting-started/installation/">文档</a><br>uv的文档另有<a target="_blank" rel="noopener" href="https://uv.doczh.com/">中译</a>，但任何时候不建议过多依赖非官方中译文档。<br>简单列举下咱常用的功能：</p>
+<h3 id="安装和更新"><a href="#安装和更新" class="headerlink" title="安装和更新"></a>安装和更新</h3><p>Windows推荐使用<code>winget</code>，在cmd和powershell下均可用：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">winget install astral-sh.uv<br></code></pre></td></tr></table></figure>
+<p>更新：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">winget upgrade astral-sh.uv<br></code></pre></td></tr></table></figure>
+
+<p>Arch Linux直接从官方软件源装还能吃到镜像加速就是爽：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S uv<br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>另有额外的<code>python-uv</code>包，安装后可以在python脚本中<code>import uv</code>使用，效果等同于在python环境中<code>pip install uv</code></p> 
+          </div>
+
+<p>其它Linux如果软件源中没有（例如ubuntu），则建议使用官方安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -LsSf https://astral.sh/uv/install.sh | sh<br></code></pre></td></tr></table></figure>
+<p>更新：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv self upgrade<br></code></pre></td></tr></table></figure>
+<p>有时会遇到github api限制，要求提供token的问题。建议配合<a target="_blank" rel="noopener" href="https://cli.github.com/">github-cli</a>，安装并登录后使用<code>gh auth token</code>获取token。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>管理python环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv python list<br></code></pre></td></tr></table></figure>
+ 输出所有可用的python版本（本地+远程），其中本地python只在PATH中搜索，Windows下如果PATH中搜索到py launcher(py.exe)，则还检测py launcher能检测到的python <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv python install X.Y<br></code></pre></td></tr></table></figure>
+ 从远程源拉取最简python环境。安装的远程源来自<a target="_blank" rel="noopener" href="https://github.com/astral-sh/python-build-standalone">github</a>。<br> 选择的文件是<code>cpython-*-install_only_stripped.tar.gz</code> <div class="note note-info">
+            <p>似乎不区分过于具体的指令集。在Linux上只使用x86_64版本，即使该平台支持x86_64_v2(SSE4)&#x2F;v3(AVX2)&#x2F;v4(AVX512)</p> 
+          </div>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv venv &lt;name&gt; -p X.Y<br></code></pre></td></tr></table></figure>
+ 使用指定的X.Y版本python创建虚拟环境。如果省略name，则目录名为<code>.venv</code> <div class="note note-info">
+            <p><code>uv</code>创建的虚拟环境里面不包含任何初始包(即使是<code>pip</code>,<code>setuptools</code>和<code>wheel</code>)。<br>使用<code>UV_VENV_SEED=true</code>环境变量可以覆盖这个行为（在3.12以上的版本中只会包含<code>pip</code>）。等价于使用<code>uv venv &lt;name&gt; --seed &lt;other options&gt;</code>。</p> 
+          </div></li>
+<li>管理pip包 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv pip install foo<br></code></pre></td></tr></table></figure>
+ 用<code>uv</code>安装pip包<code>foo</code>。接受<code>-i/--index-url</code>（uv推荐使用<code>--default-index</code>代替）和<code>--extra-index-url</code>（uv推荐使用<code>--index</code>代替），但是对<code>-f/--find-links</code>的兼容<em>似乎</em>不好。<br> uv支持设置环境变量<code>UV_DEFAULT_INDEX</code>,<code>UV_INDEX</code>和<code>UV_FIND_LINKS</code> <div class="note note-info">
+            <p>uv默认状态下，会使用硬链接(hardlink)管理缓存，即：<br>uv会把whl包的内容直接在缓存目录里面展开，然后如果目标环境和uv cache目录位于同一硬盘分区，则会直接把包内容hardlink到环境里面。如果不在同一分区则会回退到copy模式。<br>这意味着在多个不同虚拟环境下安装同一个whl包的话，实际上每个环境里的包都和缓存包互为hardlink，只占一份空间。<br>如果想要使用更激进的省空间方案，可以使用symlink模式，该模式下，所有包本体会被置于缓存目录，venv中的包均为指向缓存的symlink。<br>uv不推荐此模式，因为<code>uv cache clean</code>会破坏所有安装。<br>管理方式为设置<code>UV_LINK_MODE</code>环境变量，或者在<code>pip install</code>时使用<code>--link-mode</code>参数。<br>完整的原文在下面附上。<br>碎碎念：Linux上使用具有copy-on-write功能的文件系统感觉也可以试试clone模式？（btrfs,xfs等等）</p> 
+          </div>
+ 
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-8e159bd8" role="button" aria-expanded="false" aria-controls="collapse-8e159bd8">
+        <div class="fold-arrow">▶</div>uv_link_mode
+      </div>
+      <div class="fold-collapse collapse" id="collapse-8e159bd8">
+        <div class="fold-content">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs help">--link-mode &lt;LINK_MODE&gt;<br>The method to use when installing packages from the global cache.<br><br>Defaults to `clone` (also known as Copy-on-Write) on macOS, and `hardlink` on<br>Linux and Windows.<br><br>WARNING: The use of symlink link mode is discouraged, as they create tight<br>coupling between the cache and the target environment. For example, clearing the<br>cache (`uv cache clean`) will break all installed packages by way of removing the<br>underlying source files. Use symlinks with caution.<br><br>Possible values:<br>- clone:    Clone (i.e., copy-on-write) packages from the wheel into the<br>  `site-packages` directory<br>- copy:     Copy packages from the wheel into the `site-packages` directory<br>- hardlink: Hard link packages from the wheel into the `site-packages` directory<br>- symlink:  Symbolically link packages from the wheel into the `site-packages`<br>  directory<br><br>[env: UV_LINK_MODE=]<br><br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+ <div class="note note-warning">
+            <p>uv默认状态下会拒绝在系统全局环境下装包。如果venv未激活，uv会试图在当前目录查找名为<code>.venv</code>的虚拟环境，如果未找到则会返回报错。<br>使用<code>--system</code>参数或者<code>UV_SYSTEM_PYTHON</code>环境变量覆盖这一行为。</p> 
+          </div>
+ <div class="note note-info">
+            <p>使用uv安装pytorch的时候，可以使用<code>--torch-backend</code>或者<code>UV_TORCH_BACKEND=</code>指定安装的torch后端（例如，<code>cpu/cu128/rocm6.3/xpu</code>，也可以设定为<code>auto</code>让uv根据驱动自主选择）。<br>指定后uv将完全忽略所有设定的index，而是使用<a target="_blank" rel="noopener" href="https://download.pytorch.org/whl">torch源</a>，因此如果想使用torch镜像（目前仍在同步的有<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/pytorch-wheels/">阿里源(findlinks)</a>&#x2F;<a target="_blank" rel="noopener" href="https://mirrors.nju.edu.cn/pytorch/whl/">南京大学源(index)</a>）的话就不能使用这个参数。</p> 
+          </div></li>
+</ol>
+<p>理论而言，使用uv管理环境可以覆盖几乎全部的需求，但是还有两个小缺憾：<br>首先是使用<code>uv python install</code>安装的python不方便往全局环境塞包，有时想使用<code>--system-site-packages</code>节约空间的方法就不可行了；<br>在这个前提下，python官方又不为安全更新阶段之后的版本发安装包，想追个小版本最新都追不了。<br>再加上看这种怪一点的版本号咱有种奇妙的舒适感：<br><img src="/img/python-envs/pyplus.png" srcset="/img/loading.gif" lazyload><br>于是，折腾python源码编译就提上了日程…</p>
+<h1 id="编译cpython源码的那些事"><a href="#编译cpython源码的那些事" class="headerlink" title="编译cpython源码的那些事"></a>编译cpython源码的那些事</h1><h2 id="获取源码"><a href="#获取源码" class="headerlink" title="获取源码"></a>获取源码</h2><h3 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h3><p><a target="_blank" rel="noopener" href="https://www.python.org/downloads/">python官网</a>每个版本的发布都可以在<a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/">这里</a>快捷地找到。<br>除了官网之外，也有镜像源可以使用：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/python-release/">阿里源</a>&#x2F;<a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/python/">华为源</a>&#x2F;<a target="_blank" rel="noopener" href="https://registry.npmmirror.com/binary.html?path=python/">CNPM源</a>&#x2F;<a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/python/">中科大源</a><br>按照官方的发布规则，bugfix阶段的既提供源码包，也提供Windows&#x2F;MacOS的安装包；security阶段的仅提供源码包。<code>.tgz</code>和<code>.tar.xz</code>两种格式的源码内容完全相同，仅压缩格式不同。</p>
+<h3 id="git源码"><a href="#git源码" class="headerlink" title="git源码"></a>git源码</h3><p><a target="_blank" rel="noopener" href="https://github.com/python/cpython">cpython的官方仓库</a>可以获取到任何版本以及还未加入正式发布的源码。<br>整个仓库很大，因此建议有选择性的clone，或者使用<code>--filter=blob:none</code>甚至是<code>--filter=tree:0</code><br>比如如果想要获取3.11版本的最新代码：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">git</span> clone https://github.com/python/cpython.git -b <span class="hljs-number">3</span>.<span class="hljs-number">11</span> --depth <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p>其它需求同样，灵活使用<code>--single-branch</code> <code>--shallow-since</code>和<code>--shallow-exclude</code>等参数。<br>其中<code>--shallow since</code>接受格式为<code>YYYY-MM-DD</code>的日期，只保留该日之后（不含当日）；</p>
+<div class="note note-info">
+            <p>可以进一步指定时分秒，例如<code>--shallow-since 2025-07-21-12-09-00</code>，但是意义不大，github上面又不方便看具体的提交时间。</p> 
+          </div>
+<p><code>--shallow-exclude</code>接受tag作为参数，仅保留该tag之后的提交（不包含该tag）。</p>
+<div class="note note-info">
+            <p>官方发布的安装包，版本信息是这样的：<br><img src="/img/python-envs/tag.png" srcset="/img/loading.gif" lazyload><br>但是用发布的源码包编译的版本信息是这样的：<br><img src="/img/python-envs/main.png" srcset="/img/loading.gif" lazyload><br>因此可以判断官方发布的包采用了从git仓库使用<code>git checkout &lt;tag&gt;</code>的源码编译。</p> 
+          </div>
+
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="准备编译环境"><a href="#准备编译环境" class="headerlink" title="准备编译环境"></a>准备编译环境</h3><ol>
+<li>需要安装<a target="_blank" rel="noopener" href="https://git-scm.com/downloads/win">git-for-windows</a>，用于自动拉取编译必需的一些其它依赖；有镜像源（<a target="_blank" rel="noopener" href="https://registry.npmmirror.com/binary.html?path=git-for-windows">CNPM</a>&#x2F;<a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/git-for-windows/">华为源</a>）可用。</li>
+<li>需要<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/downloads/">Visual Studio或者Visual Studio Build Tools</a>。对于最简安装，下拉到“所有下载”，然后下载“Visual Studio 生成工具”即可。<br> 安装的时候只需要选择这些项即可：<br> 首先选择使用C++的桌面开发，保留核心的生成工具和Windows SDK即可（Windows SDK测试过为必需）：<br> <img src="/img/python-envs/vsbuild.png" srcset="/img/loading.gif" lazyload><br> 然后对于python3.11及以上，前往单个组件页面，搜索ARM64，安装ARM64生成工具（必需，按官方说法是wix3.14以上强制要求）：<br> <img src="/img/python-envs/vsbuildarm.png" srcset="/img/loading.gif" lazyload> <div class="note note-info">
+            <p>ARM64工具选择能找到的最新版本，以与x86&#x2F;x64版本匹配。</p> 
+          </div></li>
+<li>Windows功能：对于3.10及以下，需要启用.NET Framework 3.5（新系统默认不启用）；对于3.11及以上，需要启用.NET Framework 4.8（新系统默认启用无需修改）：<br> <img src="/img/python-envs/dotnet.png" srcset="/img/loading.gif" lazyload></li>
+<li>可选：需要有一个已有的python安装；如果编译python3.12安装包，需要3.11及以上。如果系统没有安装，则后续会使用nuget拉取一个python环境；但是需要注意，如果有python但是当前激活的环境版本过低会编译失败。</li>
+</ol>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>获取源码后，建一个虚拟环境（以3.11为例）并激活，进入<code>Tools/msi</code>目录（两步不分先后，虚拟环境建在哪都一样）。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmd">py -<span class="hljs-number">3</span>.<span class="hljs-number">11</span> venv venv<br>venv\Scripts\activate<br><span class="hljs-built_in">cd</span> Tools\msi<br></code></pre></td></tr></table></figure>
+<p>然后直接执行<code>buildrelease.bat</code>即可，需要使用的参数列在下面：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs llvm">-D: 跳过帮助文档构建。如果没有已构建的帮助文档，会报错；<br>-B: 跳过已经编译的内容。如果不是第一次执行buildrelease.bat可以加上这个；<br>-o &lt;dir&gt;: 指定编译的输出路径。-o输出的目录结构与原始编译产物的目录结构不同，-o输出的更便于整理，推荐使用；<br>-<span class="hljs-keyword">x</span><span class="hljs-number">64</span>: 仅编译<span class="hljs-keyword">x</span><span class="hljs-number">64</span>；也可以指定针对<span class="hljs-keyword">x</span><span class="hljs-number">86</span>或者ARM<span class="hljs-number">64</span>编译；如果不显式指明，默认同时编译<span class="hljs-keyword">x</span><span class="hljs-number">86</span>和<span class="hljs-keyword">x</span><span class="hljs-number">64</span>的安装包。<br></code></pre></td></tr></table></figure>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-d8532be7" role="button" aria-expanded="false" aria-controls="collapse-d8532be7">
+        <div class="fold-arrow">▶</div>buildrelease.bat的工作流程
+      </div>
+      <div class="fold-collapse collapse" id="collapse-d8532be7">
+        <div class="fold-content">
+          <ol> <li>准备编译帮助文档的依赖：<br> 一部分需要从github拉取；<br> 另一部分为python依赖，这部分首先会检查当前是否有可用的python环境，如果没有就用nuget获取一个；如果有，就用pip获取必需工具<code>sphinx</code>。<br> pip获取的依赖按照<code>Doc/requirements.txt</code>指定。</li> <li>编译帮助文档；</li> <li>从github拉取编译安装包的依赖；</li> <li>编译安装包本体；</li> <li>如果指定了<code>-o</code>参数，编译完成后将编译产物<strong>复制</strong>到指定目录。<br>其中所有从github获取的依赖均会位于<code>externals</code>目录内。</li> </ol> 
+        </div>
+      </div>
+    </div>
+<div class="note note-info">
+            <p>2026年3月14日更新：如果遇到这样的报错：</p> <blockquote> <p>C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(473,5): error MSB8020: 无法找到 Visual Studio 2015 的生成工具(平台工具集 &#x3D;“v140”)。若要使用 v140 生成工具进行生成，请安装 Visual Studio 2015 生成工具。或者，可以升级到当前 Visual Studio 工具，方式是通过选择“项目”菜单或右键单击该解决方案，然后选择“重定解决方案目标”。 [C:\Users\pc\Desktop\MyFile\python\src\Python-3.10.20\PCbuild\pythoncore.vcxproj]</p> </blockquote> <p>说明<code>buildrelease.bat</code>没有正确获取到安装的vs工具集版本。用环境变量强制指定：</p> <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd"><span class="hljs-built_in">set</span> PlatformToolset=v143<br></code></pre></td></tr></table></figure> <p>对于vs2022通常是v143, 对于vs2026通常是v145。<br>如果不确定实际安装的版本，可以打开vs安装目录里面的<code>VC\Auxiliary\Build</code>路径，根据文件名大致判断。<br>有的时候，vs会提供两套工具集（例如2026年5月的vs build tools 2026里面就放了一份v143兼容工具集，且通过阅读配置<code>Microsoft.VCToolsVersion.v143.default.props</code>可知实际上对应的是vs2022 lts）。<br>如果使用v145, 会收到警告：<code>warning : Toolset v145 is not used for official builds. Your build may have errors or incompatibilities.</code><br>实际上，官方提供的python3.14安装包仍然是基于v143编译的，通过启动显示的版本号<code>[MSC v.1944 64 bit (AMD64)]</code>可知。相应的，使用v145会得到<code>[MSC v.1951 64 bit (AMD64)]</code>。<br><del>但是都自己编译源码了，工具链不冲最新怎么行</del></p> 
+          </div>
+
+<h4 id="编译产物整理"><a href="#编译产物整理" class="headerlink" title="编译产物整理"></a>编译产物整理</h4><p>如果未指定<code>-o</code>目录，前往<code>PCBuild</code>目录，x64的位于<code>amd64/en-us</code>目录内。<br>目录结构应该是这样：<br><img src="/img/python-envs/no-o.png" srcset="/img/loading.gif" lazyload><br>如果指定了<code>-o</code>目录，前往对应目录，x64的位于<code>amd64</code>目录内。<br>目录结构应该是这样：<br><img src="/img/python-envs/with-o.png" srcset="/img/loading.gif" lazyload><br>其中：</p>
+<ol>
+<li><code>*-amd64.exe</code>是完整安装包，可以单独完成默认安装；</li>
+<li><code>*-embeded-amd64.zip</code>等效于官网的<code>Windows embeddable package (64-bit)</code>；</li>
+<li>其它的所有msi安装包，可以留作备用。当需要使用到自定义安装中，描述中带有”Download”选项的，会用到这其中的<em>一部分</em>msi文件，需要用到这些msi的时候，放在和exe同一个目录内即可，exe自己会调用；不需要手动运行这些msi.<br> 可以在命令行中，执行<code>*-amd64.exe /layout &lt;output dir&gt;</code>获取所有必需msi，其它的就不用保留了。对于官网下载的安装包也可以使用这种方式获取离线安装包。</li>
+<li>python3.10的输出还会有一个<code>*webinstall.exe</code>，也是调用这些msi，但是没必要留下，直接留完整安装包就行<br><img src="/img/python-envs/download.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<p>咱编译过的安装包已经全部上传到<a target="_blank" rel="noopener" href="https://huggingface.co/silvertuanzi/python-windows-build/tree/main">huggingface</a>上留档。</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="依赖准备"><a href="#依赖准备" class="headerlink" title="依赖准备"></a>依赖准备</h3><p>由于个人喜好，不记录rpm系(<code>yum/dnf</code>)的必需依赖。<br>信息存在部分冲突，所以分信息来源收录。</p>
+<div class="note note-warning">
+            <p>特别注意：如果需要使用tcl&#x2F;tk（<code>import tkinter</code>），必须在编译之前准备好必需的头文件，例如apt系的<code>tk-dev</code>, pacman系的<code>tk</code>。<br>否则，当需要tkinter功能的时候，需要重新编译，仅仅补充依赖是不够的。</p> 
+          </div>
+
+<h4 id="apt系"><a href="#apt系" class="headerlink" title="apt系"></a>apt系</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://devguide.python.org/getting-started/setup-building/#build-dependencies">python官方编译文档</a><br> 首先需要启用源码仓库：Ubuntu等有软件源管理GUI的，直接开启即可；Debian没有GUI管理，需要编辑<code>/etc/apt/source.list</code>(旧格式)或者<code>/etc/apt/sources.list.d/debian.sources</code>(新DEB822格式)，将<code>deb-src</code>源取消注释（有的版本默认已经启用）。<br> 然后执行： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br>apt build-dep python3<br>apt install pkg-config<br></code></pre></td></tr></table></figure>
+ 执行过<code>apt build-dep</code>之后源码仓库即不再需要，可以关回去而不影响使用；以上为必需依赖。<br> 如果需要编译完整功能，则： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install build-essential gdb lcov pkg-config \<br>     libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \<br>     libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev \<br>     lzma lzma-dev tk-dev uuid-dev zlib1g-dev libmpdec-dev libzstd-dev \<br>     inetutils-inetd<br></code></pre></td></tr></table></figure>
+ <div class="note note-info">
+            <ol> <li>Debian12和Ubuntu24.04因为未知原因，仓库中不包含<code>libmpdec-dev</code>。可以不安装，自动调用python内置的版本；<br> 或者，可以调用<a target="_blank" rel="noopener" href="https://launchpad.net/~ondrej/+archive/ubuntu/php">Ubuntu ppa源</a>以及<a target="_blank" rel="noopener" href="https://packages.sury.org/php/">Debian DPA源</a>，参见<a target="_blank" rel="noopener" href="https://deb.sury.org/">https://deb.sury.org/</a><br> Ubuntu添加方式：<code>add-apt-repository ppa:ondrej/php</code><br> <a target="_blank" rel="noopener" href="https://packages.sury.org/php/README.txt">Debian添加方式参看仓库readme</a><br> Debian13(trixie)和Debian unstable(sid)恢复了这个包，因此正常安装即可。<br> 有关这个问题的所有讨论可以从<a target="_blank" rel="noopener" href="https://github.com/python/cpython/issues/119114">这里</a>开始了解，内部的其它链接也可以进一步拓展信息来源。<br> <strong>按照cpython开发计划，对内置mpdecimal的支持将在python3.16终止。尽量使用系统提供的全局mpdecimal。</strong></li> <li><code>libzstd-dev</code>和<code>inetutils-inetd</code>貌似是在python3.14新引入的。</li> </ol> 
+          </div></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/main/.github/workflows/posix-deps-apt.sh">cpython官方github action工作流</a> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get update<br><br>apt-get -yq install \<br>	build-essential \<br>	pkg-config \<br>	ccache \<br>	cmake \<br>	gdb \<br>	lcov \<br>	libb2-dev \<br>	libbz2-dev \<br>	libffi-dev \<br>	libgdbm-dev \<br>	libgdbm-compat-dev \<br>	liblzma-dev \<br>	libncurses5-dev \<br>	libreadline6-dev \<br>	libsqlite3-dev \<br>	libssl-dev \<br>	libzstd-dev \<br>	lzma \<br>	lzma-dev \<br>	strace \<br>	tk-dev \<br>	uuid-dev \<br>	xvfb \<br>	zlib1g-dev<br><br><span class="hljs-comment"># Workaround missing libmpdec-dev on ubuntu 24.04:</span><br><span class="hljs-comment"># https://launchpad.net/~ondrej/+archive/ubuntu/php</span><br><span class="hljs-comment"># https://deb.sury.org/</span><br><span class="hljs-built_in">sudo</span> add-apt-repository ppa:ondrej/php<br>apt-get update<br>apt-get -yq install libmpdec-dev<br></code></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment">pyenv文档的建议</a> <div class="note note-info">
+            <p>pyenv提供了一套管理多版本python共存的方案，但是是通过一键式拉取源码编译的方式完成的，所以感觉不如手动编译可控性强。</p> 
+          </div>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br>apt install make build-essential libssl-dev zlib1g-dev \<br>libbz2-dev libreadline-dev libsqlite3-dev curl git \<br>libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev<br></code></pre></td></tr></table></figure>
+ 对于python3.14及以上，额外安装<code>libzstd-dev</code>编译<code>compress.zstd</code>模块。但是ubuntu20.04及更旧的系统版本不具有足够版本。<br> <a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv/wiki/Common-build-problems">可选建议，不在推荐集合中，通常只有在有特殊需求或其中存在问题的情况下才应考虑使用：</a> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install libedit-dev <span class="hljs-comment">#libreadline-dev的替代品</span><br>apt install libncurses5-dev <span class="hljs-comment">#libncursesw5更差的替代品</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="pacman系"><a href="#pacman系" class="headerlink" title="pacman系"></a>pacman系</h4><p>Arch可以参照的文档就没那么多，主打一个自己找吃的：</p>
+<ol>
+<li>从<a target="_blank" rel="noopener" href="https://devguide.python.org/getting-started/setup-building/#build-dependencies">python官方编译文档</a>的deb包转写： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S base-devel <span class="hljs-comment">#必需，不会有Arch人没装这个吧</span><br>pacman -S gdb lcov bzip2 libffi gdbm xz ncurses readline sqlite openssl tk utils-linux-lib zlib mpdecimal zstd inetutils --needed<br></code></pre></td></tr></table></figure>
+ 其中<code>zstd</code>和<code>inetutils</code>貌似是在python3.14新引入的。</li>
+<li>从<a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/main/.github/workflows/posix-deps-apt.sh">cpython官方github action工作流</a>的deb包转写： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed base-devel ccache cmake gdb lcov libb2 bzip2 libffi gdbm xz ncurses readline sqlite openssl zstd strace tk utils-linux-lib xorg-server-xvfb zlib mpdecimal<br></code></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment">pyenv文档的建议</a> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed base-devel openssl zlib xz tk zstd<br></code></pre></td></tr></table></figure>
+ <a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv/wiki/Common-build-problems">可选建议，不在推荐集合中，通常只有在有特殊需求或其中存在问题的情况下才应考虑使用：</a><br> 如果需要旧版本ncurses(<code>ncurses5</code>)，需要通过AUR安装<code>ncurses5-compat-libs</code>。archlinuxcn源和arch4edu源都提供了该包。</li>
+<li>原先的官方编译脚本（AUR的就不搬了）：<ul>
+<li><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/packaging/packages/python/-/blob/3.10.10-1/PKGBUILD?ref_type=tags">python3.10.10-1</a>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed bzip2 expat gdbm libffi libnsl libxcrypt openssl zlib <span class="hljs-comment">#depends</span><br>pacman -S --needed tk sqlite bluez-libs mpdecimal llvm gdb xorg-server-xvfb ttf-font <span class="hljs-comment">#makedepends</span><br></code></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/packaging/packages/python/-/blob/3.11.8-1/.SRCINFO?ref_type=tags">python3.11.8-1</a>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed bzip2 expat gdbm libffi libnsl libxcrypt openssl zlib tzdata <span class="hljs-comment">#depends</span><br>pacman -S --needed tk sqlite bluez-libs mpdecimal llvm gdb xorg-server-xvfb ttf-font <span class="hljs-comment">#makedepends</span><br></code></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/packaging/packages/python/-/blob/3.12.7-1/.SRCINFO?ref_type=tags">python3.12.7-1</a>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed bzip2 expat gdbm libffi libnsl libxcrypt openssl zlib tzdata mpdecimal <span class="hljs-comment">#depends</span><br>pacman -S --needed tk sqlite bluez-libs llvm gdb xorg-server-xvfb ttf-font <span class="hljs-comment">#makedepends</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="土法编译"><a href="#土法编译" class="headerlink" title="土法编译"></a>土法编译</h3><p>依赖和源码准备好之后，进入源码根目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure &lt;编译参数&gt;<br></code></pre></td></tr></table></figure>
+<p>编译参数这里，通常来说会需要这些：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crystal">--prefix=<span class="hljs-regexp">/path/to</span><span class="hljs-regexp">/dir: 安装路径，默认是/usr</span><span class="hljs-regexp">/local，也就是把文件分列进/usr</span><span class="hljs-regexp">/local/</span>&#123;bin,<span class="hljs-class"><span class="hljs-keyword">lib</span>,<span class="hljs-title">include</span>,<span class="hljs-title">share</span>&#125;等等；修改<span class="hljs-title">prefix</span>为单独目录会便于卸载。如果想要使用系统包管理打包，就指定为/<span class="hljs-title">usr</span></span><br>--enable-<span class="hljs-symbol">optimizations:</span> 启用pgo优化，并在部分平台自动开启lto优化<br>--<span class="hljs-keyword">with</span>-<span class="hljs-symbol">lto:</span> 强制开启lto优化<br></code></pre></td></tr></table></figure>
+<p>上面这些最好是都用上的；<br>对于手动管理的版本，比较好的选择是<code>--prefix=/opt/python/python3.X</code>或者<code>--prefix=/usr/local/python/python3.X</code><br>Debian12和Ubuntu24.04，如果没补装<code>libmpdec-dev</code>，编译python3.12及以下版本时，保险起见最好显式指定使用python内置的mpdec：<code>--with-system-mpdec=no</code>或者<code>--without-system-libmpdec</code><br>对于其它有系统mpdecimal头文件的，python官方推荐使用系统内置的版本：<code>--with-system-mpdec</code><br>在python3.12及以前，<code>--with-system-libmpdec</code>的默认值均为<code>no</code>；3.13开始，默认值变为<code>yes</code>，并且在未检测到必需文件时自动回退到使用内置版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --enable-optimizations --with-lto --prefix=/opt/python/python3.X<br></code></pre></td></tr></table></figure>
+<p>除此之外，收录部分发行版使用的所有configure参数：</p>
+<div class="note note-info">
+            <p>从distro里面抄参数可能会在configure阶段遇到缺依赖的报错，照着报错补就行。<br>例如Ubuntu24.04遇到</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">checking <span class="hljs-keyword">for</span> dtrace... not found<br>configure: error: dtrace <span class="hljs-built_in">command</span> not found on <span class="hljs-variable">$PATH</span><br></code></pre></td></tr></table></figure> <p>直接输入dtrace检测：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">找不到命令 “dtrace”，但可以通过以下软件包安装它：<br><span class="hljs-built_in">sudo</span> apt install systemtap-sdt-dev<br></code></pre></td></tr></table></figure> <p>补装即可。<br>或者保险起见可以把系统里面默认版本的编译集合全拉下来：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt build-dep python3.12 <span class="hljs-comment">#Ubuntu24.04</span><br>apt build-dep python3.13 <span class="hljs-comment">#Debian13</span><br></code></pre></td></tr></table></figure> <p>至于Arch，从PKGBUILD全抄了完事。</p> 
+          </div>
+<div class="note note-warning">
+            <p><code>--prefix=/usr</code>不要抄！</p> 
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-7c2d22a6" role="button" aria-expanded="false" aria-controls="collapse-7c2d22a6">
+        <div class="fold-arrow">▶</div>Arch
+      </div>
+      <div class="fold-collapse collapse" id="collapse-7c2d22a6">
+        <div class="fold-content">
+          <p><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/packaging/packages/python/-/blob/3.10.10-1/PKGBUILD?ref_type=tags">参考源码-3.10.10</a><br><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/packaging/packages/python/-/blob/3.11.8-1/PKGBUILD?ref_type=tags">参考源码-3.11.8</a><br><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/packaging/packages/python/-/blob/3.12.7-1/PKGBUILD?ref_type=tags">参考源码-3.12.7</a></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Disable bundled pip &amp; setuptools</span><br>./configure --prefix=/usr \<br>            --enable-shared \<br>            --with-computed-gotos \<br>            --enable-optimizations \<br>            --with-lto \<br>            --enable-ipv6 \<br>            --with-system-expat \<br>            --with-dbmliborder=gdbm:ndbm \<br>            --with-system-libmpdec \<br>            --enable-loadable-sqlite-extensions \<br>            --without-ensurepip \<br>            --with-tzpath=/usr/share/zoneinfo<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-03e0d628" role="button" aria-expanded="false" aria-controls="collapse-03e0d628">
+        <div class="fold-arrow">▶</div>Debian12(bookworm)-3.11.2，源文件巨长，由deepseek解析
+      </div>
+      <div class="fold-collapse collapse" id="collapse-03e0d628">
+        <div class="fold-content">
+          <p><a target="_blank" rel="noopener" href="https://sources.debian.org/src/python3.11/3.11.2-6%2Bdeb12u6/debian/rules">参考源码</a></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure \<br>  --prefix=/usr \<br>  --libdir=/usr/lib/x86_64-linux-gnu \<br>  --enable-ipv6 \<br>  --enable-loadable-sqlite-extensions \<br>  --with-dbmliborder=bdb:gdbm \<br>  --with-computed-gotos \<br>  --without-ensurepip \<br>  --with-system-expat \<br>  --with-system-ffi \<br>  --with-dtrace \<br>  --with-ssl-default-suites=openssl \<br>  --with-wheel-pkg-dir=/usr/share/python-wheels/ \<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-5b0f0617" role="button" aria-expanded="false" aria-controls="collapse-5b0f0617">
+        <div class="fold-arrow">▶</div>Debian13(trixie)-3.13.5，源文件巨长，由deepseek解析
+      </div>
+      <div class="fold-collapse collapse" id="collapse-5b0f0617">
+        <div class="fold-content">
+          <p><a target="_blank" rel="noopener" href="https://sources.debian.org/src/python3.13/3.13.5-2/debian/rules">参考源码</a></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure \<br>  --enable-shared \<br>  --prefix=/usr \<br>  --libdir=/usr/lib/x86_64-linux-gnu \<br>  --enable-ipv6 \<br>  --enable-loadable-sqlite-extensions \<br>  --with-dbmliborder=bdb:gdbm \<br>  --with-computed-gotos \<br>  --without-ensurepip \<br>  --with-system-expat \<br>  --with-dtrace \<br>  --with-ssl-default-suites=openssl \<br>  --with-system-libmpdec=no \<br>  --with-wheel-pkg-dir=/usr/share/python-wheels/ \<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-0c5af8e3" role="button" aria-expanded="false" aria-controls="collapse-0c5af8e3">
+        <div class="fold-arrow">▶</div>Ubuntu22.04(Jammy)-3.10.12，源文件巨长，由GPT-5解析
+      </div>
+      <div class="fold-collapse collapse" id="collapse-0c5af8e3">
+        <div class="fold-content">
+          <p><a href="/img/python-envs/jammy-rules">参考源码</a></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure \<br>  --prefix=/usr \<br>  --libdir=/usr/lib/x86_64-linux-gnu \<br>  --enable-ipv6 \<br>  --enable-loadable-sqlite-extensions \<br>  --with-dbmliborder=bdb:gdbm \<br>  --with-computed-gotos \<br>  --without-ensurepip \<br>  --with-system-expat \<br>  --with-dtrace \<br>  --with-system-libmpdec \<br>  --with-system-ffi \<br>  --with-wheel-pkg-dir=/usr/share/python-wheels/ \<br>  --enable-shared<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-e3197aa5" role="button" aria-expanded="false" aria-controls="collapse-e3197aa5">
+        <div class="fold-arrow">▶</div>Ubuntu24.04(Noble)-3.12.3，源文件巨长，由GPT-5解析
+      </div>
+      <div class="fold-collapse collapse" id="collapse-e3197aa5">
+        <div class="fold-content">
+          <p><a href="/img/python-envs/noble-rules">参考源码</a></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure \<br>  --prefix=/usr \<br>  --libdir=/usr/lib/x86_64-linux-gnu \<br>  --enable-ipv6 \<br>  --enable-loadable-sqlite-extensions \<br>  --with-dbmliborder=bdb:gdbm \<br>  --with-computed-gotos \<br>  --without-ensurepip \<br>  --with-system-expat \<br>  --with-dtrace \<br>  --with-ssl-default-suites=openssl \<br>  --with-wheel-pkg-dir=/usr/share/python-wheels/ \<br>  --enable-shared<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+<p>configure配置完后，执行编译和安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make <span class="hljs-comment">#使用-jx多线程，例如-j9</span><br>make <span class="hljs-built_in">test</span> <span class="hljs-comment">#测试，可选</span><br>make altinstall <span class="hljs-comment">#使用altinstall安装不会创建python3和pip3软链接</span><br></code></pre></td></tr></table></figure>
+<p><code>make test</code>出现一些奇怪的失败非常正常，成因各不相同，可以手动运行<code>./python -m test &lt;test_*&gt;</code>的方式重新测试检查原因，配合llm解读；<br>手动编译非常不建议开启<code>--enable-shared</code>，如果是下文打包的方式开启了<code>--enable-shared</code>，则测试前需要先把当前所在的目录加入<code>LD_LIBRARY_PATH</code>。</p>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><div class="note note-info">
+            <p>对于打包方法的编译参数，考虑使用<code>--without-ensurepip</code>；咱自己是觉得打包一个pip进去更好，但是再次打包的时候，<code>make altinstall</code>执行<code>ensurepip</code>的时候，会检测到系统里面已经安装了相应的pip，从而认为<code>Requirement already satisfied</code>，不再打包一个新的pip进去，因此需要在打包之前先卸载掉上一个版本，或者把<code>/usr/lib/python3.X/site-packages</code>目录用一些特殊的方法（例如<code>mount</code>）屏蔽掉。</p> 
+          </div>
+
+<h4 id="PKGBUILD"><a href="#PKGBUILD" class="headerlink" title="PKGBUILD"></a>PKGBUILD</h4><div class="note note-info">
+            <p>更新：</p> <ol> <li>统一了<code>${srcdir}</code>和<code>${pkgdir}</code>的规范格式，不再使用<code>$srcdir</code>和<code>$pkgdir</code></li> <li>由于<code>ensurepip</code>在系统内已存在pip模块的时候会误判，导致打包漏掉pip，补充了手动补装bundled pip的逻辑；<del>与此同时，打包结束后移除不必要的bundled wheel节省空间</del>更新：删除bundled wheel会导致venv失败，撤销这项改动</li> <li>优化compile pyc逻辑，现在会阻止<code>ensurepip</code>和<code>pip</code>自动生成<code>.pyc</code>，改为手动调用<code>compileall</code>以调整记录的路径，从而消除对<code>${pkgdir}</code>引用的警告</li> <li>优化依赖列表，列出可选依赖，把<code>ccache</code>移出构建依赖，需要<code>ccache</code>自装即可</li> </ol> 
+          </div>
+<p>直接放三份PKGBUILD在这里，都是最简单粗暴的写法：</p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-0e514b77" role="button" aria-expanded="false" aria-controls="collapse-0e514b77">
+        <div class="fold-arrow">▶</div>python310-git
+      </div>
+      <div class="fold-collapse collapse" id="collapse-0e514b77">
+        <div class="fold-content">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Silver Tuanzi</span><br>pkgname=python310-git<br>pkgver=v3.10.18.r13.f610f9e<br>pkgrel=1<br>pkgdesc=<span class="hljs-string">&quot;The Python programming language (version 3.10)&quot;</span><br><span class="hljs-built_in">arch</span>=(<span class="hljs-string">&#x27;x86_64&#x27;</span> <span class="hljs-string">&#x27;aarch64&#x27;</span>)<br>license=(<span class="hljs-string">&quot;PSF-2.0&quot;</span>)<br>url=<span class="hljs-string">&quot;www.python.org&quot;</span><br>depends=(<span class="hljs-string">&#x27;bzip2&#x27;</span> <span class="hljs-string">&#x27;expat&#x27;</span> <span class="hljs-string">&#x27;gdbm&#x27;</span> <span class="hljs-string">&#x27;libffi&#x27;</span> <span class="hljs-string">&#x27;libnsl&#x27;</span> <span class="hljs-string">&#x27;libxcrypt&#x27;</span> <span class="hljs-string">&#x27;openssl&#x27;</span> <span class="hljs-string">&#x27;zlib&#x27;</span> <span class="hljs-string">&#x27;mpdecimal&#x27;</span>)<br>makedepends=(<span class="hljs-string">&#x27;git&#x27;</span> <span class="hljs-string">&#x27;gdb&#x27;</span> <span class="hljs-string">&#x27;xz&#x27;</span> <span class="hljs-string">&#x27;sqlite&#x27;</span> <span class="hljs-string">&#x27;tk&#x27;</span>)<br>optdepends=(<span class="hljs-string">&#x27;sqlite: for a default database integration&#x27;</span><br>            <span class="hljs-string">&#x27;xz: for lzma&#x27;</span><br>            <span class="hljs-string">&#x27;tk: for tkinter&#x27;</span>)<br>provides=(<span class="hljs-string">&#x27;python310&#x27;</span>)<br>conflicts=(<span class="hljs-string">&#x27;python310&#x27;</span>)<br>options=(strip !debug)<br><span class="hljs-built_in">source</span>=(<span class="hljs-string">&#x27;python310::git+https://github.com/python/cpython.git#branch=3.10&#x27;</span>)<br>sha256sums=(<span class="hljs-string">&#x27;SKIP&#x27;</span>)<br><br><span class="hljs-function"><span class="hljs-title">pkgver</span></span>() &#123;<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310&quot;</span><br>	<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s&quot;</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(git describe --long | sed &#x27;s/\([^-]*-\)g/r\1/;s/-/./g&#x27;)</span>&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">build</span></span>() &#123;<br>  <span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310&quot;</span><br>  ./configure --prefix=/usr \<br>              --with-computed-gotos \<br>              --enable-optimizations \<br>              --with-lto \<br>              --enable-ipv6 \<br>              --with-system-expat \<br>              --with-system-ffi \<br>              --with-dbmliborder=gdbm:ndbm \<br>              --with-system-libmpdec \<br>              --enable-loadable-sqlite-extensions \<br>              --enable-shared \<br>              ax_cv_c_float_words_bigendian=no<br>	make<br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">package</span></span>() &#123;<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310&quot;</span><br>	PYTHONDONTWRITEBYTECODE=1 make DESTDIR=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/&quot;</span> altinstall<br>	<span class="hljs-built_in">export</span> PIP_FIND_LINKS=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>&quot;</span>/python310/Lib/ensurepip/_bundled/<br>	<span class="hljs-keyword">if</span> [[ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/python3.10/site-packages/pip&quot;</span> ]]; <span class="hljs-keyword">then</span><br>		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Fix missing pip...&quot;</span><br>		PYTHONDONTWRITEBYTECODE=1 LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310/python&quot;</span> -m pip install --no-index --root=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> --ignore-installed pip<br>		<span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip3&quot;</span><br>	<span class="hljs-keyword">else</span><br>		sed -i <span class="hljs-string">&#x27;1s|^#!/usr/bin/python$|#!/usr/bin/python3.10|&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip3.10&quot;</span><br>	<span class="hljs-keyword">fi</span><br>	<span class="hljs-keyword">if</span> [[ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/python3.10/site-packages/setuptools&quot;</span> ]]; <span class="hljs-keyword">then</span><br>		PYTHONDONTWRITEBYTECODE=1 LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310/python&quot;</span> -m pip install --no-index --root=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> --ignore-installed setuptools<br>	<span class="hljs-keyword">fi</span><br>	<span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/libpython3.so&quot;</span><br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span>/usr/lib/python*/<br>	<span class="hljs-built_in">rm</span> -r <span class="hljs-built_in">test</span> &amp;&amp; <span class="hljs-built_in">rm</span> -r */*<span class="hljs-built_in">test</span>*/<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span><br>	LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python310/python&quot;</span> -m compileall -s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> -p / usr/lib/python3.10/site-packages/<br>&#125;<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-ad9eb357" role="button" aria-expanded="false" aria-controls="collapse-ad9eb357">
+        <div class="fold-arrow">▶</div>python311-git
+      </div>
+      <div class="fold-collapse collapse" id="collapse-ad9eb357">
+        <div class="fold-content">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Silver Tuanzi</span><br>pkgname=python311-git<br>pkgver=v3.11.13.r15.8adac49<br>pkgrel=1<br>pkgdesc=<span class="hljs-string">&quot;The Python programming language (version 3.11)&quot;</span><br><span class="hljs-built_in">arch</span>=(<span class="hljs-string">&#x27;x86_64&#x27;</span> <span class="hljs-string">&#x27;aarch64&#x27;</span>)<br>license=(<span class="hljs-string">&quot;PSF-2.0&quot;</span>)<br>url=<span class="hljs-string">&quot;www.python.org&quot;</span><br>depends=(<span class="hljs-string">&#x27;bzip2&#x27;</span> <span class="hljs-string">&#x27;expat&#x27;</span> <span class="hljs-string">&#x27;gdbm&#x27;</span> <span class="hljs-string">&#x27;libffi&#x27;</span> <span class="hljs-string">&#x27;libnsl&#x27;</span> <span class="hljs-string">&#x27;libxcrypt&#x27;</span> <span class="hljs-string">&#x27;openssl&#x27;</span> <span class="hljs-string">&#x27;zlib&#x27;</span> <span class="hljs-string">&#x27;mpdecimal&#x27;</span>)<br>makedepends=(<span class="hljs-string">&#x27;git&#x27;</span> <span class="hljs-string">&#x27;gdb&#x27;</span> <span class="hljs-string">&#x27;xz&#x27;</span> <span class="hljs-string">&#x27;sqlite&#x27;</span> <span class="hljs-string">&#x27;tk&#x27;</span>)<br>optdepends=(<span class="hljs-string">&#x27;sqlite: for a default database integration&#x27;</span><br>            <span class="hljs-string">&#x27;xz: for lzma&#x27;</span><br>            <span class="hljs-string">&#x27;tk: for tkinter&#x27;</span>)<br>provides=(<span class="hljs-string">&#x27;python311&#x27;</span>)<br>conflicts=(<span class="hljs-string">&#x27;python311&#x27;</span>)<br>options=(strip !debug)<br><span class="hljs-built_in">source</span>=(<span class="hljs-string">&#x27;python311::git+https://github.com/python/cpython.git#branch=3.11&#x27;</span>)<br>sha256sums=(<span class="hljs-string">&#x27;SKIP&#x27;</span>)<br><br><span class="hljs-function"><span class="hljs-title">pkgver</span></span>() &#123;<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311&quot;</span><br>	<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s&quot;</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(git describe --long | sed &#x27;s/\([^-]*-\)g/r\1/;s/-/./g&#x27;)</span>&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">build</span></span>() &#123;<br>  <span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311&quot;</span><br>  ./configure --prefix=/usr \<br>              --with-computed-gotos \<br>              --enable-optimizations \<br>              --with-lto \<br>              --enable-ipv6 \<br>              --with-system-expat \<br>              --with-system-ffi \<br>              --with-dbmliborder=gdbm:ndbm \<br>              --with-system-libmpdec \<br>              --enable-loadable-sqlite-extensions \<br>              --enable-shared \<br>              ax_cv_c_float_words_bigendian=no<br>	make<br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">package</span></span>() &#123;<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311&quot;</span><br>	PYTHONDONTWRITEBYTECODE=1 make DESTDIR=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/&quot;</span> altinstall<br>	<span class="hljs-built_in">export</span> PIP_FIND_LINKS=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>&quot;</span>/python311/Lib/ensurepip/_bundled/<br>	<span class="hljs-keyword">if</span> [[ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/python3.11/site-packages/pip&quot;</span> ]]; <span class="hljs-keyword">then</span><br>		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Fix missing pip...&quot;</span><br>		PYTHONDONTWRITEBYTECODE=1 LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311/python&quot;</span> -m pip install --no-index --root=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> --ignore-installed pip<br>		<span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip3&quot;</span><br>	<span class="hljs-keyword">fi</span><br>	<span class="hljs-keyword">if</span> [[ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/python3.11/site-packages/setuptools&quot;</span> ]]; <span class="hljs-keyword">then</span><br>		PYTHONDONTWRITEBYTECODE=1 LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311/python&quot;</span> -m pip install --no-index --root=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> --ignore-installed setuptools<br>	<span class="hljs-keyword">fi</span><br>	<span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/libpython3.so&quot;</span><br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span>/usr/lib/python*/<br>	<span class="hljs-built_in">rm</span> -r <span class="hljs-built_in">test</span> &amp;&amp; <span class="hljs-built_in">rm</span> -r */*<span class="hljs-built_in">test</span>*/<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span><br>	LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python311/python&quot;</span> -m compileall -s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> -p / usr/lib/python3.11/site-packages/<br>&#125;<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-ffbebcdb" role="button" aria-expanded="false" aria-controls="collapse-ffbebcdb">
+        <div class="fold-arrow">▶</div>python312-git
+      </div>
+      <div class="fold-collapse collapse" id="collapse-ffbebcdb">
+        <div class="fold-content">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Silver Tuanzi</span><br>pkgname=python312-git<br>pkgver=v3.12.13.r21.7c999be49<br>pkgrel=1<br>pkgdesc=<span class="hljs-string">&quot;The Python programming language (version 3.12)&quot;</span><br><span class="hljs-built_in">arch</span>=(<span class="hljs-string">&#x27;x86_64&#x27;</span> <span class="hljs-string">&#x27;aarch64&#x27;</span>)<br>license=(<span class="hljs-string">&quot;PSF-2.0&quot;</span>)<br>url=<span class="hljs-string">&quot;www.python.org&quot;</span><br>depends=(<span class="hljs-string">&#x27;bzip2&#x27;</span> <span class="hljs-string">&#x27;expat&#x27;</span> <span class="hljs-string">&#x27;gdbm&#x27;</span> <span class="hljs-string">&#x27;libffi&#x27;</span> <span class="hljs-string">&#x27;libnsl&#x27;</span> <span class="hljs-string">&#x27;libxcrypt&#x27;</span> <span class="hljs-string">&#x27;openssl&#x27;</span> <span class="hljs-string">&#x27;zlib&#x27;</span> <span class="hljs-string">&#x27;mpdecimal&#x27;</span>)<br>makedepends=(<span class="hljs-string">&#x27;git&#x27;</span> <span class="hljs-string">&#x27;gdb&#x27;</span> <span class="hljs-string">&#x27;tk&#x27;</span> <span class="hljs-string">&#x27;xz&#x27;</span> <span class="hljs-string">&#x27;sqlite&#x27;</span>)<br>optdepends=(<span class="hljs-string">&#x27;sqlite: for a default database integration&#x27;</span><br>            <span class="hljs-string">&#x27;xz: for lzma&#x27;</span><br>            <span class="hljs-string">&#x27;tk: for tkinter&#x27;</span>)<br>provides=(<span class="hljs-string">&#x27;python312&#x27;</span>)<br>conflicts=(<span class="hljs-string">&#x27;python312&#x27;</span>)<br>options=(strip !debug)<br><span class="hljs-built_in">source</span>=(<span class="hljs-string">&#x27;python312::git+https://github.com/python/cpython.git#branch=3.12&#x27;</span>)<br>sha256sums=(<span class="hljs-string">&#x27;SKIP&#x27;</span>)<br><br><span class="hljs-function"><span class="hljs-title">pkgver</span></span>() &#123;<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312&quot;</span><br>	<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s&quot;</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(git describe --long | sed &#x27;s/\([^-]*-\)g/r\1/;s/-/./g&#x27;)</span>&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">build</span></span>() &#123;<br>  <span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312&quot;</span><br>  ./configure --prefix=/usr \<br>              --with-computed-gotos \<br>              --enable-optimizations \<br>              --with-lto \<br>              --enable-ipv6 \<br>              --with-system-expat \<br>              --with-dbmliborder=gdbm:ndbm \<br>              --with-system-libmpdec \<br>              --enable-loadable-sqlite-extensions \<br>              --enable-shared \<br>              ax_cv_c_float_words_bigendian=no<br>	make<br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">package</span></span>() &#123;<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312&quot;</span><br>	PYTHONDONTWRITEBYTECODE=1 make DESTDIR=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/&quot;</span> altinstall<br>	<span class="hljs-built_in">export</span> PIP_FIND_LINKS=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>&quot;</span>/python312/Lib/ensurepip/_bundled/<br>	<span class="hljs-keyword">if</span> [[ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/python3.12/site-packages/pip&quot;</span> ]]; <span class="hljs-keyword">then</span><br>		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Fix missing pip...&quot;</span><br>		PYTHONDONTWRITEBYTECODE=1 LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312/python&quot;</span> -m pip install --no-index --root=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> --ignore-installed pip<br>		<span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/bin/pip3&quot;</span><br>	<span class="hljs-keyword">fi</span><br>	<span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/libpython3.so&quot;</span><br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span>/usr/lib/python*/<br>	<span class="hljs-built_in">rm</span> -r <span class="hljs-built_in">test</span> &amp;&amp; <span class="hljs-built_in">rm</span> -r */*<span class="hljs-built_in">test</span>*/<br>	<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span><br>	LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>/python312/python&quot;</span> -m compileall -s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>&quot;</span> -p / usr/lib/python3.12/site-packages/<br>&#125;<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+<div class="note note-info">
+            <ol> <li>只按照最简单的<code>configure</code> <code>make</code> <code>make altinstall</code>三步走的流程。</li> <li>依赖精挑细选了一些，可以调整；尤其注意，如果想使用tkinter相关功能，tk包需要保留；这种情况下可以考虑把tk直接移入depends中。直接不保留任何依赖也行，反正<a href="#%E4%BE%9D%E8%B5%96%E5%87%86%E5%A4%87">准备依赖</a>的时候已经把需要的包显式安装了。</li> <li>让<code>makepkg</code>自己拉代码会拉下来很多多余的内容；似乎没有包含<code>--single-branch</code>参数。拉下来的仓库会达到吓人的2.6GB甚至更多。因此可以在执行<code>makepkg</code>之前，手动把仓库浅克隆下来： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/python/cpython.git -b 3.10 --shallow-since 2025-06-03 --bare python310 <span class="hljs-comment">#python3.10</span><br>git <span class="hljs-built_in">clone</span> https://github.com/python/cpython.git -b 3.11 --shallow-since 2025-06-03 --bare python311 <span class="hljs-comment">#python3.11</span><br>git <span class="hljs-built_in">clone</span> https://github.com/python/cpython.git -b 3.12 --shallow-since 2025-06-02 --bare python312 <span class="hljs-comment">#python3.12</span><br></code></pre></td></tr></table></figure>  这里使用<code>--shallow-since</code>而非<code>--depth 1</code>，是因为脚本需要<code>git describe</code>来获取版本号，因此需要保留最近的一个git tag；使用<code>--shallow-exclude</code>的话也可以，但是要回溯到倒数第二个tag，因为<code>shallow-exclude</code>指定的提交不会被保留。例如，如果当前版本是3.12.10，就需要<code>--shallow-exclude v3.12.9</code></li> <li>没有使用<code>--with-dtrace</code>；dtrace本就不是为Linux准备的，如果强行使用的话，需要安装依赖systemtab，但是在咱这里会编译失败。</li> <li>没有使用<code>make test</code>；如果想要使用的话，在<code>build()</code>函数和<code>package()</code>函数中间增加一个<code>check()</code>函数，在这里面执行；不使用是因为<code>test</code>失败不便排查且只能重新编译，而大部分时候测试的问题都是干扰项问题。</li> <li>如果不开启<code>--enable-shared</code>，则编译成静态库，可以因此去掉<code>package()</code>中的 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-operator">-f</span> <span class="hljs-string">&quot;<span class="hljs-variable">$</span>&#123;pkgdir&#125;/usr/lib/libpython3.so&quot;</span><br></code></pre></td></tr></table></figure></li> <li>如果想要安装man手册，在<code>altinstall</code>后面再添加<code>maninstall</code>，然后打包的时候为了避免冲突执行 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-operator">-f</span> <span class="hljs-string">&quot;<span class="hljs-variable">$</span>&#123;pkgdir&#125;/usr/share/man/man1/python3.1&quot;</span><br></code></pre></td></tr></table></figure></li> <li>按照PEP668标准，可以准备一个文件，文件名为<code>EXTERNALLY-MANAGED</code>，内容为： <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[externally-managed]</span><br></code></pre></td></tr></table></figure>  然后<code>package()</code>阶段，把它安装进去： <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">install</span> -Dm644 <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;srcdir&#125;</span>&quot;</span>/EXTERNALLY-MANAGED -t <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;pkgdir&#125;</span>/usr/lib/python3.X/&quot;</span> <span class="hljs-comment"># X换为对应版本</span><br></code></pre></td></tr></table></figure>  但是不建议在手动编译安装的环境里面加这个，它会阻止你用pip往系统环境里面塞包。</li> </ol> 
+          </div>
+
+<h4 id="deb"><a href="#deb" class="headerlink" title=".deb"></a>.deb</h4><p>.deb包<code>dpkg-buildpackage</code>自动化编译写起来不太方便，这里选择手动编译再打包的方法：<br>首先按照上一节的手动编译方法，配置好编译参数，其中给到<code>--prefix=/usr</code>，如果想要更贴近debian的打包规范就再给到<code>--libdir=/usr/lib/x86_64-linux-gnu</code>；<br>执行完<code>./configure</code>和<code>make</code>之后不执行<code>make altinstall</code>，而是改为先找一个临时存放的目录，例如<code>/tmp/py</code>，然后执行<code>make DESTDIR=&quot;/path/to/dir&quot; altinstall</code><br>接着进入前面的<code>DESTDIR</code>目录，里面应该是只有一个<code>/usr</code>目录。在这个文件夹下再新建一个<code>DEBIAN</code>目录。<br>DEBIAN目录下新建一个control文件，填入以下内容：（以3.10为例，包名命名为python3.10-git）</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">Package:</span> python3.<span class="hljs-number">1</span>0-git<br><span class="hljs-params">Version:</span> <span class="hljs-number">3.10</span>.<span class="hljs-number">18</span><span class="hljs-operator">+</span>git12.g5c19c5b <span class="hljs-comment">#来自git describe</span><br><span class="hljs-params">Section:</span> python<br><span class="hljs-params">Priority:</span> optional<br><span class="hljs-params">Architecture:</span> amd64<br><span class="hljs-params">Installed-Size:</span> <span class="hljs-number">247424</span> <span class="hljs-comment">#自行查看大小之后转写为KiB单位</span><br><span class="hljs-params">Conflicts:</span> python3.<span class="hljs-number">1</span>0-minimal,python3.<span class="hljs-number">10</span> <span class="hljs-comment">#为了避免和deadsnake ppa源的python包冲突；可以省略，反正要自己管理的</span><br><span class="hljs-params">Maintainer:</span> Silver Tuanzi<br><span class="hljs-params">Homepage:</span> https:<span class="hljs-operator">//</span>www.python.org<span class="hljs-symbol">/</span><br><span class="hljs-params">Description:</span> Git build of Python <span class="hljs-number">3.10</span><br> This is a custom git build of Python <span class="hljs-number">3.10</span> compiled from source.<br> .<br> The package provides a complete Python <span class="hljs-number">3.10</span> installation including<br> the standard library, development headers, and virtual environment<br> support.<br> .<br> Git <span class="hljs-params">describe:</span> v3.<span class="hljs-number">10.1</span>8-<span class="hljs-number">9</span><span class="hljs-operator">-</span>g5c19c5b<br> Built from git <span class="hljs-params">commit:</span> <span class="hljs-number">5</span>c19c5b (<span class="hljs-number">9</span> commits after v3.<span class="hljs-number">10.18</span>)<br></code></pre></td></tr></table></figure>
+<p>这个control文件没有设置任何的<code>Depends</code>,<code>Provides</code>和<code>Replace</code>字段，因为必需的依赖已经显式安装；自行管理即可。<br>python包不需要<code>postinst</code>和<code>postrm</code>脚本执行操作，因此不作设置。<br><br>如果编译的时候使用了<code>--enable-shared</code>，进入<code>/usr/lib</code>目录，删除<code>libpython3.so</code>文件，避免冲突。<br><br>对于python3.10版本，进入<code>/usr/bin</code>目录，检查<code>pip3.10</code>文件的第一行是否错误地标注成了<code>#!/usr/bin/python</code>；如果是，将其手动修复为<code>#!/usr/bin/python3.10</code>。<br>当然如果编译的时候本来就带了<code>--without-ensurepip</code>就不用考虑这个问题了。<br><br>最后，回到<code>/usr</code>和<code>/DEBIAN</code>目录所在的文件夹，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dpkg -b . python3.10-git.deb<br></code></pre></td></tr></table></figure>
+<p>deb文件名可以随意，稍等片刻之后打包成功，可以使用<code>dpkg -i</code>或者<code>apt install</code>安装。<br>建议使用<code>apt install ./python3.10-git.deb</code>的方式安装，如果打包不规范，可能会出现<code>apt</code>安装失败但是<code>dpkg</code>能安装成功的情况，使用<code>apt</code>有助于规避未来使用可能遇到的一些奇怪的依赖问题。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>搞python环境杂七杂八那些事</div>
+      <div>http://silvertuanzi.github.io/2025/10/01/python-envs/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silvertuanzi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年10月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/03/nvcc-notes/" title="一些编译cuda的笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一些编译cuda的笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/27/fix-edge-copilot/" title="修复Linux版本edge的侧边栏和copilot按钮">
+                        <span class="hidden-mobile">修复Linux版本edge的侧边栏和copilot按钮</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"silvertuanzi/silvertuanzi.github.io","repo-id":"R_kgDONp8bkA","category":"Announcements","category-id":"DIC_kwDONp8bkM4C-7VA","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","data-strict":1};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="umami-site-pv-container" style="display: none">
+        总访问量 
+        <span id="umami-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="umami-site-uv-container" style="display: none">
+        总访客数 
+        <span id="umami-site-uv"></span>
+         人
+      </span>
+    
+    
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/umami-view.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

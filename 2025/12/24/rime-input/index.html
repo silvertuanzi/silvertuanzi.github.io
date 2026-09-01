@@ -1,0 +1,1111 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silvertuanzi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="记录一下各平台(Windows&#x2F;Linux&#x2F;Android)配置Rime输入法的经验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rime输入法配置">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/12/24/rime-input/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="记录一下各平台(Windows&#x2F;Linux&#x2F;Android)配置Rime输入法的经验">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/rime-input/weasel-settings.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/rime-input/remove-ibus.png">
+<meta property="article:published_time" content="2025-12-24T09:38:33.000Z">
+<meta property="article:modified_time" content="2026-01-09T15:18:10.000Z">
+<meta property="article:author" content="silvertuanzi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/rime-input/weasel-settings.png">
+  
+  
+  
+  <title>Rime输入法配置 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":"https://silvertuanzi-umami.netlify.app/script.js","website_id":"8696ff80-db66-47ae-8f97-dce9da61066b","domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":"3ay5n/D+qZfExizE1VsC63yZVb1BLb5c2fX8frr4eIbjf45uO6BWxM3sPDbztIyAbm9qSesnugRb7M7yhNuHt8WNleaVmKaSp17eECt31fAnRKYruDD+tRoDuNMSlgQSfhtTfw6tX7ELMt8Q6nazsg5qudrPgmusxyWux9HeeaAip1BRl6nP1Ruf19XNCJVXpTgb/x/hLIpVbHhEu5Rfp4Ry1hs5zddYV6+2hd7zvBnljm6m9ouSpAhn6Ewfx3IVCduBPH6cvQvwlhcjvFrm7TMsZ+ngOeHiJmJSzaJLuUwF8ARfRFU8deilRIUvdKgt5OcrGmHC3Vh2cnEXnpYmS/XXRVjiEcRcpkL3joRJf66O5UqAqKGjGjLbIO8rVE5X3bgs","api_server":"https://silvertuanzi-umami.netlify.app"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        let umami = document.createElement('script');
+        umami.async = true;
+        umami.src = "https://silvertuanzi-umami.netlify.app/script.js";
+        umami.setAttribute("data-website-id", "8696ff80-db66-47ae-8f97-dce9da61066b");
+        umami.setAttribute("data-domains", "");
+        document.head.appendChild(umami);
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tools/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>工具</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Rime输入法配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-24 17:38" pubdate>
+          2025年12月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="umami-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="umami-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Rime输入法配置</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年1月9日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="0-为什么用rime？"><a href="#0-为什么用rime？" class="headerlink" title="0.为什么用rime？"></a>0.为什么用rime？</h1><p>开源，完全离线，不上传用户数据；自定义配置词库，并且可以本地记录高频词。<br>又希望输入法聪明又希望保留隐私，rime就是个不错的选择。如果喜欢DIY就更合适了。</p>
+<h1 id="1-词库方案选择"><a href="#1-词库方案选择" class="headerlink" title="1. 词库方案选择"></a>1. 词库方案选择</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/iDvel/rime-ice">rime-ice雾凇拼音</a>: 老牌经典选择，热门稳健</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gaboolic/rime-frost">rime-frost白霜拼音</a>: 号称从雾凇拼音优化而来，先删除大量废词，然后重新分词优化</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/amzxyz/rime_wanxiang.git">rime-wanxiang万象拼音</a>: 功能特别特别丰富，对双拼和辅助码做了多种支持方案，与此同时还内嵌了一个小模型用来解决词库盲区</li>
+</ol>
+<p>以上方案无优劣之分，最合适的就是最适合自己的。<br>不要问咱选了什么，咱几台设备每个都用用（笑）。<br>下文部署方案举例不代表推荐，想换成别的方案的自己改链接就行，使用方式完全一样。</p>
+<p>部署方案是完全通用的，唯一需要注意的就是万象拼音的各种方案位于不同的git branch，如果想借助git管理，建议在<code>git clone</code>时开启<code>--single-branch</code>选项，并用<code>-b/--branch</code>选择好辅助码方案。</p>
+<div class="note note-info">
+            <p>老二次元还可以自己额外添加<a target="_blank" rel="noopener" href="https://github.com/outloudvi/mw2fcitx/releases">萌娘百科词库</a>，添加方式后面一并会介绍。</p> 
+          </div>
+
+<h1 id="2-部署rime并加载词库"><a href="#2-部署rime并加载词库" class="headerlink" title="2. 部署rime并加载词库"></a>2. 部署rime并加载词库</h1><h2 id="2-1-自动化工具"><a href="#2-1-自动化工具" class="headerlink" title="2.1 自动化工具"></a>2.1 自动化工具</h2><h3 id="东风破"><a href="#东风破" class="headerlink" title="东风破"></a>东风破</h3><p><a target="_blank" rel="noopener" href="https://github.com/rime/plum">东风破plum</a>是rime推出的自动化管理工具，但是咱懒得多研究一个工具，就选择不用它，而是手动管理。<br>它原生适用于Linux&#x2F;MacOS平台，在Windows下最好借助git bash提供的bash环境使用。<br>上述提到的词库都提供了借助东风破部署的方式，都是一行命令解决，参看上游文档即可。</p>
+<div class="note note-warning">
+            <p>使用东风破之前还是要先安装好对应平台的rime输入法。</p> 
+          </div>
+<p>rime输入法在<a target="_blank" rel="noopener" href="https://rime.im/download/">官网</a>已经提供了各个平台的安装方式，直接选择相应的安装即可，后面会展开讲。</p>
+<div class="note note-info">
+            <p>除了Arch社区打包特殊之外，大部分Linux使用东风破plum部署词库都比手动方便得多。</p> 
+          </div>
+
+<h3 id="万象拼音专属"><a href="#万象拼音专属" class="headerlink" title="万象拼音专属"></a>万象拼音专属</h3><p>万象拼音提供了一个专门的<a target="_blank" rel="noopener" href="https://github.com/amzxyz/RIME-LMDG/releases/download/tool/wanxiang-tools">gui管理工具</a>，由于万象打包过于多样，使用这个工具似乎比下文的手动方式方便？</p>
+<h2 id="2-2-Windows"><a href="#2-2-Windows" class="headerlink" title="2.2 Windows"></a>2.2 Windows</h2><p>Windows直接下载安装小狼毫<a target="_blank" rel="noopener" href="https://github.com/rime/weasel/releases/latest">weasel</a>即可，但是为了方便起见，建议先部署词库，再安装输入法。</p>
+<div class="note note-info">
+            <p>安装输入法的时候就会立即在<code>%APPDATA\Rime</code>生成一些基本的配置文件，而如果用git部署词库便于后续更新的话，是要直接把词库<code>git clone</code>到<code>Rime</code>文件夹下的，因此意味着如果先安装了输入法，就还需要先把<code>Rime</code>文件夹先移走，部署完词库再移动回来。</p> 
+          </div>
+
+<ol>
+<li>进入数据目录，一般是<code>C:\Users\&lt;username&gt;\AppData\Roaming</code>，或者最快的进入方式是win+R运行<code>%appdata%</code>。<br> 如果还没有安装小狼毫，那这里应该不存在Rime文件夹；如果已经安装了，就把Rime文件夹重命名备份。</li>
+<li>使用<code>git clone</code>获取输入方案，这里给两个示例，第一个是雾凇拼音，第二个是万象拼音基础全拼方案（万象辅助码全是双拼）： <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/gaboolic/rime-frost.git Rime --depth <span class="hljs-number">1</span><br>git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/amzxyz/rime_wanxiang.git Rime --depth <span class="hljs-number">1</span> --single-branch -b wanxiang-base<br></code></pre></td></tr></table></figure>
+ 使用<code>--depth 1</code>很有必要性，词库仓库通常有相当厚重的commit历史，只获取最新版本可以节省大量无用下载量。<br> 如果使用万象拼音，根据<a target="_blank" rel="noopener" href="https://github.com/amzxyz/rime_wanxiang/releases">release界面的说明</a>获取模型，同样放置在Rime目录中。</li>
+<li>如果在第一步中重命名备份了Rime文件夹，那就把里面的文件合并到刚刚<code>git clone</code>获取的Rime文件夹中，通常来说不会有同名文件冲突。</li>
+<li>如果没有安装小狼毫，现在安装，安装结束后会自动弹出设置界面；已经安装的，在托盘处右击小狼毫图标，选择输入法设置；<br> 只勾选自己拉取的方案即可，其它输入方案可以完全不选。然后选择一个自己喜欢的配色方案，设置完成。<br> <img src="/img/rime-input/weasel-settings.png" srcset="/img/loading.gif" lazyload></li>
+<li>如果希望小狼毫作为默认输入法，可以前往Windows的输入法设置，删除微软拼音，再重新添加微软拼音，这样小狼毫的顺位就会在微软拼音前面。</li>
+</ol>
+<h2 id="2-3-Linux"><a href="#2-3-Linux" class="headerlink" title="2.3 Linux"></a>2.3 Linux</h2><h3 id="输入法框架-ibus还是fcitx？"><a href="#输入法框架-ibus还是fcitx？" class="headerlink" title="输入法框架: ibus还是fcitx？"></a>输入法框架: ibus还是fcitx？</h3><ul>
+<li>Gnome: 已经和ibus深度集成，ibus的设置直接嵌入系统内的键盘设置；并且gnome wayland没有适配fcitx5需要的输入法协议，fcitx5如果要在gnome wayland下正确工作，需要依赖<a target="_blank" rel="noopener" href="https://github.com/wengxt/gnome-shell-extension-kimpanel">gnome插件</a>；因此gnome桌面强烈建议搭配ibus；</li>
+<li>KDE Plasma: 理论上均可选择，但是KDE官方推荐使用fcitx5；</li>
+<li>Cinnamon: 本来应该位于其它桌面里面，但是Cinnamon6.6更新开始添加ibus集成。<br>  目前cinnamon的ibus集成尚未完善，暂时还是fcitx5更方便。<br>  咱自己目前是cinnamon+fcitx5的方案。<br>  在cinnamon wayland成熟之后，或许应该开始评估迁移到ibus的可能性了；</li>
+<li>其它桌面：均可选择，并且有ibus更适合gtk，fcitx更适合qt的说法；但是从易用性看，或许fcitx5会更好一些。</li>
+</ul>
+<h3 id="安装配置输入法框架"><a href="#安装配置输入法框架" class="headerlink" title="安装配置输入法框架"></a>安装配置输入法框架</h3><p>首先检测是否有预装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ibus version <span class="hljs-comment">#ibus</span><br>fcitx --version <span class="hljs-comment">#fcitx4,老旧且不支持wayland,不建议使用</span><br>fcitx5 --version <span class="hljs-comment">#fcitx5</span><br></code></pre></td></tr></table></figure>
+<p>虽然ibus和fcitx5并不会冲突（在很多发行版上会选择同时预装这两个），但是正常来说，一个输入法框架一直用就行了，没道理搞两个切来切去的，所以为了避免冲突的隐患，卸掉其中一个。<br>Ubuntu可以试探一下（仅作演示，实际上Ubuntu保留ibus卸载fcitx5应该是更好的）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt autoremove ibus<br></code></pre></td></tr></table></figure>
+<p><img src="/img/rime-input/remove-ibus.png" srcset="/img/loading.gif" lazyload><br>从输出列表来看，ibus可以安全卸载而不会因此干掉整个gnome，其它发行版就更不需要担心这个问题了。</p>
+<p>接下来，检查保留的输入法框架能否正常开机自启动，如果不能，可以稍微参考ArchWiki的方法配置环境变量。<br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/IBus">ibus wiki仅英文，中文wiki长期未更新且质量不佳</a>&#x2F;<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5">fcitx5英文wiki</a>&#x2F;<a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Fcitx5">fcitx5中文wiki</a><br>fcitx5的中文wiki并非是翻译英文页面，而是另外重写的，所以可以两边结合看。</p>
+<div class="note note-success">
+            <p>tldr: </p> <ol> <li>Gnome+iBus无需配置；</li> <li>KDE plasma Wayland+fcitx5需要: <ul> <li>前往系统设置 &gt; 输入与输出 &gt; 键盘 &gt; 虚拟键盘，选择 Fcitx 5 Wayland 启动器。</li> <li>对于XWayland应用，为应用单独设置环境变量<code>XMODIFIERS=@im=fcitx</code></li> </ul> </li> <li>其它任意x11桌面+fcitx5组合：<br> 设置全局环境变量，可以填入<code>/etc/environment</code>文件： <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">GTK_IM_MODULE</span>=fcitx<br><span class="hljs-attr">QT_IM_MODULE</span>=fcitx<br><span class="hljs-attr">XMODIFIERS</span>=@im=fcitx<br><span class="hljs-attr">SDL_IM_MODULE</span>=fcitx<br><span class="hljs-attr">GLFW_IM_MODULE</span>=ibus<br></code></pre></td></tr></table></figure></li> <li>其它桌面和WM用户默认自己有能力折腾。</li> <li>LinuxMint+fcitx5用户在系统设置 &gt; 输入法里面，顶部页面选择输入法框架为fcitx5，选择完成之后直接离开页面，注销或者重启即可。</li> </ol> 
+          </div>
+
+<h3 id="安装rime"><a href="#安装rime" class="headerlink" title="安装rime"></a>安装rime</h3><p>ibus用户安装<code>ibus-rime</code>，fcitx5用户安装<code>fcitx5-rime</code>，主流发行版均有收录：</p>
+<p>Debian&#x2F;Ubuntu:<code>apt install ibus-rime</code>或者<code>apt install fcitx5-rime</code><br>Fedora:<code>dnf install ibus-rime</code>或者<code>dnf install fcitx5-rime</code><br>Fedora 18&#x2F;19或者CentOS等旧版:<code>yum install ibus-rime</code>或者<code>yum install fcitx5-rime</code><br>OpenSUSE:<code>zypper in rime</code>，然后<code>zypper in ibus-rime</code>或者<code>zypper in fcitx5-rime</code><br>Gentoo:<code>emerge ibus-rime</code>或者<code>emerge fcitx5-rime</code><br>Arch:<code>pacman -S ibus-rime</code>或者<code>pacman -S fcitx5-rime</code></p>
+<p>安装完成之后，可能需要去fcitx5或者ibus的设置面板里面把rime添加进输入法列表。<br>然后可以暂时不急切出rime输入法，配置完词库之后再启用可以节省一次rime部署配置的时间。</p>
+<h3 id="配置词库"><a href="#配置词库" class="headerlink" title="配置词库"></a>配置词库</h3><h4 id="ArchLinux"><a href="#ArchLinux" class="headerlink" title="ArchLinux"></a>ArchLinux</h4><div class="note note-info">
+            <p>万象系列已经不在AUR中；archlinuxcn的打包有点乱，并且启用似乎不太方便，因此手动部署万象方案用下文<a href="#%E5%85%B6%E5%AE%83%E5%8F%91%E8%A1%8C%E7%89%88">其它发行版</a>的方法应该更好。</p> 
+          </div>
+<p>直接通过AUR或者pacman安装：<br><code>rime-ice-git</code>已经被收录进archlinuxcn仓库，可以直接通过pacman安装；<br><code>rime-frost-git</code>可以通过AUR安装。<br>安装完成之后通过patch的方式启用：<br>创建或者编辑<code>$HOME/.config/ibus/rime/default.custom.yaml</code>或者<code>$HOME/.local/share/fcitx5/rime/default.custom.yaml</code>，填入以下内容：</p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-05eef982" role="button" aria-expanded="false" aria-controls="collapse-05eef982">
+        <div class="fold-arrow">▶</div>雾凇
+      </div>
+      <div class="fold-collapse collapse" id="collapse-05eef982">
+        <div class="fold-content">
+          <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">patch:</span><br>  <span class="hljs-attr">__include:</span> <span class="hljs-string">rime_ice_suggestion:/</span><br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-90469042" role="button" aria-expanded="false" aria-controls="collapse-90469042">
+        <div class="fold-arrow">▶</div>白霜
+      </div>
+      <div class="fold-collapse collapse" id="collapse-90469042">
+        <div class="fold-content">
+          <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">patch:</span><br>  <span class="hljs-attr">__include:</span> <span class="hljs-string">rime_frost_suggestion:/</span><br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+<div class="note note-info">
+            <p>核心是检查<code>/usr/share/rime-data</code>目录下是否存在<code>rime_*_suggestion.yaml</code>文件：<br>如果是，就可以使用这种方法启用，并根据文件名填写<code>__include</code>字段；<br>如果否，就需要考虑其它方法（雾凇和白霜都可以这样启用）</p> 
+          </div>
+<p>如果需要其它配置可以参考<a target="_blank" rel="noopener" href="https://github.com/iDvel/rime-ice?tab=readme-ov-file#arch-linux">rime-ice官方文档</a>或者<a target="_blank" rel="noopener" href="https://arch.icekylin.online/guide/advanced/optional-cfg-1.html#%E9%9B%BE%E5%87%87%E6%8B%BC%E9%9F%B3-rime-ice-%E8%BE%93%E5%85%A5%E6%B3%95">这里</a></p>
+<h4 id="其它发行版"><a href="#其它发行版" class="headerlink" title="其它发行版"></a>其它发行版</h4><p>前往输入法的用户配置目录：<br>fcitx5前往<code>$HOME/.local/share/fcitx5</code><br>ibus前往<code>~/.config/ibus</code></p>
+<div class="note note-danger">
+            <p>不要进入rime目录；如果原本存在rime文件夹，则备份里面的所有文件，之后暂时删除或者移走rime文件夹。</p> 
+          </div>
+<p>为了方便更新，直接使用<code>git clone</code>获取完整的词库文件，并用<code>--depth 1</code>减少拉取大小（词库往往都有着极为厚重的commit历史）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#根据自己的选择更换词库链接</span><br>git <span class="hljs-built_in">clone</span> https://github.com/gaboolic/rime-frost.git rime --depth 1 <span class="hljs-comment">#白霜拼音</span><br>git <span class="hljs-built_in">clone</span> https://github.com/amzxyz/rime_wanxiang.git rime --depth 1 --single-branch -b wanxiang-base <span class="hljs-comment">#万象基础方案</span><br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>万象用户还要前往<a target="_blank" rel="noopener" href="https://github.com/amzxyz/rime_wanxiang/releases">官方release</a>下载语法模型，放到上述的rime文件夹中。</p> 
+          </div>
+<p>更新的时候直接<code>git pull</code>即可。</p>
+<div class="note note-warning">
+            <p>如果前面备份了rime默认配置文件，现在可以移回来了。一般情况下，不会有同名文件冲突。</p> 
+          </div>
+<p>然后可以注销重启以完全重新启动输入法引擎，只要输入法切换到中州韵(rime)，就能自动启用安装好的词库。<br>如果没有的话，前往rime菜单点击重新部署，稍等片刻之后就完成了。</p>
+<h2 id="2-4-Android"><a href="#2-4-Android" class="headerlink" title="2.4 Android"></a>2.4 Android</h2><p>Android目前有三种基于Rime的输入法：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/osfans/trime">同文输入法</a>：Rime官网推荐的输入法之一，直接本体就是Rime，安装包大小很小，最简洁，在咱的设备(EMUI11, Android 10)上会不明原因闪退；</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fcitx5-android/fcitx5-android">小企鹅输入法</a>：Rime官网推荐的输入法之二，本体是fcitx的安卓移植，因此还需要另外安装Rime插件(直接在release页面下载即可)；当前咱正在使用的方案；</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gurecn/YuyanIme">语燕输入法</a>（<a target="_blank" rel="noopener" href="https://gitee.com/gurecn/YuyanIme">gitee</a>）：非Rime官方支持方案，基于Rime开发，进行了大量开箱即用的配置，例如内置雾凇词库和白霜词库，从readme来看似乎功能最为丰富，但是咱已经配好小企鹅了才发现这个项目，就懒得再下下来体验实用性了。由于词库均为内置，不确定导入万象方案，或者导入自定义词库（例如萌百词库）是否方便。</li>
+</ol>
+<p>选择其中一个下载，然后语燕使用雾凇或者白霜词库的话直接去app设置里面应该就行。<br>同文输入法的数据位于<code>/rime</code>目录下（可能Android11以后的版本此目录不容易出现权限问题？）<br>小企鹅输入法的数据位于<code>/Android/data/org.fcitx.fcitx5.android/files/data/rime</code>目录下（Android11及更新的系统版本，编辑此目录下的文件可能需要一点提权操作）</p>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-dc9f9183" role="button" aria-expanded="false" aria-controls="collapse-dc9f9183">
+        <div class="fold-arrow">▶</div>小企鹅数据提权的思路
+      </div>
+      <div class="fold-collapse collapse" id="collapse-dc9f9183">
+        <div class="fold-content">
+          <ol> <li>最简单粗暴：MT管理器+shizuku暴力提权就完事了;</li> <li>另一种简单粗暴：USB数据线插电脑操作;</li> <li>无需借助外力的方式：把下载好的词库文件放在公共目录（例如Downloads目录）下，然后打开小企鹅的软件，进入 高级 &gt; 浏览用户数据目录 ，这样打开的文件管理器是安卓内置的底层文件管理器，只拥有对小企鹅输入法自己的访问权限，然后在这里把公共目录的词库文件复制进来即可。</li> </ol> <p>上述三种方法中，按照万象拼音的发布说明，前两种方案可能会遇到权限问题，第三种方案最麻烦但是最稳妥。</p> 
+        </div>
+      </div>
+    </div>
+<p>由于手机端难以使用git，雾凇和万象可以通过release下载，白霜建议下载源码zip。或者，如果有termux环境，在termux里面执行<code>git clone</code>也行，但是记得把词库仓库放置在外部软件可访问的公共文件夹。<br>接下来把完整的仓库全部复制到输入法的数据目录，具体的数据目录根据上文。<br>然后启动输入法等待片刻，部署完成。</p>
+<h2 id="2-5-萌娘百科词库"><a href="#2-5-萌娘百科词库" class="headerlink" title="2.5 萌娘百科词库"></a>2.5 萌娘百科词库</h2><p>适用于二次元补充额外词库。也可以参考这种方式自行添加其它词库。</p>
+<h3 id="ArchLinux-1"><a href="#ArchLinux-1" class="headerlink" title="ArchLinux"></a>ArchLinux</h3><p>同样是archlinuxcn仓库有直接收录，可以直接<code>pacman -S rime-pinyin-moegirl</code>安装；</p>
+<h3 id="其它系统"><a href="#其它系统" class="headerlink" title="其它系统"></a>其它系统</h3><p>前往<a target="_blank" rel="noopener" href="https://github.com/outloudvi/mw2fcitx/releases">github release</a>，下载<code>moegirl.dict.yaml</code>一个文件即可，放置在词库同级目录。</p>
+<h3 id="共同后续步骤"><a href="#共同后续步骤" class="headerlink" title="共同后续步骤"></a>共同后续步骤</h3><p>接下来有两种应用方式：</p>
+<ol>
+<li>传统改文件（最稳，维护起来稍麻烦但也不难）<br> 修改词库的主配置文件：雾凇是<code>rime_ice.dict.yaml</code>，白霜是<code>rime_frost.dict.yaml</code>，万象基础base版是<code>wanxiang.dict.yaml</code>，带辅助码的分支根据文件名自己看着办。<br> 对于Arch用户如果通过pacman安装，建议先把<code>/usr/share/rime-data/*.dict.yaml</code>文件复制到<code>~/.local/share/fcitx5/rime</code>或者<code>~/.config/ibus/rime</code>目录下，再修改，不要动全局配置。<br> 在<code>import_tables</code>段里面加一行： <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs diff">	import_tables:<br>	  - cn_dicts/base #或者其它什么的，总之就是自带的词典<br>	  ...<br><span class="hljs-addition">+	  - moegirl</span><br>	<br>	...<br></code></pre></td></tr></table></figure>
+ 修改完之后，为了让以后<code>git pull</code>可以正常拉取更新，可以commit这次改动： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git add .<br>git commit <span class="hljs-comment">#弹出编辑器的时候随便写点提交说明，add moegirl就行</span><br></code></pre></td></tr></table></figure>
+ 之后<code>git pull</code>拉取更新的时候，就可以自动合并这次改动（合并过程会创建一个merge commit，因此会弹一次编辑器出来，但是有默认的提交信息，因此直接保存退出即可）</li>
+<li>补丁方式（可能无效）<br> 以雾凇为例，其它输入方案根据主词典文件修改对应文件名：<br> 创建<code>rime_ice.custom.yaml</code>填入： <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">patch:</span><br>  <span class="hljs-string">translator/packs/+:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">moegirl</span><br></code></pre></td></tr></table></figure>
+ <div class="note note-warning">
+            <p>yaml格式很严格，这个patch的每级缩进都是两个英文空格，不要用tab</p> 
+          </div>
+ <div class="note note-info">
+            <p>记录目前通过补丁方式应用的情况（不会只有万象不行吧）：</p> <ol> <li>Windows+小狼毫+万象：失败</li> <li>Android+小企鹅+Rime+雾凇&#x2F;白霜：成功</li> <li>Linux+fcitx5-rime+雾凇：成功</li> </ol> 
+          </div></li>
+</ol>
+<p>完成之后，在rime菜单点击重新部署即可生效。</p>
+<h1 id="杂tips"><a href="#杂tips" class="headerlink" title="杂tips"></a>杂tips</h1><div class="note note-info">
+            <p>记录一点其它的通用配置。<br>凡是提到数据文件夹，根据自己系统对应：<br>Windows: <code>%appdata%\Rime</code><br>Linux fcitx5-rime: <code>~/.local/share/fcitx5/rime</code><br>Linux ibus-rime: <code>~/.config/ibus/rime</code><br>MacOS鼠须管和安卓根据实际情况判断。</p> 
+          </div>
+
+<h2 id="修改候选词数目"><a href="#修改候选词数目" class="headerlink" title="修改候选词数目"></a>修改候选词数目</h2><p>在数据文件夹下，如果没有<code>default.custom.yaml</code>就创建，如果有就编辑：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">patch:</span><br>  <span class="hljs-comment"># 以下根据自己所需自行定义</span><br>  <span class="hljs-attr">__patch:</span><br>    <span class="hljs-attr">menu/page_size:</span> <span class="hljs-number">5</span>   <span class="hljs-comment">#候选词个数</span><br></code></pre></td></tr></table></figure>
+<p>保持这个三级结构即可，如果原先有其它文件就自己看着插。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Rime输入法配置</div>
+      <div>http://silvertuanzi.github.io/2025/12/24/rime-input/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silvertuanzi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/02/linux-ntfs/" title="Linux与NTFS的那些事">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux与NTFS的那些事</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/03/nvcc-notes/" title="一些编译cuda的笔记">
+                        <span class="hidden-mobile">一些编译cuda的笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"silvertuanzi/silvertuanzi.github.io","repo-id":"R_kgDONp8bkA","category":"Announcements","category-id":"DIC_kwDONp8bkM4C-7VA","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","data-strict":1};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="umami-site-pv-container" style="display: none">
+        总访问量 
+        <span id="umami-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="umami-site-uv-container" style="display: none">
+        总访客数 
+        <span id="umami-site-uv"></span>
+         人
+      </span>
+    
+    
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/umami-view.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
