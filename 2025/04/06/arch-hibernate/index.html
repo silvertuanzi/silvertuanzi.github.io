@@ -1,0 +1,1056 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silvertuanzi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Arch Linux配置休眠的难度似乎比其它发行版还要简单一截...吧？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux配置休眠">
+<meta property="og:url" content="http://silvertuanzi.github.io/2025/04/06/arch-hibernate/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="Arch Linux配置休眠的难度似乎比其它发行版还要简单一截...吧？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/disable1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/disable2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/busybox.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/systemd1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/systemd2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-part-uuid.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-part-para.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-btrfs-uuid.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-btrfs-offset.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-btrfs-para.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-ext-uuid.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-ext-offset1.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-ext-offset2.png">
+<meta property="og:image" content="http://silvertuanzi.github.io/img/arch-hibernate/swap-ext-para.png">
+<meta property="article:published_time" content="2025-04-06T09:07:30.000Z">
+<meta property="article:modified_time" content="2025-04-06T09:07:30.000Z">
+<meta property="article:author" content="silvertuanzi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://silvertuanzi.github.io/img/arch-hibernate/disable1.png">
+  
+  
+  
+  <title>Arch Linux配置休眠 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":"https://silvertuanzi-umami.netlify.app/script.js","website_id":"8696ff80-db66-47ae-8f97-dce9da61066b","domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":"3ay5n/D+qZfExizE1VsC63yZVb1BLb5c2fX8frr4eIbjf45uO6BWxM3sPDbztIyAbm9qSesnugRb7M7yhNuHt8WNleaVmKaSp17eECt31fAnRKYruDD+tRoDuNMSlgQSfhtTfw6tX7ELMt8Q6nazsg5qudrPgmusxyWux9HeeaAip1BRl6nP1Ruf19XNCJVXpTgb/x/hLIpVbHhEu5Rfp4Ry1hs5zddYV6+2hd7zvBnljm6m9ouSpAhn6Ewfx3IVCduBPH6cvQvwlhcjvFrm7TMsZ+ngOeHiJmJSzaJLuUwF8ARfRFU8deilRIUvdKgt5OcrGmHC3Vh2cnEXnpYmS/XXRVjiEcRcpkL3joRJf66O5UqAqKGjGjLbIO8rVE5X3bgs","api_server":"https://silvertuanzi-umami.netlify.app"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        let umami = document.createElement('script');
+        umami.async = true;
+        umami.src = "https://silvertuanzi-umami.netlify.app/script.js";
+        umami.setAttribute("data-website-id", "8696ff80-db66-47ae-8f97-dce9da61066b");
+        umami.setAttribute("data-domains", "");
+        document.head.appendChild(umami);
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tools/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>工具</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Arch Linux配置休眠"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-06 17:07" pubdate>
+          2025年4月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="umami-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="umami-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Arch Linux配置休眠</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="写在前面：名词解释"><a href="#写在前面：名词解释" class="headerlink" title="写在前面：名词解释"></a>写在前面：名词解释</h1><h2 id="休眠与睡眠"><a href="#休眠与睡眠" class="headerlink" title="休眠与睡眠"></a>休眠与睡眠</h2><p>睡眠（挂起到内存，suspend to RAM），将当前运行的程序状态保存到内存，然后保留内存供电；<br>休眠（挂起到硬盘，suspend to disk），将当前运行的程序状态保存到硬盘，然后完全断电，这意味着可以拔掉台式机的插座，搬走之后插电再恢复。<br>在Linux中，休眠会使用swap，无论是swap分区还是swap文件都可以。</p>
+<div class="note note-success">
+            <p>由于是对系统层面的修改，下文的所有操作如无特殊说明，均需要在root权限下执行。</p> 
+          </div>
+
+<h2 id="重新生成initramfs"><a href="#重新生成initramfs" class="headerlink" title="重新生成initramfs"></a>重新生成initramfs</h2><p>是下文将会使用的操作。当提到“重新生成initramfs”时，需要执行下面两种操作的一种：</p>
+<ol>
+<li>对所有安装的内核重新生成initramfs： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkinitcpio -P<br></code></pre></td></tr></table></figure></li>
+<li>对指定的一个内核单独重新生成initramfs，以<code>linux</code>为例 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkinitcpio -p linux<br></code></pre></td></tr></table></figure>
+ 可以只对当前正在使用的内核执行，因为内核在更新的时候也会自动重新生成initramfs，不使用的内核等到滚新版本的时候让它自动来就行了，节省时间。</li>
+</ol>
+<h2 id="更新grub配置"><a href="#更新grub配置" class="headerlink" title="更新grub配置"></a>更新grub配置</h2><p>如果配置过 <a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/update-grub">update-grub</a> 脚本，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">update-grub<br></code></pre></td></tr></table></figure>
+<p>否则执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grub-mkconfig -o /boot/grub/grub.cfg<br></code></pre></td></tr></table></figure>
+
+<h1 id="Windows-Arch双系统休眠需要注意的地方"><a href="#Windows-Arch双系统休眠需要注意的地方" class="headerlink" title="Windows+Arch双系统休眠需要注意的地方"></a>Windows+Arch双系统休眠需要注意的地方</h1><div class="note note-info">
+            <p>本节内容默认关闭了Windows快速启动。</p> 
+          </div>
+<ol>
+<li>EFI分区：如果双系统共用同一个EFI分区，当休眠其中一个系统并启动另一个系统时，根据 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Dual_boot_with_Windows#Fast_Startup_and_hibernation">ArchWiki</a> ，EFI分区<em>可能</em>遭到破坏。通常来说并不会出现问题（咱这么干过并且没事），但是这么做的时候务必确保手头有现成的WindowsPE盘以及Linux的liveCD（可以通过 <a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/">ventoy</a> 把两个功能整合在同一个U盘里），以在EFI分区万一真的被破坏的时候，可以从容地修复引导。</li>
+<li>文件系统：当休眠其中一个系统并启动另一个系统时，如果挂载了在另一个系统中处于挂载状态的分区，那么<em>可能</em>发生数据损失；并且如果对这个分区进行了写入操作，文件系统<strong>几乎一定</strong>会损坏。由于Windows通常并不能读取Linux的分区，这种情况最可能出现在“休眠了Windows之后启动Linux，并挂载了Windows分区”的时候，这时尽快结束当前操作，重启回到Windows，并对这个分区执行<code>chkdsk</code>检查与修复。</li>
+</ol>
+<h1 id="如果不需要休眠"><a href="#如果不需要休眠" class="headerlink" title="如果不需要休眠"></a>如果不需要休眠</h1><p>在以下两种方案中选择一种，以禁用休眠功能并在桌面环境中隐藏休眠按钮，避免误触引发意料之外的后果。参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/KDE#Disable_hibernate">ArchWiki</a> ，虽然是KDE的wiki页但是对其它桌面环境同样有效。</p>
+<ol>
+<li>创建文件<code>/etc/polkit-1/rules.d/99-disable-hibernate.rules</code>，填入以下内容： <figure class="highlight wren"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs wren"><span class="hljs-comment">// Disable hibernate for all users</span><br><span class="hljs-variable">polkit</span>.<span class="hljs-property">addRule</span>(<span class="hljs-title function_">function</span>(<span class="hljs-params">action</span>, <span class="hljs-params">subject</span>) &#123;<br>	<span class="hljs-keyword">if</span> ((<span class="hljs-variable">action</span>.<span class="hljs-property">id</span> <span class="hljs-operator">==</span> <span class="hljs-string">&quot;org.freedesktop.login1.hibernate&quot;</span>)) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-variable">polkit</span>.<span class="hljs-property">Result</span>.<span class="hljs-property">NO</span>;<br>	&#125;<br>&#125;);<br><span class="hljs-variable">polkit</span>.<span class="hljs-property">addRule</span>(<span class="hljs-title function_">function</span>(<span class="hljs-params">action</span>, <span class="hljs-params">subject</span>) &#123;<br>	<span class="hljs-keyword">if</span> ((<span class="hljs-variable">action</span>.<span class="hljs-property">id</span> <span class="hljs-operator">==</span> <span class="hljs-string">&quot;org.freedesktop.login1.hibernate-multiple-sessions&quot;</span>)) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-variable">polkit</span>.<span class="hljs-property">Result</span>.<span class="hljs-property">NO</span>;<br>	&#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+ <img src="/img/arch-hibernate/disable1.png" srcset="/img/loading.gif" lazyload></li>
+<li>创建文件<code>/etc/systemd/sleep.conf.d/00-disable-hibernation.conf</code>，填入以下内容： <div class="note note-info">
+            <p>只需要保证该文件位于<code>/etc/systemd/sleep.conf.d/</code>路径下即可，文件名并不重要。</p> 
+          </div>
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Sleep]</span><br><span class="hljs-attr">AllowHibernation</span>=<span class="hljs-literal">no</span><br><span class="hljs-attr">AllowSuspendThenHibernate</span>=<span class="hljs-literal">no</span><br><span class="hljs-attr">AllowHybridSleep</span>=<span class="hljs-literal">no</span><br></code></pre></td></tr></table></figure>
+ <img src="/img/arch-hibernate/disable2.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<h1 id="配置休眠"><a href="#配置休眠" class="headerlink" title="配置休眠"></a>配置休眠</h1><p>详细资料参见 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation">ArchWiki</a> 。<br>需要确保至少有一个足够大的swap分区或者swap文件。Linux不支持跨swap休眠，休眠数据必须存储在单一的swap分区或者swap文件上。具体的大小根据内存的大小判断。</p>
+<div class="note note-info">
+            <p>测试平台：Oracle Virtualbox虚拟机，VMware虚拟机不支持休眠。测试涵盖了swap分区，ext4的swap文件和btrfs的swap文件三种形式，均可以休眠并成功恢复。<br>2025年8月在物理机上测试正常工作。</p> 
+          </div>
+
+<h2 id="配置initramfs"><a href="#配置initramfs" class="headerlink" title="配置initramfs"></a>配置initramfs</h2><p>Arch Linux使用<code>mkinitcpio</code>来管理initramfs。<code>mkinitcpio</code>支持两种initramfs，一种基于busybox（这是默认值），另一种基于systemd。</p>
+<div class="note note-info">
+            <p>2025年11月5日，mkinitcpio发布v40版本。在该版本中，基于systemd的initramfs变成了默认值。<br>因此，对于此后的版本，以下内容完全不需要做任何配置，只要具有足够大小的单块swap分区或者单个swap分区，休眠应该是开箱即用的。</p> 
+          </div>
+<div class="note note-info">
+            <p>基于systemd的似乎更现代，支持并行启动，开机更快。但是有一些功能在基于systemd的initramfs上面似乎并没有平替。<br>例如systemd似乎无法使用救急shell，并且似乎无法在initramfs阶段执行fsck检查文件系统（都是根据wiki的推测，wiki这一块讲的感觉很含糊）<br>相关的说明可以参考<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Mkinitcpio#Common_hooks">ArchWiki-mkinitcpio</a> ，属于进阶阅读内容。</p> 
+          </div>
+<p>需要编辑<code>/etc/mkinitcpio.conf</code>，找到这一行：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">HOOKS</span><span class="hljs-operator">=</span>(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>继续使用基于busybox的initramfs，则需要加入<code>resume</code>钩子，并且确保<code>resume</code>在<code>udev</code>之后： <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">HOOKS</span><span class="hljs-operator">=</span>(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems resume fsck)<br></code></pre></td></tr></table></figure>
+ <img src="/img/arch-hibernate/busybox.png" srcset="/img/loading.gif" lazyload></li>
+<li>改为使用基于systemd的initramfs，则systemd自带休眠支持： <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nsis">HOOKS=(base <span class="hljs-params">system</span>d autodetect microcode modconf kms keyboard sd-vconsole block <span class="hljs-keyword">file</span><span class="hljs-params">system</span>s fsck)<br></code></pre></td></tr></table></figure>
+ <img src="/img/arch-hibernate/systemd1.png" srcset="/img/loading.gif" lazyload><br> 或者，考虑去掉可能无用的<code>base</code>和<code>fsck</code>(例如，btrfs不需要；并且systemd另外有一套检查体系) <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nsis">HOOKS=(<span class="hljs-params">system</span>d autodetect microcode modconf kms keyboard sd-vconsole block <span class="hljs-keyword">file</span><span class="hljs-params">system</span>s)<br></code></pre></td></tr></table></figure>
+ <img src="/img/arch-hibernate/systemd2.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<p>完成编辑后，<a href="#%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90initramfs">重新生成initramfs</a>。</p>
+<h2 id="指定休眠的位置"><a href="#指定休眠的位置" class="headerlink" title="指定休眠的位置"></a>指定休眠的位置</h2><blockquote>
+<p>从systemd v255和mkinitcpio v38开始，当系统运行在UEFI上时，<code>systemd-sleep</code>将自动选择合适的交换空间进行休眠，并且所用交换空间的信息存储在<code>HibernateLocation</code>EFI变量中。在下次启动时，<code>systemd-hibernate-resume</code>从EFI变量读取位置，系统恢复。这意味着除非系统使用传统BIOS或您想选择与自动选择的不同的交换空间，否则以下步骤不是必需的。</p>
+</blockquote>
+<h3 id="休眠到swap分区"><a href="#休眠到swap分区" class="headerlink" title="休眠到swap分区"></a>休眠到swap分区</h3><p>休眠到swap分区的操作相对比较简单，首先获取swap分区的UUID：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsblk -o name,mountpoints,size,uuid<br></code></pre></td></tr></table></figure>
+<p><img src="/img/arch-hibernate/swap-part-uuid.png" srcset="/img/loading.gif" lazyload><br>图中UUID是<code>851b93b3-ab5a-401c-88ad-5487cd4ad270</code><br>接下来需要添加内核参数，对于使用grub引导的系统，编辑<code>/etc/default/grub</code>文件，找到<code>GRUB_CMDLINE_LINUX_DEFAULT</code>一行，在其中添加<code>resume=UUID= </code><br><img src="/img/arch-hibernate/swap-part-para.png" srcset="/img/loading.gif" lazyload><br>最后<a href="#%E6%9B%B4%E6%96%B0grub%E9%85%8D%E7%BD%AE">更新grub配置</a>；完成后需要重启才能使更改生效。</p>
+<h3 id="休眠到swap文件"><a href="#休眠到swap文件" class="headerlink" title="休眠到swap文件"></a>休眠到swap文件</h3><h4 id="1-swap文件位于btrfs分区"><a href="#1-swap文件位于btrfs分区" class="headerlink" title="1.swap文件位于btrfs分区"></a>1.swap文件位于btrfs分区</h4><p>首先获取swap文件所在分区的UUID：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsblk -o name,mountpoints,size,uuid<br></code></pre></td></tr></table></figure>
+<p><img src="/img/arch-hibernate/swap-btrfs-uuid.png" srcset="/img/loading.gif" lazyload><br>swap文件是<code>/swap/swapfile</code>，位于<code>/dev/sda2</code>分区，UUID是<code>5df5e112-f1ec-4639-9871-c3bdd2da41ac</code><br>然后需要获取swap文件相对于分区的偏移量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">btrfs inspect-internal map-swapfile -r path/to/swapfile<br></code></pre></td></tr></table></figure>
+<p><img src="/img/arch-hibernate/swap-btrfs-offset.png" srcset="/img/loading.gif" lazyload><br>图中偏移量是<code>1451264</code></p>
+<p>接下来需要添加内核参数，对于使用grub引导的系统，编辑<code>/etc/default/grub</code>文件，找到<code>GRUB_CMDLINE_LINUX_DEFAULT</code>一行，在其中添加<code>resume=UUID= resume_offset= </code><br><img src="/img/arch-hibernate/swap-btrfs-para.png" srcset="/img/loading.gif" lazyload><br>最后<a href="#%E6%9B%B4%E6%96%B0grub%E9%85%8D%E7%BD%AE">更新grub配置</a>；完成后需要重启才能使更改生效。</p>
+<h4 id="2-swap文件位于其它文件系统分区"><a href="#2-swap文件位于其它文件系统分区" class="headerlink" title="2.swap文件位于其它文件系统分区"></a>2.swap文件位于其它文件系统分区</h4><div class="note note-info">
+            <p>其它文件系统(ext4,xfs等等)均适用此方法。</p> 
+          </div>
+<p>首先获取swap文件所在分区的UUID：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsblk -o name,mountpoints,size,uuid<br></code></pre></td></tr></table></figure>
+<p><img src="/img/arch-hibernate/swap-ext-uuid.png" srcset="/img/loading.gif" lazyload><br>swap文件是<code>/swapfile</code>，位于<code>/dev/sda2</code>分区，UUID是<code>ccbc7703-d83e-4846-b70b-61eec5b3f9ec</code><br>然后需要获取swap文件相对于分区的偏移量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">filefrag -v path/to/swapfile<br></code></pre></td></tr></table></figure>
+<p><img src="/img/arch-hibernate/swap-ext-offset1.png" srcset="/img/loading.gif" lazyload><br>图中需要的数值为第一行<code>physical_offset</code>列，偏移量是<code>352256</code></p>
+<p>或者可以这样直接获取偏移值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">filefrag -v path/to/swapfile | awk <span class="hljs-string">&#x27;$1==&quot;0:&quot; &#123;print substr($4, 1, length($4)-2)&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/img/arch-hibernate/swap-ext-offset2.png" srcset="/img/loading.gif" lazyload><br>图中偏移量是<code>352256</code><br>	<br>接下来需要添加内核参数，对于使用grub引导的系统，编辑<code>/etc/default/grub</code>文件，找到<code>GRUB_CMDLINE_LINUX_DEFAULT</code>一行，在其中添加<code>resume=UUID= resume_offset= </code><br><img src="/img/arch-hibernate/swap-ext-para.png" srcset="/img/loading.gif" lazyload><br>最后<a href="#%E6%9B%B4%E6%96%B0grub%E9%85%8D%E7%BD%AE">更新grub配置</a>；完成后需要重启才能使更改生效。</p>
+<h2 id="测试休眠"><a href="#测试休眠" class="headerlink" title="测试休眠"></a>测试休眠</h2><p>任意启动几个软件，然后使用桌面环境自带的休眠，或者使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl hibernate<br></code></pre></td></tr></table></figure>
+<p>电源完全关闭后，重新开机并进入Arch Linux，确认应用是否成功恢复。<br>成功断电并且成功恢复说明配置成功。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Arch Linux配置休眠</div>
+      <div>http://silvertuanzi.github.io/2025/04/06/arch-hibernate/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silvertuanzi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/20/fix-ssh-github/" title="修复DNS污染导致无法通过ssh连接github的问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">修复DNS污染导致无法通过ssh连接github的问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/11/arch-cinnamon/" title="Arch Linux配置cinnamon桌面与常用应用">
+                        <span class="hidden-mobile">Arch Linux配置cinnamon桌面与常用应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"silvertuanzi/silvertuanzi.github.io","repo-id":"R_kgDONp8bkA","category":"Announcements","category-id":"DIC_kwDONp8bkM4C-7VA","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","data-strict":1};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="umami-site-pv-container" style="display: none">
+        总访问量 
+        <span id="umami-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="umami-site-uv-container" style="display: none">
+        总访客数 
+        <span id="umami-site-uv"></span>
+         人
+      </span>
+    
+    
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/umami-view.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

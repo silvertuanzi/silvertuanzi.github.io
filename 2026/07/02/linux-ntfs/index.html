@@ -1,0 +1,1102 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#66afef">
+  <meta name="author" content="silvertuanzi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="原计划是记录记录新ntfs驱动(7.1进主线那个)的玩法，然后意外发现老的ntfs3驱动还有挺多值得聊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux与NTFS的那些事">
+<meta property="og:url" content="http://silvertuanzi.github.io/2026/07/02/linux-ntfs/index.html">
+<meta property="og:site_name" content="团子的血域城堡">
+<meta property="og:description" content="原计划是记录记录新ntfs驱动(7.1进主线那个)的玩法，然后意外发现老的ntfs3驱动还有挺多值得聊">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-02T06:54:46.000Z">
+<meta property="article:modified_time" content="2026-07-10T02:38:35.000Z">
+<meta property="article:author" content="silvertuanzi">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Linux与NTFS的那些事 - 团子的血域城堡</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"silvertuanzi.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":"https://silvertuanzi-umami.netlify.app/script.js","website_id":"8696ff80-db66-47ae-8f97-dce9da61066b","domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":"3ay5n/D+qZfExizE1VsC63yZVb1BLb5c2fX8frr4eIbjf45uO6BWxM3sPDbztIyAbm9qSesnugRb7M7yhNuHt8WNleaVmKaSp17eECt31fAnRKYruDD+tRoDuNMSlgQSfhtTfw6tX7ELMt8Q6nazsg5qudrPgmusxyWux9HeeaAip1BRl6nP1Ruf19XNCJVXpTgb/x/hLIpVbHhEu5Rfp4Ry1hs5zddYV6+2hd7zvBnljm6m9ouSpAhn6Ewfx3IVCduBPH6cvQvwlhcjvFrm7TMsZ+ngOeHiJmJSzaJLuUwF8ARfRFU8deilRIUvdKgt5OcrGmHC3Vh2cnEXnpYmS/XXRVjiEcRcpkL3joRJf66O5UqAqKGjGjLbIO8rVE5X3bgs","api_server":"https://silvertuanzi-umami.netlify.app"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        let umami = document.createElement('script');
+        umami.async = true;
+        umami.src = "https://silvertuanzi-umami.netlify.app/script.js";
+        umami.setAttribute("data-website-id", "8696ff80-db66-47ae-8f97-dce9da61066b");
+        umami.setAttribute("data-domains", "");
+        document.head.appendChild(umami);
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>团子的血域城堡</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tools/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>工具</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tools/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>工具</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://t.mwm.moe/ycy') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux与NTFS的那些事"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-02 14:54" pubdate>
+          2026年7月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          89 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="umami-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="umami-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux与NTFS的那些事</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年7月10日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="写在前面————关闭Windows快速启动"><a href="#写在前面————关闭Windows快速启动" class="headerlink" title="写在前面————关闭Windows快速启动"></a>写在前面————关闭Windows快速启动</h1><p>Windows快速启动在Windows8引入，且默认开启。如果开启快速启动，则关闭Windows的时候实际上并没有真正关闭，而是进入了休眠状态。<br>众所周知，在双系统的计算机上如果休眠一个系统的时候启动另一个系统，则那些已经被挂载在休眠系统上的硬盘<strong>一定不能</strong>以读&#x2F;写方式被挂载到另一个系统，否则会出现两个系统的文件系统metadata不匹配，文件系统<strong>一定会损坏</strong>。以只读挂载<em>可能</em>是安全的。<br>如果快速启动开启，由于Windows默认挂载所有硬盘，因此意味着几乎永远无法读写Windows的NTFS分区。</p>
+<h1 id="现状记录与考古————前7-0时代"><a href="#现状记录与考古————前7-0时代" class="headerlink" title="现状记录与考古————前7.0时代"></a>现状记录与考古————前7.0时代</h1><h2 id="ntfs-3g————又不是不能用"><a href="#ntfs-3g————又不是不能用" class="headerlink" title="ntfs-3g————又不是不能用"></a>ntfs-3g————又不是不能用</h2><p>稍微翻一下<a target="_blank" rel="noopener" href="https://github.com/tuxera/ntfs-3g/wiki/NTFS-3G-Release-History">发布历史</a>就能看出来，ntfs-3g这玩意的历史相当悠久。不过好消息是至今仍在积极维护。<br>在绝大多数的Linux发行版里面，<code>ntfs-3g</code>都在官方软件源提供，且绝大部分开箱即用的发行版安装，都会直接预装<code>ntfs-3g</code>。<br>并且由于<code>ntfs-3g</code>提供了<code>/sbin/mount.ntfs</code>执行文件，对于ntfs分区，直接<code>mount -t ntfs</code>甚至直接不指定类型直接<code>mount</code>走的就是ntfs驱动。<br>缺点嘛，首先它是用户空间的驱动，要走至少一层fuse开销，性能肯定差一些（可以查看<code>mount</code>之后类型显示为<code>fuseblk</code>）；其次驱动的底子毕竟还是比较老旧的实现，功能没那么全，稳定性稍微有点争议，总之不是一个很现代的东西，但是确实是<em>能用就行</em>。</p>
+<h2 id="ntfs3————更好的性能，更大的稳定性争议"><a href="#ntfs3————更好的性能，更大的稳定性争议" class="headerlink" title="ntfs3————更好的性能，更大的稳定性争议"></a>ntfs3————更好的性能，更大的稳定性争议</h2><p><a target="_blank" rel="noopener" href="https://docs.kernel.org/filesystems/ntfs3.html">NTFS3驱动</a>在Linux5.15引入，内核态驱动，提供了更强的性能，更完善的功能支持。</p>
+<blockquote>
+<p>Why is NTFS3 called NTFS3 ?<br>NTFS3 is called NTFS3 because it fully implements the latest version 3.1 of NTFS file system specification. NTFS is unlikely to change in future, thus NTFS3 naming reflects that NTFS3 implements the latest revision of NTFS.</p>
+</blockquote>
+<p>NTFS3的主要优势还是在性能上，内核态驱动意味着它不需要走一层fuse转发，因此效率会强得多。功能上实际上ntfs-3g功能也覆盖的相当全，大部分常见的ntfs特性两边都实现了。</p>
+<p>至于二者的取舍，就咱个人的身边统计学来说，似乎很多人都觉得ntfs-3g的实现太老旧，写入不靠谱，建议用ntfs3；但是从发行版社区来看情况似乎不太一样。<br>最值得玩味的就是Debian的态度：<a target="_blank" rel="noopener" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=998627">这里</a>可以看到完整的讨论历史，咱大致总结一下要点：</p>
+<ol>
+<li>首先是行为：5.15发布之后debian有不短的时间一直都没有开启ntfs3模块，一直到Debian12发布（使用Linux6.1lts内核），ntfs3是完全不开的：可以直接<code>ls /usr/lib/modules/$(uname -r)/kernel/fs</code>查，然后发现里面根本没有ntfs3内核模块。Debian13 (Linux6.12lts)才开起来。</li>
+<li>看看时间线：Linux5.15发布于2021年11月，Debian12发布于2023年6月，隔了足足一年半的时间Debian社区依然认为”NTFS3 driver is still not in astate making it confident it’s wise to enable it for a stable release. “</li>
+<li>从沟通记录来看，5.15合入ntfs3驱动之后，似乎有很长的一段时间完全没有后续更新，或许这也是Linux社区对它缺乏信任的原因。不过看看现在<a target="_blank" rel="noopener" href="https://github.com/torvalds/linux/commits/master/fs/ntfs3">github上记录的日志（github容易看一点）</a>, 看起来至少现在Paragon是有积极维护这个驱动的。</li>
+</ol>
+<p>此外mint社区在mint22.1和LMDE7里面屏蔽了该模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">cat</span> /usr/lib/modprobe.d/mint-blacklist-ntfs3.conf <br><span class="hljs-comment"># Blacklist the ntfs3 driver</span><br><span class="hljs-comment"># See https://github.com/orgs/linuxmint/discussions/680</span><br><span class="hljs-comment"># Upstream bug report: https://bugs.launchpad.net/ubuntu/+source/ntfs-3g/+bug/2062972</span><br><br>blacklist ntfs3<br></code></pre></td></tr></table></figure>
+<p>理由写在里面了，大体似乎就是”ntfs3会弄坏一些分区，ntfs-3g至少能用”。不过内核里面模块是在的，解除屏蔽就行。咱喜欢用破坏性最小的方式，在<code>/etc/modprobe.d/</code>目录下创建一个同名的<code>mint-blacklist-ntfs3.conf</code>文件，内容直接留空，按照优先级就能覆盖掉。除此之外的方法就只有删掉文件，没有类似<code>unblacklist</code>这种覆写的语法。</p>
+<div class="note note-secondary">
+            <p>咱自己的个人经历吧，在用mint21.3（基于Ubuntu22.04, linux6.5hwe内核）的时候，咱那时没有隔离双系统工作区的习惯，直接把Linux的python venv也建在ntfs分区下了，然后平时用的时候没问题，只要删venv，分区几乎必挂，然后重启回Windows需要跑<code>chkdsk</code>修复，且修复之后会有不少文件恢复到<code>found.000</code>类似目录。后来咱自己的判定就是，Linux下尽量避免删除大量零碎文件。<br>后来咱去确认了一下mint21时期的设置，ntfs3驱动没有被屏蔽，测试了一下配置，当时大概率用的就是ntfs3,所以说这或许也是一个可能佐证ntfs3不稳定的实例？</p> 
+          </div>
+<div class="note note-secondary">
+            <p>Archwiki记录了另一个实例：双系统如果共享同一个游戏文件夹（Windows原生运行+Linux proton），那这个共享文件夹如果位于NTFS分区，Linux侧会经常发生着色器缓存损坏，也很有可能是和ntfs3驱动有关。参见<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Steam#NTFS">英文</a>&#x2F;<a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Steam#NTFS">中文</a></p> 
+          </div>
+
+<div class="note note-info">
+            <p>ntfs3内核驱动没有提供任何用户空间工具，因此即使主用ntfs3驱动，通常也需要用到ntfs-3g来提供用户空间工具，包括<code>mkfs.ntfs</code> <code>ntfsresize</code> <code>ntfsfix</code>等等。有的发行版就是ntfs-3g一个包，有的发行版则把ntfs-3g的驱动部分和工具部分拆成两个包并共同依赖libntfs-3g共享库包，具体看各自发行版配置。</p> 
+          </div>
+
+<h2 id="我到底用的是哪个驱动？"><a href="#我到底用的是哪个驱动？" class="headerlink" title="我到底用的是哪个驱动？"></a>我到底用的是哪个驱动？</h2><p>对于手动使用<code>mount</code>命令的其实很简单，显式<code>-t ntfs3</code>就是用的ntfs3驱动，不加<code>-t</code>就会被识别出文件类型是ntfs后，使用默认<code>-t ntfs</code>然后落到ntfs-3g驱动。</p>
+<p>对于大部分桌面环境，大部分GUI文件管理器，用的都是<a target="_blank" rel="noopener" href="https://www.freedesktop.org/wiki/Software/udisks/">udisks2</a>，所以配置遵循<code>/etc/udisks2</code>下的配置。<br><code>/etc/udisks2/mount_options.conf</code>存放个性化配置，<code>/etc/udisks2/mount_options.conf.example</code>里面都是被注释掉的配置，但是默认选项基本遵循这个文件。</p>
+<p>可以留意到ntfs部分是这样配置的（多截取一点，保留一个完整的overwrite层次结构）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs conf">### Simple global overrides<br># [defaults]<br># # common options, applied to any filesystem, always merged with specific filesystem type options<br># defaults=ro<br># allow=exec,noexec,nodev,nosuid,atime,noatime,nodiratime,ro,rw,sync,dirsync,noload<br><br>### Specific filesystem type options<br># ntfs_defaults=uid=$UID,gid=$GID,windows_names<br># ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes<br><br>### For the reference, these are the builtin mount options:<br># [defaults]<br># allow=exec,noexec,nodev,nosuid,atime,noatime,nodiratime,relatime,strictatime,lazytime,ro,rw,sync,dirsync,noload,acl,nosymfollow<br><br># # &#x27;ntfs&#x27; signature, definitions for the legacy ntfs kernel driver and the ntfs-3g fuse driver<br># ntfs:ntfs_defaults=uid=$UID,gid=$GID,windows_names<br># ntfs:ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes<br># <br># # &#x27;ntfs&#x27; signature, the new &#x27;ntfs3&#x27; kernel driver<br># ntfs:ntfs3_defaults=uid=$UID,gid=$GID<br># ntfs:ntfs3_allow=uid=$UID,gid=$GID,umask,dmask,fmask,iocharset,discard,nodiscard,sparse,nosparse,hidden,nohidden,sys_immutable,nosys_immutable,showmeta,noshowmeta,prealloc,noprealloc,hide_dot_files,nohide_dot_files,windows_names,nocase,case<br># <br># # define order of filesystem driver priorities for the actual mount call,<br># # required definition for non-matching driver names<br># ntfs_drivers=ntfs3,ntfs<br></code></pre></td></tr></table></figure>
+<div class="note note-info">
+            <p>咱故意保留了完整的结构，这样才能便于看出来配置生效的层次顺序。</p> 
+          </div>
+<p>其中与驱动选择相关的其实只有最后一行，<code>ntfs_drivers=ntfs3,ntfs</code>优先选择ntfs3驱动挂载，如果ntfs3挂载失败，就改用ntfs-3g，这应该是几乎所有发行版的默认配置。</p>
+<p>咱自己当然也直接遵循了这个默认配置。</p>
+<p>不过最权威的复查方式是在挂载完成之后使用<code>mount</code>命令直接查挂载类型，<code>ntfs3</code>自然不用说，<code>fuseblk</code>就是走的ntfs-3g。<br>看起来这里的字样似乎不太好抓，所以直接读完整列表，反正这种手动挂载的分区通常都会位于最底下。<br>不过通常来说，需要复查的都是通过udisks2挂载的才需要复查，而udisks2会在挂载参数里面留下自己的痕迹，所以用<code>mount | grep udisks2</code>来抓一般是可行的。</p>
+<h2 id="几乎不会触及，但是其实还存在的老内核驱动"><a href="#几乎不会触及，但是其实还存在的老内核驱动" class="headerlink" title="几乎不会触及，但是其实还存在的老内核驱动"></a>几乎不会触及，但是其实还存在的老内核驱动</h2><p>Linux内核中存在一个历史更为久远的ntfs驱动，历史甚至可以追溯到1997年，一直存在到Linux6.9版本被移除。这个驱动的写入支持极其有限，约等于只读驱动。由于ntfs-3g占据了<code>mount.ntfs</code>的位置，因此几乎不可能有机会使用到它，除非使用<code>mount -i -t ntfs</code>方式，禁用mount helper进行挂载，或者卸载掉ntfs-3g，才能见到这个老驱动。一般它以只读驱动的形式存在，<code>mount</code>命令会显示类型为<code>ntfs</code>。在Linux6.9移除这个驱动之后，这个行为被ntfs3接管，ntfs3会在相同的挂载选项下，模拟这个旧的只读驱动的行为，并表现出几乎完全相同的现象（类型<code>ntfs</code>且只读）。</p>
+<hr>
+<p>直到————Linux7.1, 基于这个只读驱动完全重写的ntfs读写驱动，以完全取代ntfs-3g为目标的内核驱动，也是咱这篇文的饺子醋，登场</p>
+<hr>
+<h1 id="新的里程碑…吗？————NTFSPLUS，后改名为NTFS"><a href="#新的里程碑…吗？————NTFSPLUS，后改名为NTFS" class="headerlink" title="新的里程碑…吗？————NTFSPLUS，后改名为NTFS"></a>新的里程碑…吗？————NTFSPLUS，后改名为NTFS</h1><div class="note note-info">
+            <p>本节涉及到的软件包，安装方式上只有Arch AUR和Debian&#x2F;Ubuntu咱自己利用github action打的包，其它发行版要么手动make要么自己包吧，学一个debian打包已经学到头大了…</p> 
+          </div>
+
+<p>全新的NTFS驱动在2025年10月以NTFSPLUS的名字官宣，12月改名为NTFS，最后在Linux7.1进入内核主线。CachyOS提前把它移植到了自家的7.0内核上。<br>从<a target="_blank" rel="noopener" href="https://lore.kernel.org/lkml/20260213081804.13351-1-linkinjeon@kernel.org/">Linux邮件列表</a>可以看到作者对这个驱动的介绍。</p>
+<p>简而言之，新驱动的设计目标是既要又要————更强的性能，更齐全的功能，以及更高的稳定性。至少目前来看，它<em>似乎</em>已经完成了对NTFS3驱动的覆盖式超越。</p>
+<p>稍微对比一下维护者吧：</p>
+<table>
+<thead>
+<tr>
+<th>NTFS-3G</th>
+<th>NTFS3</th>
+<th>NTFS(PLUS)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://www.tuxera.com/community/open-source-ntfs-3g/">Tuxera</a></td>
+<td><a target="_blank" rel="noopener" href="https://www.paragon-software.com/home/ntfs3-driver-faq/">Paragon</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/namjaejeon">Namjae Jeon</a>&#x2F;<a target="_blank" rel="noopener" href="https://github.com/hclee">Hyunchul Lee</a></td>
+</tr>
+</tbody></table>
+<p>前二者在文件系统上经验都相当丰富，都有不少跨系统访问文件系统的工具，例如什么Windows访问APFS&#x2F;HFS+，以及Mac访问NTFS等等。但是NTFS-3G是个基于FUSE的用户态驱动，NTFS3虽然是内核驱动，但是和Paragon的另一商业NTFS驱动完全不同源。<br>而<a target="_blank" rel="noopener" href="https://github.com/namjaejeon">Namjae Jeon</a>和<a target="_blank" rel="noopener" href="https://github.com/hclee">Hyunchul Lee</a>常驻Linux内核开发，在此NTFS之前，Linux内核的exFAT驱动也是这二位贡献的，从<a target="_blank" rel="noopener" href="https://lore.kernel.org/lkml/?q=linkinjeon@kernel.org">Linux内核邮件列表</a>也能看出，这二位既是高技术力又是Linux社区活跃开发者。所以从作者靠谱程度来看，还是比较放心的。</p>
+<p>对于这个新驱动，Namjae Jeon提供了<a target="_blank" rel="noopener" href="https://github.com/namjaejeon/linux-ntfs">内核驱动</a>和<a target="_blank" rel="noopener" href="https://github.com/ntfsprogs-plus/ntfsprogs-plus">用户空间工具</a>两个仓库。</p>
+<h2 id="ntfsprogs-plus"><a href="#ntfsprogs-plus" class="headerlink" title="ntfsprogs-plus"></a>ntfsprogs-plus</h2><p>用户空间工具可聊的不多，简单介绍一下。<a target="_blank" rel="noopener" href="https://github.com/ntfsprogs-plus/ntfsprogs-plus">ntfsprogs-plus</a>定位仍然是补强ntfs-3g提供的用户空间工具，建议配套新ntfs驱动使用，替代ntfs-3g。</p>
+<table>
+<thead>
+<tr>
+<th>工具包</th>
+<th>提供的命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>共有</td>
+<td>mkfs.ntfs mkntfs ntfsclone ntfscluster ntfsinfo ntfslabel ntfsresize</td>
+</tr>
+<tr>
+<td>ntfs-3g独有</td>
+<td>ntfscat ntfscmp ntfscp ntfsdecrypt ntfsfix ntfsls ntfsrecover ntfssecaudit ntfstruncate ntfsundelete ntfsusermap ntfswipe</td>
+</tr>
+<tr>
+<td>ntfsprogs-plus独有</td>
+<td>fsck.ntfs ntfsck</td>
+</tr>
+</tbody></table>
+<p>从对比表来看，ntfsprogs-plus精简掉了ntfs-3g时代大量依赖FUSE的用户态修补工具；<br>与此同时新增了fsck.ntfs&#x2F;ntfsck，且这个应该是<a target="_blank" rel="noopener" href="https://github.com/ntfsprogs-plus/ntfsprogs-plus">ntfsprogs-plus</a>的重头戏：</p>
+<blockquote>
+<p>ntfsck include basic filesystem checking features, like as below:</p>
+<ul>
+<li>Boot sector check</li>
+<li>Meta system files check</li>
+<li>Inode and LCN Bitmap consistency check</li>
+<li>Inode structure check<ul>
+<li>Essential attribute check</li>
+<li>Runlist check</li>
+<li>Attribute list check</li>
+</ul>
+</li>
+<li>Directory structure check<ul>
+<li>All checks for inode strcuture above</li>
+<li>Directory index check</li>
+<li>Directory index bitmap check</li>
+</ul>
+</li>
+<li>Cluster duplication check : If found cluster duplication. it copied to new clusters.</li>
+</ul>
+</blockquote>
+<p>它能在Linux上修复NTFS文件系统问题，接近在Windows上执行<code>chkdsk</code>的结果，功能远强于ntfs-3g提供的<code>ntfsfix</code>。</p>
+<h3 id="如何安装"><a href="#如何安装" class="headerlink" title="如何安装"></a>如何安装</h3><p>从发布策略来看，仓库使用了<code>ntfs-next</code>分支作开发分支，主分支更新频率很低，因此直接把<code>main</code>分支当成发布分支都行。至于release tag上一个已经是2025年12月了，实在有点太老旧。<br>因此如果自行编译安装，咱觉得直接拉git主线来编译是个相当不错的选择。</p>
+<ol>
+<li>Arch直接安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/ntfsprogs-plus-git">AUR包ntfsprogs-plus-git</a></li>
+<li>Debian&#x2F;Ubuntu用户可以移步咱的<a target="_blank" rel="noopener" href="https://github.com/silvertuanzi/ntfsprogs-plus-debpackage">打包repo</a>，为了避免C abi不兼容，能源码安装就源码安装；release里面作为实验性打包，咱打算长期标注为<code>pre-release</code>，且只用Ubuntu22.04作为打包基底系统————<del>由于该项目是纯C的，<code>debhelper</code>自动检测的运行依赖列表里面只有<code>libc6</code>一项，</del>由于glibc有单向向上兼容，因此理论上选择一个具有最旧glibc的系统，在上面编译的包可以适用于未来的所有新系统。目前deb系里面适配新ntfs内核驱动的最旧发行版就是Ubuntu22.04了，因此先用它；Debian12的版本作为Ubuntu22.04停止支持之后的打包实验。值得一提的是，Ubuntu22.04和Debian12输出的均为<code>libc6 (&gt;= 2.34)</code>，而从Ubuntu24.04开始的发行版，输出的均为<code>libc6 (&gt;= 2.38)</code>，这里刚刚好形成一条兼容性分界线了。后续如果有空做兼容性测试且确实新系统上有问题，咱再来研究每个系统分别打包。<br> 更新：由于漏了两个<em>非必需，但是会在configure阶段跳警告</em>的构建依赖，补齐之后Depends列表里面多了几项，但是<em>应该</em>也保持了向上兼容性，所以目前还是只保持Ubuntu2204和Debian12双线打包；二进制包如果有问题咱始终推荐自己源码编译，本来二进制发布包就是实验性质。</li>
+</ol>
+<div class="note note-warning">
+            <p>由于工具冲突，因此咱只能设定<code>Conflicts: ntfs-3g</code>否则会撞同名文件；<br>与此同时考虑到有一些磁盘管理应用会硬依赖ntfs-3g，因此咱考虑再三之后设定了<code>Provides: ntfs-3g</code>，以免因为使用新工具破坏已有的依赖，甚至导致部分软件被apt拒绝安装。<br>为了保留兼容性，咱补充了链接<code>ntfsfix-&gt;fsck.ntfs</code>，并增设脚本<code>mount.ntfs-3g</code>将<code>mount -t ntfs-3g</code>重定向到<code>mount -t ntfs</code>（这里没有使用ntfs3而是使用ntfs），同时增设<code>mount.lowntfs-3g-&gt;mount.ntfs-3g</code>。</p> 
+          </div>
+
+<h2 id="ntfs新驱动尝鲜指北"><a href="#ntfs新驱动尝鲜指北" class="headerlink" title="ntfs新驱动尝鲜指北"></a>ntfs新驱动尝鲜指北</h2><p>新的NTFS驱动在<code>linux-cachyos&gt;=7.0</code>，主线内核<code>linux&gt;=7.1</code>上线，但是这个版本存在一个<a target="_blank" rel="noopener" href="https://github.com/namjaejeon/linux-ntfs/issues/62">软链接不兼容</a>的bug, 主要影响的是相对链接（绝对链接就算能认，存的路径也不一样，因此也不指望能用）。<br>这个bug的修复要到<code>linux&gt;=7.2</code>的主线才能看到（目前还是rc2），因此对于所有内核<code>&gt;=6.1, &lt;=7.1</code>的发行版，单独编译驱动本身作为外置模块是最优尝鲜方案。</p>
+<p>首先讲一下这个驱动引入的两个新的挂载选项，都是在7.2的补丁才引入的：</p>
+<ol>
+<li><code>symlink=&lt;native|wsl&gt;</code>:<br> <code>wsl(默认)</code>: 在创建符号链接时，这些链接无法被Windows系统或者Linux ntfs3驱动程序读取，只能被WSL读取。由于利用一些Linux特性，创建和解析速度都会快一些。<br> <code>native</code>: 在创建符号链接时，这些链接可以被Windows系统或者Linux ntfs3驱动程序读取。因此，这些符号链接的行为应该与在Windows系统中创建的符号链接完全相同。<br> 无论激活哪个，都可以正常读取Windows原生创建的符号链接。</li>
+<li><code>native_symlink=&lt;raw|rel&gt;</code>:<br> <code>raw(默认)</code>: 记录绝对路径的符号链接，路径直接按原样解析。<br> <code>rel</code>: ntfs_translate_junction()函数会被激活，然后把符号链接记录的绝对路径重写成相对于挂载点的相对符号链接。</li>
+</ol>
+<h3 id="如何安装-1"><a href="#如何安装-1" class="headerlink" title="如何安装"></a>如何安装</h3><p>对于<a target="_blank" rel="noopener" href="https://github.com/namjaejeon/linux-ntfs">官方repo</a>介绍的<code>make</code>编译方法，只能为当前正在运行的内核编译，每次内核切换版本，都需要手动编译。<br>因此最方便的使用方法自然是打成dkms包，这样每次安装新内核的时候，dkms就能自动编译；卸载内核的时候模块也能自动一起移除。</p>
+<ol>
+<li>Arch直接安装<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/ntfsplus-dkms-git">AUR包ntfsplus-dkms-git</a>，附带的<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/ntfsplus-udev">udev rules包</a>看起来作用不明，可选安装；</li>
+<li>Debian&#x2F;Ubuntu: 适用系统版本：Debian12及以上，Ubuntu22.04及以上；其中Ubuntu22.04需要检查当前运行的内核版本： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -r<br></code></pre></td></tr></table></figure>
+ 如果是出厂的5.15内核则无法兼容，需要装hwe内核，内核版本是6.1以上即可；<br> 从咱的<a target="_blank" rel="noopener" href="https://github.com/silvertuanzi/linux-ntfs-dkms-deb/releases">打包repo</a>获取到dkms驱动包安装即可。由于dkms包本质是把源码安装到指定位置，然后在用户的本机上根据用户系统内安装的内核对应编译，因此不分系统兼容性，甚至不分指令集架构，ARM64都能用。<br> 由于打包使用到了一点新版本dh-dkms的特性，因此只能在Debian13&#x2F;Ubuntu26.04上才能完成打包，低一点的系统版本都会导致<code>dkms.conf</code>被打包到错误的位置。包好的就能通用了。</li>
+</ol>
+<h3 id="Udisks2配置"><a href="#Udisks2配置" class="headerlink" title="Udisks2配置"></a>Udisks2配置</h3><p>查看<code>/etc/udisks2/mount_options.conf.example</code>可以看到ntfs区的示例配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf"># # &#x27;ntfs&#x27; signature, definitions for the legacy ntfs kernel driver and the ntfs-3g fuse driver<br># ntfs:ntfs_defaults=uid=$UID,gid=$GID,windows_names<br># ntfs:ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes<br># <br># # &#x27;ntfs&#x27; signature, the new &#x27;ntfs3&#x27; kernel driver<br># ntfs:ntfs3_defaults=uid=$UID,gid=$GID<br># ntfs:ntfs3_allow=uid=$UID,gid=$GID,umask,dmask,fmask,iocharset,discard,nodiscard,sparse,nosparse,hidden,nohidden,sys_immutable,nosys_immutable,showmeta,noshowmeta,prealloc,noprealloc,hide_dot_files,nohide_dot_files,windows_names,nocase,case<br># <br># # define order of filesystem driver priorities for the actual mount call,<br># # required definition for non-matching driver names<br># ntfs_drivers=ntfs3,ntfs<br></code></pre></td></tr></table></figure>
+<p>所以自定义的<code>/etc/udisks2/mount_options.conf</code>可以作以下调整：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs conf"># 新驱动改为首选驱动<br>ntfs_drivers=ntfs,ntfs3<br><br># 新驱动的挂载选项，主要是添加symlink的配置<br>ntfs:ntfs_defaults=uid=$UID,gid=$GID,windows_names,symlink=native<br>ntfs:ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes,symlink<br></code></pre></td></tr></table></figure>
+<p>如果添加其它defaults选项，确保它同时也在allow选项里面。</p>
+<h3 id="与ntfs-3g共存"><a href="#与ntfs-3g共存" class="headerlink" title="与ntfs-3g共存"></a>与ntfs-3g共存</h3><p>新驱动本身是不与ntfs-3g冲突的，因此如果不使用<a target="_blank" rel="noopener" href="https://github.com/ntfsprogs-plus/ntfsprogs-plus">ntfsprogs-plus</a>，那三个驱动共存是没问题的。<br>但是ntfs-3g会注册一个可执行文件<code>/usr/sbin/mount.ntfs</code>，从而<code>mount -t ntfs</code>会被ntfs-3g抢占；使用<code>mount -i -t ntfs</code>就能让<code>mount</code>命令无视<code>/sbin</code>目录下的mount helper，使用新的ntfs驱动挂载。</p>
+<p>但是Udisks2没法加<code>-i</code>参数，因此需要曲线救国，给新ntfs驱动准备一个新的名字，例如<code>ntfsplus</code>；然后在<code>/usr/sbin</code>目录下创建一个<code>mount.ntfsplus</code>文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-built_in">exec</span> /usr/bin/mount -i -t ntfs <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span><br></code></pre></td></tr></table></figure>
+<p>这样之后<code>mount -t ntfsplus</code>就会被新ntfs驱动接管。接下来配置Udisks2的<code>/etc/udisks2/mount_options.conf</code>驱动顺序就行了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">ntfs_drivers=ntfsplus,ntfs3,ntfs<br><br>ntfs:ntfsplus_defaults=uid=$UID,gid=$GID,windows_names,symlink=native<br>ntfs:ntfsplus_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes,symlink<br></code></pre></td></tr></table></figure>
+<p>实测这样配置的挂载选项可以完全正常生效，Udisks2在这一块留的接口还是挺灵活的。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>配完默认驱动之后就该收工了，之后该怎么用怎么用。没有存在感的驱动才是好驱动，如果驱动有存在感了，那八成是出问题了。<br>好好尝鲜就完事了~</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux与NTFS的那些事</div>
+      <div>http://silvertuanzi.github.io/2026/07/02/linux-ntfs/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>silvertuanzi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/24/rime-input/" title="Rime输入法配置">
+                        <span class="hidden-mobile">Rime输入法配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"silvertuanzi/silvertuanzi.github.io","repo-id":"R_kgDONp8bkA","category":"Announcements","category-id":"DIC_kwDONp8bkM4C-7VA","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","data-strict":1};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="umami-site-pv-container" style="display: none">
+        总访问量 
+        <span id="umami-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="umami-site-uv-container" style="display: none">
+        总访客数 
+        <span id="umami-site-uv"></span>
+         人
+      </span>
+    
+    
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/umami-view.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
